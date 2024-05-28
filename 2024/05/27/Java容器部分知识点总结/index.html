@@ -28,7 +28,7 @@
 <meta property="og:description" content="一、通用分为Collection（存对象） 和 Map（存两个对象之间映射表），两种接口 如List、Set等都是接口，ArrayList、HashSet、HashMap等才是实现类，所以初始化对象，如List&lt;Integer&gt; list &#x3D; new ArrayList&lt;&gt;();可以体现出Java中的多态 java容器里只能放对象，对于基本类型(int, long, flo">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2024-05-27T12:55:34.000Z">
-<meta property="article:modified_time" content="2024-05-27T13:40:59.097Z">
+<meta property="article:modified_time" content="2024-05-28T13:53:17.581Z">
 <meta property="article:author" content="Yinhongyang">
 <meta name="twitter:card" content="summary">
 
@@ -126,7 +126,7 @@
   </li>
         <li class="menu-item menu-item-life">
 
-    <a href="/categories/%E7%94%9F%E6%B4%BB/" rel="section"><i class="fa fa-heart fa-fw"></i>生活</a>
+    <a href="/categories/%E7%A2%8E%E7%A2%8E%E5%BF%B5/" rel="section"><i class="fa fa-heart fa-fw"></i>碎碎念</a>
 
   </li>
         <li class="menu-item menu-item-leetcode">
@@ -226,10 +226,16 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              
 
-              <time title="创建时间：2024-05-27 20:55:34 / 修改时间：21:40:59" itemprop="dateCreated datePublished" datetime="2024-05-27T20:55:34+08:00">2024-05-27</time>
+              <time title="创建时间：2024-05-27 20:55:34" itemprop="dateCreated datePublished" datetime="2024-05-27T20:55:34+08:00">2024-05-27</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2024-05-28 21:53:17" itemprop="dateModified" datetime="2024-05-28T21:53:17+08:00">2024-05-28</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
@@ -247,7 +253,7 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>1k</span>
+              <span>1.2k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
@@ -315,7 +321,47 @@
 <p>LinkedHashSet——套壳LinkedHashMap（同理）</p>
 <h3 id="五、Queue"><a href="#五、Queue" class="headerlink" title="五、Queue"></a>五、Queue</h3><p>主要是PriorityQueue——优先级队列</p>
 <p>Deque（双端队列，Queue的子接口）其实现类：LinkedList、ArrayDeque</p>
-<h3 id="六、其他总结"><a href="#六、其他总结" class="headerlink" title="六、其他总结"></a>六、其他总结</h3><h4 id="Tip1：List-和-Queue的区别"><a href="#Tip1：List-和-Queue的区别" class="headerlink" title="Tip1：List 和 Queue的区别"></a>Tip1：List 和 Queue的区别</h4><p><strong>List</strong>：更适合在需要频繁索引访问和控制元素精确位置的场景中使用。</p>
+<h3 id="六、其他总结"><a href="#六、其他总结" class="headerlink" title="六、其他总结"></a>六、其他总结</h3><h4 id="Tip0：List、Set、Map之间的区别"><a href="#Tip0：List、Set、Map之间的区别" class="headerlink" title="Tip0：List、Set、Map之间的区别"></a>Tip0：List、Set、Map之间的区别</h4><table>
+<thead>
+<tr>
+<th>比较项目</th>
+<th>List</th>
+<th>Set</th>
+<th>Map</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>继承接口</td>
+<td>Collection</td>
+<td>Collection</td>
+<td>就是自己（没有继承）</td>
+</tr>
+<tr>
+<td>常见实现类</td>
+<td>ArrayList、LinkedList、Vector（继承自AbstractList）</td>
+<td>HashSet、LinkedHashSet、TreeSet（继承自AbstractSet）</td>
+<td>HashMap、HashTable</td>
+</tr>
+<tr>
+<td>常见方法</td>
+<td>add()、remove()、clear()、get()、contains()、size()</td>
+<td>add()、remove()、clear()、contains()、size()</td>
+<td>put()、get()、remove()、clear()、containsKey()、containsValue()、keySet()、values()、size()、</td>
+</tr>
+<tr>
+<td>元素特性</td>
+<td>可重复</td>
+<td>不可重复（使用equals判断）</td>
+<td>不可重复</td>
+</tr>
+<tr>
+<td>顺序</td>
+<td>有序</td>
+<td>无序（实际上用HashCode决定）</td>
+<td></td>
+</tr>
+</tbody></table>
+<h4 id="Tip1：List-和-Queue的区别"><a href="#Tip1：List-和-Queue的区别" class="headerlink" title="Tip1：List 和 Queue的区别"></a>Tip1：List 和 Queue的区别</h4><p><strong>List</strong>：更适合在需要频繁索引访问和控制元素精确位置的场景中使用。</p>
 <p><strong>Queue</strong>：更适合在需要管理按特定顺序处理元素的场景中使用，如在多线程环境中管理任务的分发。</p>
 <h4 id="Tip2：容器中的排序问题"><a href="#Tip2：容器中的排序问题" class="headerlink" title="Tip2：容器中的排序问题"></a>Tip2：容器中的排序问题</h4><p>容器中的排序可以分为3类：无序、插入顺序、大小顺序</p>
 <ul>
@@ -324,6 +370,8 @@
 <li>TreeMap可以根据key进行自定义的大小排序（指定Comparator）</li>
 <li>LinkedHashMap默认是插入顺序，也可以初始化时指定为LRU顺序</li>
 </ul>
+<h4 id="Tip3：其他常用方法：-待补充，记录自己想用但不知道的方法"><a href="#Tip3：其他常用方法：-待补充，记录自己想用但不知道的方法" class="headerlink" title="Tip3：其他常用方法：(待补充，记录自己想用但不知道的方法)"></a>Tip3：其他常用方法：(待补充，记录自己想用但不知道的方法)</h4><p>数组转list：<code>Arrays.asList(array)</code>不推荐，但是前面加上new ArrayLsit()就行</p>
+<p>List转数组：使用List中的toArray方法，<code>list.toArray()</code></p>
 
     </div>
 
@@ -404,7 +452,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%80%E3%80%81%E9%80%9A%E7%94%A8"><span class="nav-number">1.</span> <span class="nav-text">一、通用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BA%8C%E3%80%81Map"><span class="nav-number">2.</span> <span class="nav-text">二、Map</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#HashMap%EF%BC%9A"><span class="nav-number">2.1.</span> <span class="nav-text">HashMap：</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%89%E3%80%81List"><span class="nav-number">3.</span> <span class="nav-text">三、List</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9B%9B%E3%80%81Set"><span class="nav-number">4.</span> <span class="nav-text">四、Set</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BA%94%E3%80%81Queue"><span class="nav-number">5.</span> <span class="nav-text">五、Queue</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%AD%E3%80%81%E5%85%B6%E4%BB%96%E6%80%BB%E7%BB%93"><span class="nav-number">6.</span> <span class="nav-text">六、其他总结</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Tip1%EF%BC%9AList-%E5%92%8C-Queue%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="nav-number">6.1.</span> <span class="nav-text">Tip1：List 和 Queue的区别</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Tip2%EF%BC%9A%E5%AE%B9%E5%99%A8%E4%B8%AD%E7%9A%84%E6%8E%92%E5%BA%8F%E9%97%AE%E9%A2%98"><span class="nav-number">6.2.</span> <span class="nav-text">Tip2：容器中的排序问题</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%80%E3%80%81%E9%80%9A%E7%94%A8"><span class="nav-number">1.</span> <span class="nav-text">一、通用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BA%8C%E3%80%81Map"><span class="nav-number">2.</span> <span class="nav-text">二、Map</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#HashMap%EF%BC%9A"><span class="nav-number">2.1.</span> <span class="nav-text">HashMap：</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%89%E3%80%81List"><span class="nav-number">3.</span> <span class="nav-text">三、List</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9B%9B%E3%80%81Set"><span class="nav-number">4.</span> <span class="nav-text">四、Set</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BA%94%E3%80%81Queue"><span class="nav-number">5.</span> <span class="nav-text">五、Queue</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%AD%E3%80%81%E5%85%B6%E4%BB%96%E6%80%BB%E7%BB%93"><span class="nav-number">6.</span> <span class="nav-text">六、其他总结</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Tip0%EF%BC%9AList%E3%80%81Set%E3%80%81Map%E4%B9%8B%E9%97%B4%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="nav-number">6.1.</span> <span class="nav-text">Tip0：List、Set、Map之间的区别</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Tip1%EF%BC%9AList-%E5%92%8C-Queue%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="nav-number">6.2.</span> <span class="nav-text">Tip1：List 和 Queue的区别</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Tip2%EF%BC%9A%E5%AE%B9%E5%99%A8%E4%B8%AD%E7%9A%84%E6%8E%92%E5%BA%8F%E9%97%AE%E9%A2%98"><span class="nav-number">6.3.</span> <span class="nav-text">Tip2：容器中的排序问题</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Tip3%EF%BC%9A%E5%85%B6%E4%BB%96%E5%B8%B8%E7%94%A8%E6%96%B9%E6%B3%95%EF%BC%9A-%E5%BE%85%E8%A1%A5%E5%85%85%EF%BC%8C%E8%AE%B0%E5%BD%95%E8%87%AA%E5%B7%B1%E6%83%B3%E7%94%A8%E4%BD%86%E4%B8%8D%E7%9F%A5%E9%81%93%E7%9A%84%E6%96%B9%E6%B3%95"><span class="nav-number">6.4.</span> <span class="nav-text">Tip3：其他常用方法：(待补充，记录自己想用但不知道的方法)</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -420,7 +468,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">10</span>
+          <span class="site-state-item-count">11</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -475,7 +523,7 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">18 分钟</span>
+    <span title="站点阅读时长">20 分钟</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> 强力驱动
   </div>

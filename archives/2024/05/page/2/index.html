@@ -20,19 +20,17 @@
     var CONFIG = {"hostname":"yhy1031.cn","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="消息队列最常被使用的三种场景：异步处理、服务解耦和流量控制（削峰） 基本上一切消息队列的应用场景，都是围绕异步、解耦和削峰三个特性来设计的。反过来也可以说，如果你有一些需要异步、解耦和削峰的需求，那么消息队列就是最合适的工具。 用秒杀系统深入理解消息队列的作用">
-<meta property="og:type" content="article">
-<meta property="og:title" content="消息队列01：消息队列的应用场景">
-<meta property="og:url" content="http://yhy1031.cn/blog/2024/05/28/MQ01/index.html">
+  <meta name="description" content="个人博客">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Yinhy Blog">
+<meta property="og:url" content="http://yhy1031.cn/blog/archives/2024/05/page/2/index.html">
 <meta property="og:site_name" content="Yinhy Blog">
-<meta property="og:description" content="消息队列最常被使用的三种场景：异步处理、服务解耦和流量控制（削峰） 基本上一切消息队列的应用场景，都是围绕异步、解耦和削峰三个特性来设计的。反过来也可以说，如果你有一些需要异步、解耦和削峰的需求，那么消息队列就是最合适的工具。 用秒杀系统深入理解消息队列的作用">
+<meta property="og:description" content="个人博客">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2024-05-28T11:13:06.000Z">
-<meta property="article:modified_time" content="2024-05-28T11:16:26.234Z">
 <meta property="article:author" content="Yinhongyang">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="http://yhy1031.cn/blog/2024/05/28/MQ01/">
+<link rel="canonical" href="http://yhy1031.cn/blog/archives/2024/05/page/2/">
 
 
 <script id="page-configurations">
@@ -40,12 +38,12 @@
   CONFIG.page = {
     sidebar: "",
     isHome : false,
-    isPost : true,
+    isPost : false,
     lang   : 'zh-CN'
   };
 </script>
 
-  <title>消息队列01：消息队列的应用场景 | Yinhy Blog</title>
+  <title>首页 | Yinhy Blog</title>
   
 
 
@@ -197,145 +195,54 @@
         <div class="content-wrap">
           
 
-          <div class="content post posts-expand">
+          <div class="content archive">
             
 
-    
   
   
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yhy1031.cn/blog/2024/05/28/MQ01/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="Yinhongyang">
-      <meta itemprop="description" content="个人博客">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Yinhy Blog">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          消息队列01：消息队列的应用场景
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2024-05-28 19:13:06 / 修改时间：19:16:26" itemprop="dateCreated datePublished" datetime="2024-05-28T19:13:06+08:00">2024-05-28</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97/" itemprop="url" rel="index"><span itemprop="name">消息队列</span></a>
-                </span>
-            </span>
-              <span>&emsp;</span><span class="post-meta-item-icon"><i class="fa fa-eye"></i></span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span id="busuanzi_value_page_pv"></span><br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>1.2k</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>4 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
+  
+  <div class="post-block">
+    <div class="posts-collapse">
+      <div class="collection-title">
+        <span class="collection-header">嗯..! 目前共计 12 篇日志。 继续努力。</span>
+      </div>
 
       
-        <p>消息队列最常被使用的三种场景：<strong>异步处理</strong>、<strong>服务解耦</strong>和<strong>流量控制</strong>（削峰）</p>
-<p><strong>基本上一切消息队列的应用场景，都是围绕异步、解耦和削峰三个特性来设计的</strong>。反过来也可以说，如果你有一些需要异步、解耦和削峰的需求，那么消息队列就是最合适的工具。</p>
-<p>用秒杀系统深入理解消息队列的作用</p>
-<span id="more"></span>
-
-<h3 id="流量控制、削峰——削去秒杀场景下的峰值写流量"><a href="#流量控制、削峰——削去秒杀场景下的峰值写流量" class="headerlink" title="流量控制、削峰——削去秒杀场景下的峰值写流量"></a>流量控制、削峰——削去秒杀场景下的峰值写流量</h3><p>如果没有消息队列，在秒杀场景下，短时间之内数据库的写流量会很高，如果仅对数据做分库分表、数据迁移、活动结束后的缩表则过于麻烦了！！</p>
-<p>所以引入消息队列——<strong>将秒杀请求暂存在消息队列中，然后业务服务器会响应用户“秒杀结果正在计算中”，释放了系统资源之后再处理其它用户的请求</strong></p>
-<p>我们可以在后台启动多个队列处理程序，执行后续的消费等程序（但是处理程序有限，如果请求过多队列会满，则超出的请求就会被丢弃）</p>
-<p>这就是消息队列在秒杀系统中最主要的作用：<strong>削峰填谷，</strong>也就是说它可以削平短暂的流量高峰，虽说堆积会造成请求被短暂延迟处理，但是只要我们时刻监控消息队列中的堆积长度，在堆积量超过一定量时，增加队列处理机数量，来提升消息的处理能力就好了。（这种设计的优点是：能根据下游的处理能力自动调节流量）</p>
-<h3 id="异步处理——通过异步处理简化秒杀请求中的业务流程"><a href="#异步处理——通过异步处理简化秒杀请求中的业务流程" class="headerlink" title="异步处理——通过异步处理简化秒杀请求中的业务流程"></a>异步处理——通过异步处理简化秒杀请求中的业务流程</h3><p>秒杀场景下，<strong>会有主要的业务逻辑，也会有次要的业务逻辑：</strong>比如说，主要的流程是生成订单、扣减库存；次要的流程可能是我们在下单购买成功之后会给用户发放优惠券，会增加用户的积分等。</p>
-<p>所以当服务端完成前面 2 个步骤，确定本次请求的秒杀结果后，就可以马上给用户返回响应，然后把请求的数据放入消息队列中，由消息队列异步地进行后续的操作。</p>
-<p><strong>消息队列被用于实现服务的异步处理。</strong>这样做的好处是：</p>
-<ul>
-<li>可以更快地返回结果；</li>
-<li>减少等待，自然实现了步骤之间的并发，提升系统总体的性能。</li>
-</ul>
-<h3 id="服务解耦——解耦实现秒杀系统模块之间松耦合"><a href="#服务解耦——解耦实现秒杀系统模块之间松耦合" class="headerlink" title="服务解耦——解耦实现秒杀系统模块之间松耦合"></a>服务解耦——解耦实现秒杀系统模块之间松耦合</h3><p>使用消息队列降低业务系统和数据系统的直接耦合度。</p>
-<p>订单服务在订单变化时发送一条消息到消息队列的一个主题 Order 中，所有下游系统都订阅主题 Order，这样每个下游系统都可以获得一份实时完整的订单数据。</p>
-<h3 id="面试题：为什么一定要用消息队列呢？同步调用不行吗"><a href="#面试题：为什么一定要用消息队列呢？同步调用不行吗" class="headerlink" title="面试题：为什么一定要用消息队列呢？同步调用不行吗"></a>面试题：为什么一定要用消息队列呢？同步调用不行吗</h3><p>其实就是在问：<strong>在这个业务场景下，不异步、不解耦或者不削峰会有什么问题</strong>？</p>
-<ol>
-<li><p><strong>不异步</strong>——<strong>性能差</strong></p>
-<p>因为需要停下来等全部调用完成才可以返回响应。</p>
-<ul>
-<li><p>追问：但是我可以并发调用啊~</p>
-<p>在并发调用的情况下，性能取决于最坏的那个同步调用什么时候返回结果。而正常我们丢一个消息到消息中间件上是很快的。</p>
-<p>但是即便性能损耗可以接收，但是扩展性和可用性就不行了</p>
-</li>
-</ul>
-</li>
-<li><p><strong>不解耦</strong>——扩展性</p>
-<p>在使用消息队列的方案中，新增的下游只需要订阅对应的消息队列就行了；但是同步调用需要新增的下游提供一堆东西很麻烦</p>
-<ul>
-<li>在使用消息队列的情况下，消息发送者完全不关心谁会去消费这些消息。同样地，如果有一个新的业务方要订阅这个消息，它可以自主完成。</li>
-<li>同步调用的时候，上游必须知道下游的接口，然后要知道如何构造请求、如何解析响应，还要联调、测试、上线，整个过程都得和下游密切合作，因此效率特别低，可扩展性很差。</li>
-</ul>
-</li>
-<li><p><strong>不削峰</strong>——可用性</p>
-<p>在使用消息队列的方案中，只需要确保自己把消息发送到了消息队列上，就认为操作已经成功了。（容错高）</p>
-<p>但是，在同步调用方案中，你必须要确保调用所有的下游都成功了才算是成功了。所以你还需要额外考虑部分成功部分失败的问题。</p>
-</li>
-</ol>
-
+    <div class="collection-year">
+      <span class="collection-header">2024</span>
     </div>
 
-    
-    
-    
+  <article itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
 
-      <footer class="post-footer">
+      <div class="post-meta">
+        <time itemprop="dateCreated"
+              datetime="2024-05-26T14:16:05+08:00"
+              content="2024-05-26">
+          05-26
+        </time>
+      </div>
 
-        
+      <div class="post-title">
+          <a class="post-title-link" href="/2024/05/26/introduce/" itemprop="url">
+            <span itemprop="name">本栏目介绍</span>
+          </a>
+      </div>
 
-
-        
-    <div class="post-nav">
-      <div class="post-nav-item">
-    <a href="/2024/05/28/leetCode-142-%E7%8E%AF%E5%BD%A2%E9%93%BE%E8%A1%A8II/" rel="prev" title="leetCode_142_环形链表II">
-      <i class="fa fa-chevron-left"></i> leetCode_142_环形链表II
-    </a></div>
-      <div class="post-nav-item">
-    <a href="/2024/05/28/%E4%B8%80%E6%AC%A1%E7%AC%94%E8%AF%95%E4%B9%8B%E5%90%8E%E7%9A%84%E7%A2%8E%E7%A2%8E%E5%BF%B5/" rel="next" title="一次笔试之后的碎碎念">
-      一次笔试之后的碎碎念 <i class="fa fa-chevron-right"></i>
-    </a></div>
-    </div>
-      </footer>
-    
+    </header>
   </article>
+
+
+    </div>
+  </div>
   
   
   
+
+  
+  <nav class="pagination">
+    <a class="extend prev" rel="prev" href="/archives/2024/05/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/archives/2024/05/">1</a><span class="page-number current">2</span>
+  </nav>
 
 
 
@@ -387,7 +294,6 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B5%81%E9%87%8F%E6%8E%A7%E5%88%B6%E3%80%81%E5%89%8A%E5%B3%B0%E2%80%94%E2%80%94%E5%89%8A%E5%8E%BB%E7%A7%92%E6%9D%80%E5%9C%BA%E6%99%AF%E4%B8%8B%E7%9A%84%E5%B3%B0%E5%80%BC%E5%86%99%E6%B5%81%E9%87%8F"><span class="nav-number">1.</span> <span class="nav-text">流量控制、削峰——削去秒杀场景下的峰值写流量</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BC%82%E6%AD%A5%E5%A4%84%E7%90%86%E2%80%94%E2%80%94%E9%80%9A%E8%BF%87%E5%BC%82%E6%AD%A5%E5%A4%84%E7%90%86%E7%AE%80%E5%8C%96%E7%A7%92%E6%9D%80%E8%AF%B7%E6%B1%82%E4%B8%AD%E7%9A%84%E4%B8%9A%E5%8A%A1%E6%B5%81%E7%A8%8B"><span class="nav-number">2.</span> <span class="nav-text">异步处理——通过异步处理简化秒杀请求中的业务流程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9C%8D%E5%8A%A1%E8%A7%A3%E8%80%A6%E2%80%94%E2%80%94%E8%A7%A3%E8%80%A6%E5%AE%9E%E7%8E%B0%E7%A7%92%E6%9D%80%E7%B3%BB%E7%BB%9F%E6%A8%A1%E5%9D%97%E4%B9%8B%E9%97%B4%E6%9D%BE%E8%80%A6%E5%90%88"><span class="nav-number">3.</span> <span class="nav-text">服务解耦——解耦实现秒杀系统模块之间松耦合</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%9D%A2%E8%AF%95%E9%A2%98%EF%BC%9A%E4%B8%BA%E4%BB%80%E4%B9%88%E4%B8%80%E5%AE%9A%E8%A6%81%E7%94%A8%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97%E5%91%A2%EF%BC%9F%E5%90%8C%E6%AD%A5%E8%B0%83%E7%94%A8%E4%B8%8D%E8%A1%8C%E5%90%97"><span class="nav-number">4.</span> <span class="nav-text">面试题：为什么一定要用消息队列呢？同步调用不行吗</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 

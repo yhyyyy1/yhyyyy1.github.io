@@ -4,6 +4,82 @@
   
     
     <entry>
+      <title>KMP算法</title>
+      <link href="/2024/06/01/KMP%E7%AE%97%E6%B3%95/"/>
+      <url>/2024/06/01/KMP%E7%AE%97%E6%B3%95/</url>
+      
+        <content type="html"><![CDATA[<p>前言：之前上算法课 + 自己刷题都遇到过，每次都感叹KMP的巧妙，但是每次都是看过就过了，下次遇到还是感叹“woc nb”，特记录完整的思路</p><h3 id="什么是KMP"><a href="#什么是KMP" class="headerlink" title="什么是KMP"></a>什么是KMP</h3><p>KMP主要应用在字符串匹配上。主要思想是<strong>当出现字符串不匹配时，可以知道一部分之前已经匹配的文本内容，可以利用这些信息避免从头再去做匹配了。</strong>、</p><p><strong>前缀</strong>：对于字符串 abcdxxxxxxyz，abcd就是该字符串的一个前缀</p><p><strong>后缀</strong>：对于字符串 abcdxxxxxxyz，xyz就是该字符串的一个后缀</p><h3 id="前缀表"><a href="#前缀表" class="headerlink" title="前缀表"></a>前缀表</h3><p>也就是KMP中常说的next数组，<strong>用来回退的</strong>，<strong>它记录了模式串与主串(文本串)不匹配的时候，模式串应该从哪里开始重新匹配。</strong></p><span id="more"></span><h3 id="匹配过程"><a href="#匹配过程" class="headerlink" title="匹配过程"></a>匹配过程</h3><p>假设原串为abcababeabf，匹配串为abeabf</p><p><img src="https://raw.githubusercontent.com/yhyyyy1/MyTypora/master/img/2024-6-1-KMPP1.png" alt="2024-6-1-KMPP1"></p><h4 id="先看不用KMP，会怎么匹配：（暴力，且不用substring）"><a href="#先看不用KMP，会怎么匹配：（暴力，且不用substring）" class="headerlink" title="先看不用KMP，会怎么匹配：（暴力，且不用substring）"></a>先看不用KMP，会怎么匹配：（暴力，且不用substring）</h4><p>首先在 原串和匹配串分割各自有一个指针执行当前匹配的位置（如图的箭头）：</p><p>第一次匹配的出发点是第一个字符 ‘a’，显然后面的字符是相等的，于是向右移动——直到出现第一个不同的位置（红色箭头）</p><p><img src="C:/Users/14505/Desktop/2024-6-1-KMPP2.png" alt="2024-6-1-KMPP2"></p><p>后面的逻辑就是 暴力匹配 和 <strong>KMP</strong> 不同的地方：</p><p><strong>暴力匹配：</strong></p><ol><li>先将原串的指针移动到本次出发点（’a’）的下一个位置 ‘b’，并且匹配串移动到起始位置</li><li>重复之前的步骤，直到能够匹配成功</li></ol><p>也就是说，对于暴力匹配，一旦匹配失败，<strong>之前遍历的内容就作废</strong>了，换一个出发点重新匹配</p><p><strong>时间复杂度</strong>：O(m * n)</p><h4 id="KMP匹配过程"><a href="#KMP匹配过程" class="headerlink" title="KMP匹配过程"></a>KMP匹配过程</h4><p><strong>首先匹配串会检查之前已经匹配成功的部分中里是否存在相同的「前缀」和「后缀」。如果存在，则跳转到「前缀」的下一个位置继续往下匹配：</strong></p><p>如下图，当前（原串和匹配串）匹配成功的部分为 abcab，其中前缀ab和后缀ab相同，所以可以跳转</p><p><img src="https://raw.githubusercontent.com/yhyyyy1/MyTypora/master/img/2024-6-1-KMPP3.png" alt="2024-6-1-KMPP3"></p><p>跳转到下一匹配位置后，尝试匹配，发现两个指针的字符对不上，并且此时匹配串指针前面 ab 不存在相同的「前缀」和「后缀」，这时候只能回到匹配串的起始位置重新开始。。。（依次进行循环）</p><p><strong>KMP比暴力快的原因：</strong></p><ul><li>KMP利用已匹配的部分中相同的「前缀」和「后缀」来加速下一次的匹配</li><li>KMP的原串不会进行回溯（没有暴力中回到下一个出发点的过程）</li></ul><h3 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h3><p>和常规的暴力相比，KMP增加了检查「前缀」和「后缀」的过程，其目的是「为了确定匹配串中的下一段开始匹配的位置」，所以要考虑如何实现这个检查</p><p>有这么一个结论——<strong>对于匹配串的任意一个位置而言，由该位置发起的下一个匹配点位置其实与原串无关。</strong></p><p>怎么理解呢？</p><p>就拿本文的例子来说，对于匹配串 abeabf 中的字符 f 来说，由它发起的下一个匹配点跳转必然是字符 e 的位置，因为 f 位置的相同「前缀」和「后缀」字符 ab 的下一个位置就是字符 c</p><p>所以要预处理出前缀表——next数组（用于跳转，当前字符i不匹配了，则next[i]就是同前缀的点，是可以跳转的位置）</p><h4 id="next数组的构建"><a href="#next数组的构建" class="headerlink" title="next数组的构建"></a>next数组的构建</h4><p>对于本题的匹配串 aaabbab</p><p><img src="https://raw.githubusercontent.com/yhyyyy1/MyTypora/master/img/2024-6-1-nextP1.png" alt="2024-6-1-nextP1"></p><p>起始时next[0] &#x3D; 0，j指针从0位置开始，i指针从1位置开始；</p><ul><li><p>如果p[j] &#x3D;&#x3D; p[i]，则next[i] &#x3D; j+1，且 i 和 j 同时向后移动</p><p><img src="https://raw.githubusercontent.com/yhyyyy1/MyTypora/master/img/2024-6-1-nextP2.png" alt="2024-6-1-nextP2"></p></li><li><p>如果p[j] !&#x3D; p[i]：将j指针指向迁移位置的next数字多对应的位置——j &#x3D; next[j - 1]，并重新判断p[j] !和 p[i]，直到p[j] &#x3D;&#x3D; p[i] 或者 j &#x3D;&#x3D; 0；且j &#x3D;&#x3D; 0时，next[i] &#x3D; 0，之后 j 不动，i 向后移动</p><p><img src="https://raw.githubusercontent.com/yhyyyy1/MyTypora/master/img/2024-6-1-nextP3.png" alt="2024-6-1-nextP3"></p></li></ul><p>之后就是循环两种情况</p><p><img src="https://raw.githubusercontent.com/yhyyyy1/MyTypora/master/img/2024-6-1-nextP4.png" alt="2024-6-1-nextP4"></p><p><img src="https://raw.githubusercontent.com/yhyyyy1/MyTypora/master/img/2024-6-1-nextP5.png" alt="2024-6-1-nextP5"></p><h4 id="代码实现："><a href="#代码实现：" class="headerlink" title="代码实现："></a>代码实现：</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * KMP 算法实现</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> ss 原串</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> pp 匹配串</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@return</span> 匹配串在原串中第一次出现的位置</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="type">int</span> <span class="title function_">strStr</span><span class="params">(String ss, String pp)</span> &#123;</span><br><span class="line">    <span class="comment">// 字符串转为char数组方便操作</span></span><br><span class="line">    <span class="type">char</span>[] s = ss.toCharArray();</span><br><span class="line">    <span class="type">char</span>[] p = pp.toCharArray();</span><br><span class="line">    <span class="type">int</span>[] next = getNext(p);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 匹配过程，用i指针指向原串遍历的位置，j指针是匹配串遍历的位置</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>, j = <span class="number">0</span>; i &lt; s.length; i++) &#123;</span><br><span class="line">        <span class="keyword">while</span> (j &gt; <span class="number">0</span> &amp;&amp; s[i] != p[j])</span><br><span class="line">            j = next[j - <span class="number">1</span>]; <span class="comment">// 如果不等，则利用next数组进行跳转</span></span><br><span class="line">        <span class="keyword">if</span> (s[i] == p[j]) j++;</span><br><span class="line">        <span class="keyword">if</span> (j == p.length) <span class="keyword">return</span> i - p.length + <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> -<span class="number">1</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * next数组构建</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> p</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">private</span> <span class="type">int</span>[] getNext(<span class="type">char</span>[] p) &#123;</span><br><span class="line">    <span class="type">int</span> <span class="variable">length</span> <span class="operator">=</span> p.length;</span><br><span class="line">    <span class="type">int</span>[] next = <span class="keyword">new</span> <span class="title class_">int</span>[length];</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 完全按照next构建描述中实现</span></span><br><span class="line">    next[<span class="number">0</span>] = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">1</span>, j = <span class="number">0</span>; i &lt; length; i++) &#123;</span><br><span class="line">        <span class="comment">// 定义出对应的i j 指针</span></span><br><span class="line">        <span class="keyword">while</span> (j &gt; <span class="number">0</span> &amp;&amp; p[i] != p[j]) &#123;</span><br><span class="line">            j = next[j - <span class="number">1</span>];</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (p[i] == p[j]) j++;</span><br><span class="line">        next[i] = j;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> next;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      <categories>
+          
+          <category> 技术 </category>
+          
+      </categories>
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>Java并发01</title>
+      <link href="/2024/06/01/Java%E5%B9%B6%E5%8F%9101/"/>
+      <url>/2024/06/01/Java%E5%B9%B6%E5%8F%9101/</url>
+      
+        <content type="html"><![CDATA[]]></content>
+      
+      
+      <categories>
+          
+          <category> Java </category>
+          
+      </categories>
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>MQ02</title>
+      <link href="/2024/06/01/MQ02/"/>
+      <url>/2024/06/01/MQ02/</url>
+      
+        <content type="html"><![CDATA[]]></content>
+      
+      
+      <categories>
+          
+          <category> 消息队列 </category>
+          
+      </categories>
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>2024-6-1-刷题日记</title>
+      <link href="/2024/06/01/2024-6-1-%E5%88%B7%E9%A2%98%E6%97%A5%E8%AE%B0/"/>
+      <url>/2024/06/01/2024-6-1-%E5%88%B7%E9%A2%98%E6%97%A5%E8%AE%B0/</url>
+      
+        <content type="html"><![CDATA[<h4 id="Question-1-反转字符串II"><a href="#Question-1-反转字符串II" class="headerlink" title="Question.1 反转字符串II"></a><a href="https://leetcode.cn/problems/reverse-string-ii/description/">Question.1 反转字符串II</a></h4><blockquote><p>给定一个字符串 <code>s</code> 和一个整数 <code>k</code>，从字符串开头算起，每计数至 <code>2k</code> 个字符，就反转这 <code>2k</code> 字符中的前 <code>k</code> 个字符。</p><ul><li>如果剩余字符少于 <code>k</code> 个，则将剩余字符全部反转。</li><li>如果剩余字符小于 <code>2k</code> 但大于或等于 <code>k</code> 个，则反转前 <code>k</code> 个字符，其余字符保持原样。</li></ul></blockquote><p>整体流程如下：</p><ul><li>剩余字符数目 &gt;2*k，则反转前k个，剩余的k个不变</li><li>k &lt;&#x3D; 剩余字符数目 &lt;2*k，则反转前k个，剩余的不变</li><li>剩余字符数目&lt;k，则全部反转</li></ul><p>总结就是：前k个一定要反转，不满k也要反转；反转完成就向后走2*k格</p><span id="more"></span><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> String <span class="title function_">reverseStr</span><span class="params">(String s, <span class="type">int</span> k)</span> &#123;</span><br><span class="line">    <span class="type">int</span> <span class="variable">length</span> <span class="operator">=</span> s.length();</span><br><span class="line">    <span class="type">char</span>[] ansArray = s.toCharArray();</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; length; i += <span class="number">2</span> * k) &#123;</span><br><span class="line">        <span class="type">int</span> <span class="variable">start</span> <span class="operator">=</span> i;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 无论后面是多少，总要反转前k个，如果不满k就都反转</span></span><br><span class="line">        <span class="type">int</span> <span class="variable">end</span> <span class="operator">=</span> Math.min(length - <span class="number">1</span>, start + k - <span class="number">1</span>);</span><br><span class="line">        <span class="keyword">while</span> (start &lt; end) &#123;</span><br><span class="line">            <span class="type">char</span> <span class="variable">temp</span> <span class="operator">=</span> ansArray[start];</span><br><span class="line">            ansArray[start] = ansArray[end];</span><br><span class="line">            ansArray[end] = temp;</span><br><span class="line">            start++;</span><br><span class="line">            end--;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">String</span>(ansArray);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><h4 id="Question-2-找出字符串中第一个匹配项的下标"><a href="#Question-2-找出字符串中第一个匹配项的下标" class="headerlink" title="Question.2 找出字符串中第一个匹配项的下标"></a><a href="https://leetcode.cn/problems/find-the-index-of-the-first-occurrence-in-a-string/">Question.2 找出字符串中第一个匹配项的下标</a></h4><blockquote><p>给你两个字符串 <code>haystack</code> 和 <code>needle</code> ，请你在 <code>haystack</code> 字符串中找出 <code>needle</code> 字符串的第一个匹配项的下标（下标从 0 开始）。如果 <code>needle</code> 不是 <code>haystack</code> 的一部分，则返回 <code>-1</code> 。</p></blockquote><p>很容易想到，一个个匹配的暴力解法。</p><p>但是可以用字符串匹配算法——*<a href="http://yhy1031.cn/2024/06/01/KMP%E7%AE%97%E6%B3%95/">KMP</a>*</p><h4 id="Question-3-重复的子字符串"><a href="#Question-3-重复的子字符串" class="headerlink" title="Question.3 重复的子字符串"></a><a href="https://leetcode.cn/problems/repeated-substring-pattern/">Question.3 重复的子字符串</a></h4><blockquote><p>给定一个非空的字符串 <code>s</code> ，检查是否可以通过由它的一个子串重复多次构成。</p></blockquote><p>（自己不会KMP时，用的substring）</p><p>同理，使用KMP算法，但是要明白这个题目的转换</p><p>题目问该字符串是否可以通过由它的一个子串重复多次构成，如果直接用kmp，那么就要不停的分割来用，不合适</p><p>所以就有s+s（去除第一个元素和最后一个元素），来匹配s，</p><p>去除首尾之后，就不会匹配到第一个s和第二个s了</p><p>（代码去看KMP，唯一不一样的为<code>for (int i = 1, j = 0; i &lt; s.length - 1; i++)</code>）</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 刷题日记 </category>
+          
+      </categories>
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>2024-5-30-刷题日记</title>
       <link href="/2024/05/30/2024-5-30-%E5%88%B7%E9%A2%98%E6%97%A5%E8%AE%B0/"/>
       <url>/2024/05/30/2024-5-30-%E5%88%B7%E9%A2%98%E6%97%A5%E8%AE%B0/</url>
@@ -198,7 +274,7 @@
       <link href="/2024/05/26/introduce/"/>
       <url>/2024/05/26/introduce/</url>
       
-        <content type="html"><![CDATA[<p>博主的算法题刷题日记</p><p>题目来自leetcode，由代码随想录整理</p><ul><li><p>题目目录：<a href="https://programmercarl.com/">https://programmercarl.com/</a></p></li><li><p>题目讲解视频：<a href="https://space.bilibili.com/525438321/channel/collectiondetail?sid=180037">https://space.bilibili.com/525438321/channel/collectiondetail?sid=180037</a></p></li></ul><p>本栏目的内容为博主二刷过程中对题目的思考、解题思路、总结的方法</p><p>包括如下内容：</p><ol><li>每天刷题的思考与问题（每道题都记录，但是不详细）</li><li>刷题时一时半会做不出来的题目 or  一道题目的多种解法</li><li>各种笔试题的题解</li></ol><p>联系博主：<a href="mailto:&#x79;&#x69;&#x6e;&#104;&#111;&#110;&#x67;&#x79;&#97;&#110;&#103;&#53;&#52;&#x36;&#x40;&#x67;&#x6d;&#x61;&#105;&#x6c;&#46;&#99;&#x6f;&#109;">&#x79;&#x69;&#x6e;&#104;&#111;&#110;&#x67;&#x79;&#97;&#110;&#103;&#53;&#52;&#x36;&#x40;&#x67;&#x6d;&#x61;&#105;&#x6c;&#46;&#99;&#x6f;&#109;</a></p>]]></content>
+        <content type="html"><![CDATA[<p>博主的算法题刷题日记</p><p>题目来自leetcode，由代码随想录整理</p><ul><li><p>题目目录：<a href="https://programmercarl.com/">https://programmercarl.com/</a></p></li><li><p>题目讲解视频：<a href="https://space.bilibili.com/525438321/channel/collectiondetail?sid=180037">https://space.bilibili.com/525438321/channel/collectiondetail?sid=180037</a></p></li></ul><p>本栏目的内容为博主二刷过程中对题目的思考、解题思路、总结的方法</p><p>包括如下内容：</p><ol><li>每天刷题的思考与问题（每道题都记录，但是不详细）</li><li>刷题时一时半会做不出来的题目 or  一道题目的多种解法</li><li>各种笔试题的题解</li></ol><p>联系博主：<a href="mailto:&#x79;&#105;&#x6e;&#104;&#x6f;&#x6e;&#103;&#x79;&#97;&#110;&#x67;&#53;&#x34;&#54;&#x40;&#x67;&#x6d;&#97;&#105;&#x6c;&#x2e;&#99;&#x6f;&#x6d;">&#x79;&#105;&#x6e;&#104;&#x6f;&#x6e;&#103;&#x79;&#97;&#110;&#x67;&#53;&#x34;&#54;&#x40;&#x67;&#x6d;&#97;&#105;&#x6c;&#x2e;&#99;&#x6f;&#x6d;</a></p>]]></content>
       
       
       <categories>
@@ -217,7 +293,7 @@
       <link href="/2024/04/09/introduceMyself/"/>
       <url>/2024/04/09/introduceMyself/</url>
       
-        <content type="html"><![CDATA[<p>昵称：4nge1<br>主要方向：Java后端（找工作ing）<br>邮箱：<a href="mailto:&#121;&#x69;&#110;&#x68;&#x6f;&#110;&#103;&#121;&#97;&#110;&#103;&#53;&#x34;&#54;&#64;&#103;&#x6d;&#x61;&#105;&#x6c;&#46;&#x63;&#x6f;&#109;">&#121;&#x69;&#110;&#x68;&#x6f;&#110;&#103;&#121;&#97;&#110;&#103;&#53;&#x34;&#54;&#64;&#103;&#x6d;&#x61;&#105;&#x6c;&#46;&#x63;&#x6f;&#109;</a></p>]]></content>
+        <content type="html"><![CDATA[<p>昵称：4nge1<br>主要方向：Java后端（找工作ing）<br>邮箱：<a href="mailto:&#x79;&#x69;&#110;&#x68;&#111;&#110;&#x67;&#121;&#97;&#110;&#x67;&#53;&#x34;&#54;&#64;&#x67;&#x6d;&#x61;&#x69;&#108;&#x2e;&#99;&#111;&#x6d;">&#x79;&#x69;&#110;&#x68;&#111;&#110;&#x67;&#121;&#97;&#110;&#x67;&#53;&#x34;&#54;&#64;&#x67;&#x6d;&#x61;&#x69;&#108;&#x2e;&#99;&#111;&#x6d;</a></p>]]></content>
       
       
       

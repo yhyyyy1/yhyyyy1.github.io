@@ -20,15 +20,15 @@
     var CONFIG = {"hostname":"yhy1031.cn","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="个人博客">
+  <meta name="description" content="问：你的项目为什么选择用rocketmq&#x2F;kafka&#x2F;rabbitmq作为消息队列组件？而不是其他的呢？  选择消息队列的前提：开源、不冷门、消息的可靠传递、Cluster、性能好 常用消息队列的优缺点RabbitMQ优点：  相当轻量级、容易部署和使用（是大多个人项目选择RabbitMQ的主要原因了吧） 路由配置很灵活 支持的编程语言很多  缺点：  RabbitMQ对消息">
 <meta property="og:type" content="article">
-<meta property="og:title" content="MQ02">
+<meta property="og:title" content="消息队列02：消息队列选型">
 <meta property="og:url" content="http://yhy1031.cn/blog/2024/06/01/MQ02/index.html">
 <meta property="og:site_name" content="Yinhy Blog">
-<meta property="og:description" content="个人博客">
+<meta property="og:description" content="问：你的项目为什么选择用rocketmq&#x2F;kafka&#x2F;rabbitmq作为消息队列组件？而不是其他的呢？  选择消息队列的前提：开源、不冷门、消息的可靠传递、Cluster、性能好 常用消息队列的优缺点RabbitMQ优点：  相当轻量级、容易部署和使用（是大多个人项目选择RabbitMQ的主要原因了吧） 路由配置很灵活 支持的编程语言很多  缺点：  RabbitMQ对消息">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2024-06-01T03:30:55.000Z">
-<meta property="article:modified_time" content="2024-06-01T03:32:00.483Z">
+<meta property="article:modified_time" content="2024-06-01T10:11:15.521Z">
 <meta property="article:author" content="Yinhongyang">
 <meta name="twitter:card" content="summary">
 
@@ -45,7 +45,7 @@
   };
 </script>
 
-  <title>MQ02 | Yinhy Blog</title>
+  <title>消息队列02：消息队列选型 | Yinhy Blog</title>
   
 
 
@@ -217,7 +217,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          MQ02
+          消息队列02：消息队列选型
         </h1>
 
         <div class="post-meta">
@@ -228,7 +228,7 @@
               <span class="post-meta-item-text">发表于</span>
               
 
-              <time title="创建时间：2024-06-01 11:30:55 / 修改时间：11:32:00" itemprop="dateCreated datePublished" datetime="2024-06-01T11:30:55+08:00">2024-06-01</time>
+              <time title="创建时间：2024-06-01 11:30:55 / 修改时间：18:11:15" itemprop="dateCreated datePublished" datetime="2024-06-01T11:30:55+08:00">2024-06-01</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -247,14 +247,14 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>0</span>
+              <span>551</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
                 <i class="far fa-clock"></i>
               </span>
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
+              <span>2 分钟</span>
             </span>
 
         </div>
@@ -266,7 +266,32 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        
+        <blockquote>
+<p>问：你的项目为什么选择用rocketmq&#x2F;kafka&#x2F;rabbitmq作为消息队列组件？而不是其他的呢？</p>
+</blockquote>
+<p>选择消息队列的前提：开源、不冷门、消息的可靠传递、Cluster、性能好</p>
+<h2 id="常用消息队列的优缺点"><a href="#常用消息队列的优缺点" class="headerlink" title="常用消息队列的优缺点"></a>常用消息队列的优缺点</h2><h3 id="RabbitMQ"><a href="#RabbitMQ" class="headerlink" title="RabbitMQ"></a>RabbitMQ</h3><p><strong>优点：</strong></p>
+<ol>
+<li>相当轻量级、容易部署和使用（是大多个人项目选择RabbitMQ的主要原因了吧）</li>
+<li>路由配置很灵活</li>
+<li>支持的编程语言很多</li>
+</ol>
+<p><strong>缺点：</strong></p>
+<ol>
+<li>RabbitMQ对消息堆积的支持不好、消息堆积会导致其性能下降</li>
+<li>RabbitMQ的性能是这几个中最差的（但是也够用了）</li>
+<li>RabbitMQ用Erlang写的，小众；不方便扩展</li>
+</ol>
+<p>消息队列并不是你将要构建系统的主角之一，你对消息队列功能和性能都没有很高的要求，只需要一个开箱即用易于维护的产品，建议使用 RabbitMQ</p>
+<h3 id="RocketMQ"><a href="#RocketMQ" class="headerlink" title="RocketMQ"></a>RocketMQ</h3><p>阿里巴巴使用Java开发的；<strong>没什么突出的优点，也没什么明显的缺点</strong></p>
+<p>优点：<strong>响应时延要求很高的场景，应该选择使用 RocketMQ。</strong></p>
+<p>缺点：与周边生态系统的集成和兼容程度要略逊一筹。</p>
+<p>如果你的系统使用消息队列主要场景是处理在线业务，比如在交易系统中用消息队列传递订单，那 RocketMQ 的低延迟和金融级的稳定性是你需要的。</p>
+<h3 id="Kafka"><a href="#Kafka" class="headerlink" title="Kafka"></a>Kafka</h3><p><strong>Kafka 与周边生态系统的兼容性是最好的没有之</strong>一，尤其在大数据和流计算领域，几乎所有的相关开源软件系统都会优先支持 Kafka。</p>
+<p>Kafka的<strong>性能很高</strong>（不过和RocketMQ没有量级上的差距），几十万条&#x2F;s</p>
+<p>但是是异步批量的设计，导致同步收发消息的响应时延较高（kafka会把消息攒一批发送）——<strong>不适合在线业务场景</strong></p>
+<p>如果你需要处理海量的消息，像收集日志、监控信息或是前端的埋点这类数据，或是你的应用场景大量使用了大数据、流计算相关的开源产品，那 Kafka 是最适合你的消息队列。</p>
+
     </div>
 
     
@@ -285,8 +310,8 @@
       <i class="fa fa-chevron-left"></i> 2024-6-1-刷题日记
     </a></div>
       <div class="post-nav-item">
-    <a href="/2024/06/01/Java%E5%B9%B6%E5%8F%9101/" rel="next" title="Java并发01">
-      Java并发01 <i class="fa fa-chevron-right"></i>
+    <a href="/2024/06/01/KMP%E7%AE%97%E6%B3%95/" rel="next" title="KMP算法">
+      KMP算法 <i class="fa fa-chevron-right"></i>
     </a></div>
     </div>
       </footer>
@@ -346,6 +371,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B8%B8%E7%94%A8%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97%E7%9A%84%E4%BC%98%E7%BC%BA%E7%82%B9"><span class="nav-number">1.</span> <span class="nav-text">常用消息队列的优缺点</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#RabbitMQ"><span class="nav-number">1.1.</span> <span class="nav-text">RabbitMQ</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#RocketMQ"><span class="nav-number">1.2.</span> <span class="nav-text">RocketMQ</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Kafka"><span class="nav-number">1.3.</span> <span class="nav-text">Kafka</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -361,7 +387,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">16</span>
+          <span class="site-state-item-count">15</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -411,12 +437,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="站点总字数">21k</span>
+    <span title="站点总字数">10k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">19 分钟</span>
+    <span title="站点阅读时长">37 分钟</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> 强力驱动
   </div>

@@ -20,19 +20,21 @@
     var CONFIG = {"hostname":"yhy1031.cn","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="你的项目为什么选择用 rocketmq &#x2F; kafka &#x2F; rabbitmq作为消息队列组件？而不是其他的呢？  选择消息队列的前提：开源、不冷门、消息的可靠传递、Cluster、性能好 常用消息队列的优缺点RabbitMQ优点：  相当轻量级、容易部署和使用（是大多个人项目选择RabbitMQ的主要原因了吧） 路由配置很灵活 支持的编程语言很多  缺点：  RabbitMQ">
+  <meta name="description" content="本文用于记录博主在学习Java并发时的知识点总结  锁Lock是显示的加锁解锁，而Synchronized是隐式的锁；Lock的实现在 java.util.concurrent包中 123456789public void add(int n) &#123;    Lock lock &#x3D; new ReentrantLock();    int count &#x3D; 0;    try &#123;">
 <meta property="og:type" content="article">
-<meta property="og:title" content="消息队列02：消息队列选型">
-<meta property="og:url" content="http://yhy1031.cn/blog/2024/06/01/MQ02/index.html">
+<meta property="og:title" content="Java并发笔记03：Lock">
+<meta property="og:url" content="http://yhy1031.cn/blog/2024/06/06/Java%E5%B9%B6%E5%8F%91%E7%AC%94%E8%AE%B003/index.html">
 <meta property="og:site_name" content="Yinhy Blog">
-<meta property="og:description" content="你的项目为什么选择用 rocketmq &#x2F; kafka &#x2F; rabbitmq作为消息队列组件？而不是其他的呢？  选择消息队列的前提：开源、不冷门、消息的可靠传递、Cluster、性能好 常用消息队列的优缺点RabbitMQ优点：  相当轻量级、容易部署和使用（是大多个人项目选择RabbitMQ的主要原因了吧） 路由配置很灵活 支持的编程语言很多  缺点：  RabbitMQ">
+<meta property="og:description" content="本文用于记录博主在学习Java并发时的知识点总结  锁Lock是显示的加锁解锁，而Synchronized是隐式的锁；Lock的实现在 java.util.concurrent包中 123456789public void add(int n) &#123;    Lock lock &#x3D; new ReentrantLock();    int count &#x3D; 0;    try &#123;">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2024-06-01T03:30:55.000Z">
-<meta property="article:modified_time" content="2024-06-01T10:50:13.054Z">
+<meta property="og:image" content="https://raw.githubusercontent.com/yhyyyy1/MyTypora/master/img/90ac22daf22e0537cb9264567f7ee5c.png">
+<meta property="article:published_time" content="2024-06-06T07:35:01.000Z">
+<meta property="article:modified_time" content="2024-06-06T12:19:19.604Z">
 <meta property="article:author" content="Yinhongyang">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/yhyyyy1/MyTypora/master/img/90ac22daf22e0537cb9264567f7ee5c.png">
 
-<link rel="canonical" href="http://yhy1031.cn/blog/2024/06/01/MQ02/">
+<link rel="canonical" href="http://yhy1031.cn/blog/2024/06/06/Java%E5%B9%B6%E5%8F%91%E7%AC%94%E8%AE%B003/">
 
 
 <script id="page-configurations">
@@ -45,7 +47,7 @@
   };
 </script>
 
-  <title>消息队列02：消息队列选型 | Yinhy Blog</title>
+  <title>Java并发笔记03：Lock | Yinhy Blog</title>
   
 
 
@@ -204,7 +206,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yhy1031.cn/blog/2024/06/01/MQ02/">
+    <link itemprop="mainEntityOfPage" href="http://yhy1031.cn/blog/2024/06/06/Java%E5%B9%B6%E5%8F%91%E7%AC%94%E8%AE%B003/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.jpg">
@@ -217,7 +219,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          消息队列02：消息队列选型
+          Java并发笔记03：Lock
         </h1>
 
         <div class="post-meta">
@@ -228,7 +230,7 @@
               <span class="post-meta-item-text">发表于</span>
               
 
-              <time title="创建时间：2024-06-01 11:30:55 / 修改时间：18:50:13" itemprop="dateCreated datePublished" datetime="2024-06-01T11:30:55+08:00">2024-06-01</time>
+              <time title="创建时间：2024-06-06 15:35:01 / 修改时间：20:19:19" itemprop="dateCreated datePublished" datetime="2024-06-06T15:35:01+08:00">2024-06-06</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -236,7 +238,7 @@
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97/" itemprop="url" rel="index"><span itemprop="name">消息队列</span></a>
+                  <a href="/categories/Java/" itemprop="url" rel="index"><span itemprop="name">Java</span></a>
                 </span>
             </span>
               <span>&emsp;</span><span class="post-meta-item-icon"><i class="fa fa-eye"></i></span>
@@ -247,14 +249,14 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>551</span>
+              <span>1.7k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
                 <i class="far fa-clock"></i>
               </span>
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>2 分钟</span>
+              <span>6 分钟</span>
             </span>
 
         </div>
@@ -267,32 +269,71 @@
 
       
         <blockquote>
-<p>你的项目为什么选择用 rocketmq &#x2F; kafka &#x2F; rabbitmq作为消息队列组件？而不是其他的呢？</p>
+<p>本文用于记录博主在学习Java并发时的知识点总结</p>
 </blockquote>
-<p>选择消息队列的前提：开源、不冷门、消息的可靠传递、Cluster、性能好</p>
-<h2 id="常用消息队列的优缺点"><a href="#常用消息队列的优缺点" class="headerlink" title="常用消息队列的优缺点"></a>常用消息队列的优缺点</h2><h3 id="RabbitMQ"><a href="#RabbitMQ" class="headerlink" title="RabbitMQ"></a>RabbitMQ</h3><p><strong>优点：</strong></p>
-<ol>
-<li>相当轻量级、容易部署和使用（是大多个人项目选择RabbitMQ的主要原因了吧）</li>
-<li>路由配置很灵活</li>
-<li>支持的编程语言很多</li>
-</ol>
-<p><strong>缺点：</strong></p>
-<ol>
-<li>RabbitMQ对消息堆积的支持不好、消息堆积会导致其性能下降</li>
-<li>RabbitMQ的性能是这几个中最差的（但是也够用了）</li>
-<li>RabbitMQ用Erlang写的，小众；不方便扩展</li>
-</ol>
-<p>消息队列并不是你将要构建系统的主角之一，你对消息队列功能和性能都没有很高的要求，只需要一个开箱即用易于维护的产品，建议使用 RabbitMQ</p>
+<p><strong>锁Lock是显示的加锁解锁</strong>，而Synchronized是隐式的锁；Lock的实现在 java.util.concurrent包中</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">add</span><span class="params">(<span class="type">int</span> n)</span> &#123;</span><br><span class="line">    <span class="type">Lock</span> <span class="variable">lock</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ReentrantLock</span>();</span><br><span class="line">    <span class="type">int</span> <span class="variable">count</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        count += n;</span><br><span class="line">    &#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">        lock.unlock();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>需要注意：</p>
+<ul>
+<li><strong>解锁一定要放在finally中</strong>，确保无论如何都可以解锁</li>
+<li><strong>加锁一定要放在try-catch外</strong>，因为加锁过程如果发生异常，也会进入finally块导致锁无故释放</li>
+</ul>
+<p>Lock接口基本是由AQS实现的（下篇文章主要介绍）</p>
 <span id="more"></span>
 
-<h3 id="RocketMQ"><a href="#RocketMQ" class="headerlink" title="RocketMQ"></a>RocketMQ</h3><p>阿里巴巴使用Java开发的；<strong>没什么突出的优点，也没什么明显的缺点</strong></p>
-<p>优点：<strong>响应时延要求很高的场景，应该选择使用 RocketMQ。</strong></p>
-<p>缺点：与周边生态系统的集成和兼容程度要略逊一筹。</p>
-<p>如果你的系统使用消息队列主要场景是处理在线业务，比如在交易系统中用消息队列传递订单，那 RocketMQ 的低延迟和金融级的稳定性是你需要的。</p>
-<h3 id="Kafka"><a href="#Kafka" class="headerlink" title="Kafka"></a>Kafka</h3><p><strong>Kafka 与周边生态系统的兼容性是最好的没有之</strong>一，尤其在大数据和流计算领域，几乎所有的相关开源软件系统都会优先支持 Kafka。</p>
-<p>Kafka的<strong>性能很高</strong>（不过和RocketMQ没有量级上的差距），几十万条&#x2F;s</p>
-<p>但是是异步批量的设计，导致同步收发消息的响应时延较高（kafka会把消息攒一批发送）——<strong>不适合在线业务场景</strong></p>
-<p>如果你需要处理海量的消息，像收集日志、监控信息或是前端的埋点这类数据，或是你的应用场景大量使用了大数据、流计算相关的开源产品，那 Kafka 是最适合你的消息队列。</p>
+<h3 id="重入锁-ReentrantLock"><a href="#重入锁-ReentrantLock" class="headerlink" title="重入锁 ReentrantLock"></a>重入锁 ReentrantLock</h3><p><strong>什么是重入？</strong>：指任意线程在获取到锁之后，能再次获取该锁而不会被锁阻塞</p>
+<p>主要是两个问题：线程再次获取锁、锁的最终释放（对AQS的状态累加实现）</p>
+<h4 id="公平锁-非公平锁"><a href="#公平锁-非公平锁" class="headerlink" title="公平锁 &amp; 非公平锁"></a>公平锁 &amp; 非公平锁</h4><blockquote>
+<p>公平 &amp; 非公平只是锁的获取方式！！！</p>
+</blockquote>
+<p>ReentrantLock类内部有三个类</p>
+<img src="https://raw.githubusercontent.com/yhyyyy1/MyTypora/master/img/90ac22daf22e0537cb9264567f7ee5c.png" alt="90ac22daf22e0537cb9264567f7ee5c" style="zoom:80%;" />
+
+<p><strong>公平锁：</strong>每个线程获取锁的顺序是按照线程访问锁的先后顺序获取的，最前面的线程总是最先获取到锁。 （<strong>保证了时间上的绝对顺序，但是性能差、上下文切换更频繁</strong>）</p>
+<p><strong>非公平锁：</strong>每个线程获取锁的顺序是随机的，并不会遵循先来先得的规则，所有线程会竞争获取锁。（<strong>性能好、但是可能会“饿死”某些线程</strong>）</p>
+<p>和公平锁相比，非公平锁实现tryAcquire() 方法时多了一个hasQueuedPredecessor()方法，用于判断同步队列中是否有前驱节点，用于实现公平</p>
+<p>ReentrantLock默认为非公平锁（且默认实现就是非公平锁）</p>
+<h4 id="公平锁-非公平锁对比"><a href="#公平锁-非公平锁对比" class="headerlink" title="公平锁 &amp; 非公平锁对比"></a>公平锁 &amp; 非公平锁对比</h4><p><strong>公平锁执行流程：</strong></p>
+<p>获取锁时，线程A先将自己添加到同步队列的队尾并休眠；当前持有锁的线程执行完毕释放锁后，会唤醒同步队列中队头线程去获取锁；直到线程A成为队头时，才会被唤醒获取锁（先后顺序）</p>
+<p><strong>非公平锁执行流程：</strong></p>
+<p>线程获取锁时，会<strong>先通过CAS尝试获取锁</strong>，如果获取成功则持有锁，如果获取失败则添加到同步队列的队尾并休眠……后续和公平锁相同（不遵循先后顺序）</p>
+<p><strong>非公平锁比公平锁性能好：</strong></p>
+<p>因为获取公平锁时，一定会<strong>使线程进入同步队列并休眠，在之后轮到这个线程后又唤醒并获取锁</strong>；这个过程中线程会<strong>经过运行状态——休眠状态——运行状态的转变</strong>，这个状态的转变<strong>需要从用户态转换成内核态</strong>（线程切换的调度器在内核中），这个状态转换很慢。</p>
+<p>而获取非公平锁时，每个线程都会先通过 CAS 尝试获取锁，可能直接获取锁继续执行了；<strong>避免了部分线程休眠和恢复的操作，减少状态转换的次数</strong>，所以性能好</p>
+<h3 id="读写锁-ReentrantReadWriteLock"><a href="#读写锁-ReentrantReadWriteLock" class="headerlink" title="读写锁 ReentrantReadWriteLock"></a>读写锁 ReentrantReadWriteLock</h3><p>是一种共享锁（之前的ReentrantLock是独占锁，Mutex互斥锁也是独占的）</p>
+<p>读写锁中在同一时间可以允许多个读线程访问（多个线程持有读锁），但是在写线程访问时，所有的读线程和写线程均被阻塞</p>
+<p>分为readLock() 和 writeLock() 可以获取</p>
+<h4 id="读写锁特性"><a href="#读写锁特性" class="headerlink" title="读写锁特性"></a>读写锁特性</h4><p><strong>公平性</strong>：支持公平和非公平（默认）两种锁的获取方式</p>
+<p><strong>重入</strong>：支持重入、同一线程获取读锁后还能再次获取、同一线程获取写锁后还能再次获取写锁 or 读锁</p>
+<p><strong>锁降级：</strong>按照获取写锁，再获取读锁，再释放写锁的顺序，写锁能够降级为读锁</p>
+<p>但是不支持锁升级，因为从读锁升级为写锁，需要等待所有读锁的释放（如果两个线程都想升级，那就都会等待对方的读锁释放，会死锁）</p>
+<h4 id="读写锁特性——锁降级"><a href="#读写锁特性——锁降级" class="headerlink" title="读写锁特性——锁降级"></a>读写锁特性——锁降级</h4><p>如果当前线程拥有写锁，然后将其释放，最后再获取读锁，这种分段完成的过程不能称之为锁降级。<strong>锁降级是指把持住（当前拥有的）写锁，再获取到读锁，随后释放（先前拥有的）写锁的过程，最后释放读锁的过程。</strong></p>
+<p>假设一个线程已经持有写锁，<strong>锁降级的步骤</strong>通常如下： 获取写锁——获取读锁——释放写锁——释放读锁</p>
+<ul>
+<li><strong>获取写锁：</strong>首先，线程获取写锁以确保对共享数据的独占访问。 </li>
+<li>写入数据：然后，线程进行数据写入操作。</li>
+<li><strong>获取读锁：</strong>在释放写锁之前，线程获取读锁。 </li>
+<li><strong>释放写锁：</strong>接着，线程释放写锁。此时，由于读锁已经被获取，即使其他线程可以开始获取读锁，但写锁仍然不可用。 </li>
+<li>执行读操作：线程可以安全地执行基于最新数据的读操作。 </li>
+<li><strong>释放读锁：</strong>最后，完成读操作后释放读锁。</li>
+</ul>
+<p><strong>为什么要实现锁降级呢？</strong></p>
+<p>如果当前线程不获取读锁而是直接释放写锁， 假设此刻<strong>另一个线程（记作线程T）获取了写锁并修改了数据，那么当前线程无法感知线程T的数据更新</strong>。</p>
+<p>如果当前线程获取读锁，即<strong>遵循锁降级的步骤，则线程T将会被阻塞</strong>，直到当前线程使用数据并释放读锁之后，线程T才能获取写锁进行数据更新。（保证了本线程后续操作的可见性，一定是最新的数据）</p>
+<h3 id="Lock-和-Synchronized对比"><a href="#Lock-和-Synchronized对比" class="headerlink" title="Lock 和 Synchronized对比"></a>Lock 和 Synchronized对比</h3><p><strong>相同点</strong></p>
+<ol>
+<li>都是用来保护资源线程安全的（作用相同）</li>
+<li>都可以保证可见性</li>
+<li>Synchronized 和 ReentrantLock 都拥有可重入的特点</li>
+</ol>
+<p><strong>不同点：</strong></p>
+<ol>
+<li><strong>加解锁控制差别：</strong>synchronized的加解锁是由Jvm实现的（属于内置锁），Lock的加解锁需要手动控制，通过lock() 和 unlock() 实现</li>
+<li><strong>Synchronized不够灵活：</strong> <strong>synchronized</strong>一个线程获取锁之后，其他线程想要获取锁<strong>只能等待，只能进入阻塞状态，直到持有锁的线程释放这个锁</strong>，可能这个等待过程会持续很久。 <strong>Lock</strong>可以<strong>使用lockInterruptibly方法</strong>，不想等了可以中断退出，也可以<strong>使用tryLock</strong>获取锁，能获取就获取，不能获取线程也可以去干别的事情，更加灵活。</li>
+<li>Synchronized锁只能同时被一个线程拥有，但是Lock锁没有这个限制：如读锁可以被多个线程同时拥有</li>
+<li>ReentrantLock可以根据自己的需求设置公平锁or非公平锁，但是Synchronized 则不能</li>
+</ol>
 
     </div>
 
@@ -308,12 +349,12 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2024/06/01/2024-6-1-%E5%88%B7%E9%A2%98%E6%97%A5%E8%AE%B0/" rel="prev" title="2024-6-1-刷题日记">
-      <i class="fa fa-chevron-left"></i> 2024-6-1-刷题日记
+    <a href="/2024/06/05/Java%E5%B9%B6%E5%8F%91%E7%AC%94%E8%AE%B002/" rel="prev" title="Java并发笔记02：Synchronized & Volatile">
+      <i class="fa fa-chevron-left"></i> Java并发笔记02：Synchronized & Volatile
     </a></div>
       <div class="post-nav-item">
-    <a href="/2024/06/01/KMP%E7%AE%97%E6%B3%95/" rel="next" title="KMP算法">
-      KMP算法 <i class="fa fa-chevron-right"></i>
+    <a href="/2024/06/06/Java%E5%B9%B6%E5%8F%91%E7%AC%94%E8%AE%B004/" rel="next" title="Java并发笔记04：AQS">
+      Java并发笔记04：AQS <i class="fa fa-chevron-right"></i>
     </a></div>
     </div>
       </footer>
@@ -373,7 +414,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B8%B8%E7%94%A8%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97%E7%9A%84%E4%BC%98%E7%BC%BA%E7%82%B9"><span class="nav-number">1.</span> <span class="nav-text">常用消息队列的优缺点</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#RabbitMQ"><span class="nav-number">1.1.</span> <span class="nav-text">RabbitMQ</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#RocketMQ"><span class="nav-number">1.2.</span> <span class="nav-text">RocketMQ</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Kafka"><span class="nav-number">1.3.</span> <span class="nav-text">Kafka</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%87%8D%E5%85%A5%E9%94%81-ReentrantLock"><span class="nav-number">1.</span> <span class="nav-text">重入锁 ReentrantLock</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%85%AC%E5%B9%B3%E9%94%81-%E9%9D%9E%E5%85%AC%E5%B9%B3%E9%94%81"><span class="nav-number">1.1.</span> <span class="nav-text">公平锁 &amp; 非公平锁</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%85%AC%E5%B9%B3%E9%94%81-%E9%9D%9E%E5%85%AC%E5%B9%B3%E9%94%81%E5%AF%B9%E6%AF%94"><span class="nav-number">1.2.</span> <span class="nav-text">公平锁 &amp; 非公平锁对比</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AF%BB%E5%86%99%E9%94%81-ReentrantReadWriteLock"><span class="nav-number">2.</span> <span class="nav-text">读写锁 ReentrantReadWriteLock</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%AF%BB%E5%86%99%E9%94%81%E7%89%B9%E6%80%A7"><span class="nav-number">2.1.</span> <span class="nav-text">读写锁特性</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%AF%BB%E5%86%99%E9%94%81%E7%89%B9%E6%80%A7%E2%80%94%E2%80%94%E9%94%81%E9%99%8D%E7%BA%A7"><span class="nav-number">2.2.</span> <span class="nav-text">读写锁特性——锁降级</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Lock-%E5%92%8C-Synchronized%E5%AF%B9%E6%AF%94"><span class="nav-number">3.</span> <span class="nav-text">Lock 和 Synchronized对比</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 

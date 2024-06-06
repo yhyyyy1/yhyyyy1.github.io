@@ -20,19 +20,22 @@
     var CONFIG = {"hostname":"yhy1031.cn","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="昵称：4nge1主要方向：Java后端（找工作ing）邮箱：&#121;&#105;&#110;&#104;&#x6f;&#110;&#103;&#121;&#97;&#110;&#x67;&#53;&#52;&#54;&#x40;&#103;&#109;&#97;&#x69;&#108;&#x2e;&#x63;&#111;&#109;">
+  <meta name="description" content="本文用于记录博主在学习Java并发时的知识点总结  老生常谈的一个概念——进程是操作系统资源分配的基本单位、线程是操作系统调度资源的基本单位">
 <meta property="og:type" content="article">
-<meta property="og:title" content="关于博主">
-<meta property="og:url" content="http://yhy1031.cn/blog/2024/04/09/introduceMyself/index.html">
+<meta property="og:title" content="Java并发笔记01：基础">
+<meta property="og:url" content="http://yhy1031.cn/blog/2024/06/05/Java%E5%B9%B6%E5%8F%91%E7%AC%94%E8%AE%B001/index.html">
 <meta property="og:site_name" content="Yinhy Blog">
-<meta property="og:description" content="昵称：4nge1主要方向：Java后端（找工作ing）邮箱：&#121;&#105;&#110;&#104;&#x6f;&#110;&#103;&#121;&#97;&#110;&#x67;&#53;&#52;&#54;&#x40;&#103;&#109;&#97;&#x69;&#108;&#x2e;&#x63;&#111;&#109;">
+<meta property="og:description" content="本文用于记录博主在学习Java并发时的知识点总结  老生常谈的一个概念——进程是操作系统资源分配的基本单位、线程是操作系统调度资源的基本单位">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2024-04-09T08:25:46.000Z">
-<meta property="article:modified_time" content="2024-05-28T08:06:49.702Z">
+<meta property="og:image" content="https://raw.githubusercontent.com/yhyyyy1/MyTypora/master/img/image-20240605153703397.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/yhyyyy1/MyTypora/master/img/2024-6-6-Interrupted.png">
+<meta property="article:published_time" content="2024-06-05T03:14:24.000Z">
+<meta property="article:modified_time" content="2024-06-06T06:31:08.755Z">
 <meta property="article:author" content="Yinhongyang">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/yhyyyy1/MyTypora/master/img/image-20240605153703397.png">
 
-<link rel="canonical" href="http://yhy1031.cn/blog/2024/04/09/introduceMyself/">
+<link rel="canonical" href="http://yhy1031.cn/blog/2024/06/05/Java%E5%B9%B6%E5%8F%91%E7%AC%94%E8%AE%B001/">
 
 
 <script id="page-configurations">
@@ -45,7 +48,7 @@
   };
 </script>
 
-  <title>关于博主 | Yinhy Blog</title>
+  <title>Java并发笔记01：基础 | Yinhy Blog</title>
   
 
 
@@ -204,7 +207,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yhy1031.cn/blog/2024/04/09/introduceMyself/">
+    <link itemprop="mainEntityOfPage" href="http://yhy1031.cn/blog/2024/06/05/Java%E5%B9%B6%E5%8F%91%E7%AC%94%E8%AE%B001/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.jpg">
@@ -217,7 +220,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          关于博主
+          Java并发笔记01：基础
         </h1>
 
         <div class="post-meta">
@@ -227,15 +230,24 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2024-04-09 16:25:46" itemprop="dateCreated datePublished" datetime="2024-04-09T16:25:46+08:00">2024-04-09</time>
+              <time title="创建时间：2024-06-05 11:14:24" itemprop="dateCreated datePublished" datetime="2024-06-05T11:14:24+08:00">2024-06-05</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2024-05-28 16:06:49" itemprop="dateModified" datetime="2024-05-28T16:06:49+08:00">2024-05-28</time>
+                <time title="修改时间：2024-06-06 14:31:08" itemprop="dateModified" datetime="2024-06-06T14:31:08+08:00">2024-06-06</time>
               </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Java/" itemprop="url" rel="index"><span itemprop="name">Java</span></a>
+                </span>
+            </span>
               <span>&emsp;</span><span class="post-meta-item-icon"><i class="fa fa-eye"></i></span>
               <span class="post-meta-item-text">阅读次数：</span>
               <span id="busuanzi_value_page_pv"></span><br>
@@ -244,14 +256,14 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>169</span>
+              <span>2.3k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
                 <i class="far fa-clock"></i>
               </span>
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
+              <span>2 分钟</span>
             </span>
 
         </div>
@@ -263,7 +275,52 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <p>昵称：4nge1<br>主要方向：Java后端（找工作ing）<br>邮箱：<a href="mailto:&#121;&#105;&#110;&#104;&#x6f;&#110;&#103;&#121;&#97;&#110;&#x67;&#53;&#52;&#54;&#x40;&#103;&#109;&#97;&#x69;&#108;&#x2e;&#x63;&#111;&#109;">&#121;&#105;&#110;&#104;&#x6f;&#110;&#103;&#121;&#97;&#110;&#x67;&#53;&#52;&#54;&#x40;&#103;&#109;&#97;&#x69;&#108;&#x2e;&#x63;&#111;&#109;</a></p>
+        <blockquote>
+<p>本文用于记录博主在学习Java并发时的知识点总结</p>
+</blockquote>
+<p>老生常谈的一个概念——<strong>进程是操作系统资源分配的基本单位</strong>、<strong>线程是操作系统调度资源的基本单位</strong></p>
+<span id="more"></span>
+
+<h3 id="线程的状态"><a href="#线程的状态" class="headerlink" title="线程的状态"></a>线程的状态</h3><p>面试被问过</p>
+<img src="https://raw.githubusercontent.com/yhyyyy1/MyTypora/master/img/image-20240605153703397.png" alt="image-20240605153703397" style="zoom: 80%;" />
+
+<ul>
+<li><strong>NEW</strong>：<strong>初始状态</strong>，线程被创建，但是还没有调用start()方法</li>
+<li><strong>RUNNABLE</strong>：<ul>
+<li><strong>READY</strong>：当线程对象调用了<code>start()</code>方法之后，线程处于<strong>就绪状态</strong>，就绪意味着该线程<strong>可以执行</strong></li>
+<li><strong>RUNNING</strong>：处于就绪状态的线程获得了CPU之后，<strong>真正开始执行run()方法的线程执行体时</strong>，意味着该线程就已经处于<strong>运行状态</strong></li>
+</ul>
+</li>
+<li><strong>BLOCKED</strong>：<strong>阻塞状态</strong>，表示线程阻塞于锁。</li>
+<li><strong>WAITING</strong>：<strong>等待状态</strong>，表示线程进入等待状态（如执行wait join等方法），进入该状态表示当前线程需要等待其他线程做出一些等待动作（通知或中断）</li>
+<li><strong>TIMED_WAITING</strong>：<strong>超时等待状态</strong>，（wait join等方法中设定等待时长）该状态不同于WAITING状态，它可以在指定的时间自行返回。</li>
+<li><strong>TERMINATED</strong>：<strong>终止状态</strong>，表示当前线程已经执行完毕。</li>
+</ul>
+<h3 id="线程创建"><a href="#线程创建" class="headerlink" title="线程创建"></a>线程创建</h3><p>只掌握两种方式：继承Thread &amp; 实现Runnable接口</p>
+<h4 id="Thread类"><a href="#Thread类" class="headerlink" title="Thread类"></a>Thread类</h4><p>要重写run方法（public）</p>
+<p>因为是继承Thread类，所以直接<strong>new一个该类的实例就可以当作一个线程操作</strong>了</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Test</span> <span class="keyword">extends</span> <span class="title class_">Thread</span> &#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">run</span><span class="params">()</span> &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;继承Thread类&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        <span class="type">Test</span> <span class="variable">instance</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Test</span>();</span><br><span class="line">        instance.start();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="Runnable接口"><a href="#Runnable接口" class="headerlink" title="Runnable接口"></a>Runnable接口</h4><p>实现 Runnable 的类只能当做一个可以在线程中运行的任务，不是真正意义上的线程，因此最后还需要通过 Thread 来调用。可以说任务是通过线程驱动从而执行的</p>
+<p>所以<strong>需要new一个Thread对象</strong>（应该是在Runnable中集成的）来实现</p>
+<p>并且<strong>将类的实例传到 Thread 类中</strong>实现线程操作</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Test</span> <span class="keyword">implements</span> <span class="title class_">Runnable</span> &#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">run</span><span class="params">()</span> &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;你好&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        <span class="type">Test</span> <span class="variable">instance</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Test</span>();</span><br><span class="line">        <span class="type">Thread</span> <span class="variable">thread</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Thread</span>(instance);</span><br><span class="line">        thread.start();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>PS：实现Runnable接口比继承Thread类合适</strong></p>
+<ol>
+<li><strong>Java不支持多继承</strong>，如果用extends的话，就不能再继承其他父类，但是可以实现多个接口</li>
+<li>类的线程有可能只要求可执行，如果继承整个Thread类，开销过大</li>
+</ol>
+<h3 id="线程中断——Interrupted"><a href="#线程中断——Interrupted" class="headerlink" title="线程中断——Interrupted"></a>线程中断——Interrupted</h3><p>线程中断不同于阻塞等待这些，它是一个线程的标识（可以用isInterrupted()方法判断），线程可以选择如何去处理这个标识（识别到中断后，不停止，而是去执行后续的操作）</p>
+<p><strong>主要是对处于休眠or阻塞状态的线程进行 Interrupt</strong>：如sleep、wait等方法使线程休眠，而处于休眠状态的线程被中断，则线程可以感受到中短信号——<strong>抛出InterruptedException异常</strong>，在这之前需要把中断标志位消除（即<code>isInterrupted()</code> 判断为falue）再抛出InterruptedException异常</p>
+<p>因为还需要执行后续的内容（try-catch以外的部分），如下图所示</p>
+<p><img src="https://raw.githubusercontent.com/yhyyyy1/MyTypora/master/img/2024-6-6-Interrupted.png" alt="2024-6-6-Interrupted"></p>
+<p>这部分也就意味着不能让线程强行停止，让被中断的线程自行判断下一步怎么进行（如何响应中断，不能贸然停止）</p>
+<h3 id="线程变量——ThreadLocal"><a href="#线程变量——ThreadLocal" class="headerlink" title="线程变量——ThreadLocal"></a>线程变量——ThreadLocal</h3><p>以ThreadLocal对象为key、任意对象为value的存储结构（k-v对）</p>
+<p><strong>当一个Key-Value对被存储之后，会一直附带在该线程上</strong>（只有这个线程可见）；可以在线程执行的任何位置通过这个ThreadLocal对象取到存入的值（set、get）</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Test</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">class</span> <span class="title class_">PrintTimeUtil</span> &#123;</span><br><span class="line">        <span class="comment">// 创建的ThreadLocal对象</span></span><br><span class="line">        <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> ThreadLocal&lt;Long&gt; OBJECT = <span class="keyword">new</span> <span class="title class_">ThreadLocal</span>&lt;&gt;();</span><br><span class="line"></span><br><span class="line">        <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">void</span> <span class="title function_">timeBegin</span><span class="params">()</span>&#123;</span><br><span class="line">            OBJECT.set(System.currentTimeMillis());</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="type">long</span> <span class="title function_">timeEnd</span><span class="params">()</span>&#123;</span><br><span class="line">            <span class="keyword">return</span> System.currentTimeMillis() - OBJECT.get();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> InterruptedException &#123;</span><br><span class="line">        PrintTimeUtil.timeBegin();</span><br><span class="line">        TimeUnit.SECONDS.sleep(<span class="number">5</span>);</span><br><span class="line">        <span class="type">long</span> <span class="variable">time</span> <span class="operator">=</span> PrintTimeUtil.timeEnd();</span><br><span class="line">        System.out.println(time + <span class="string">&quot;毫秒&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>执行结果：5006毫秒</p>
 
     </div>
 
@@ -278,10 +335,13 @@
 
         
     <div class="post-nav">
-      <div class="post-nav-item"></div>
       <div class="post-nav-item">
-    <a href="/2024/05/26/introduce/" rel="next" title="本栏目介绍">
-      本栏目介绍 <i class="fa fa-chevron-right"></i>
+    <a href="/2024/06/01/MQ03/" rel="prev" title="消息队列03：消息可靠性">
+      <i class="fa fa-chevron-left"></i> 消息队列03：消息可靠性
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2024/06/05/Java%E5%B9%B6%E5%8F%91%E7%AC%94%E8%AE%B002/" rel="next" title="Java并发笔记02：锁">
+      Java并发笔记02：锁 <i class="fa fa-chevron-right"></i>
     </a></div>
     </div>
       </footer>
@@ -341,6 +401,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BA%BF%E7%A8%8B%E7%9A%84%E7%8A%B6%E6%80%81"><span class="nav-number">1.</span> <span class="nav-text">线程的状态</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BA%BF%E7%A8%8B%E5%88%9B%E5%BB%BA"><span class="nav-number">2.</span> <span class="nav-text">线程创建</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Thread%E7%B1%BB"><span class="nav-number">2.1.</span> <span class="nav-text">Thread类</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Runnable%E6%8E%A5%E5%8F%A3"><span class="nav-number">2.2.</span> <span class="nav-text">Runnable接口</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BA%BF%E7%A8%8B%E4%B8%AD%E6%96%AD%E2%80%94%E2%80%94Interrupted"><span class="nav-number">3.</span> <span class="nav-text">线程中断——Interrupted</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BA%BF%E7%A8%8B%E5%8F%98%E9%87%8F%E2%80%94%E2%80%94ThreadLocal"><span class="nav-number">4.</span> <span class="nav-text">线程变量——ThreadLocal</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 

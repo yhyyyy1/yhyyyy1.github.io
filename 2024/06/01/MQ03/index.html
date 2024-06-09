@@ -20,17 +20,19 @@
     var CONFIG = {"hostname":"yhy1031.cn","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="怎么保证消息不会丢失？">
+  <meta name="description" content="怎么保证消息不会丢失？  目前主流的消息队列产品都提供了完善的消息可靠性保证机制，完全可以做到在消息传递过程中，即使发生网络中断或者硬件故障，也能确保消息的可靠传递，不丢消息。 不同的消息队列提供的API不同、配置不同，但是保证消息可靠传递的实现原理是相同的 检测消息丢失的方法利用消息队列的有序性来验证是否有消息丢失，在 Producer 给每个发出的消息附加一个连续递增的序号，在 Consum">
 <meta property="og:type" content="article">
 <meta property="og:title" content="消息队列03：消息可靠性">
 <meta property="og:url" content="http://yhy1031.cn/blog/2024/06/01/MQ03/index.html">
 <meta property="og:site_name" content="Yinhy Blog">
-<meta property="og:description" content="怎么保证消息不会丢失？">
+<meta property="og:description" content="怎么保证消息不会丢失？  目前主流的消息队列产品都提供了完善的消息可靠性保证机制，完全可以做到在消息传递过程中，即使发生网络中断或者硬件故障，也能确保消息的可靠传递，不丢消息。 不同的消息队列提供的API不同、配置不同，但是保证消息可靠传递的实现原理是相同的 检测消息丢失的方法利用消息队列的有序性来验证是否有消息丢失，在 Producer 给每个发出的消息附加一个连续递增的序号，在 Consum">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://raw.githubusercontent.com/yhyyyy1/MyTypora/master/img/2024-6-9-MQP1V2.png">
 <meta property="article:published_time" content="2024-06-01T10:48:14.000Z">
-<meta property="article:modified_time" content="2024-06-06T07:52:15.878Z">
+<meta property="article:modified_time" content="2024-06-09T11:09:41.114Z">
 <meta property="article:author" content="Yinhongyang">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/yhyyyy1/MyTypora/master/img/2024-6-9-MQP1V2.png">
 
 <link rel="canonical" href="http://yhy1031.cn/blog/2024/06/01/MQ03/">
 
@@ -234,7 +236,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2024-06-06 15:52:15" itemprop="dateModified" datetime="2024-06-06T15:52:15+08:00">2024-06-06</time>
+                <time title="修改时间：2024-06-09 19:09:41" itemprop="dateModified" datetime="2024-06-09T19:09:41+08:00">2024-06-09</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -253,14 +255,14 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>11</span>
+              <span>661</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
                 <i class="far fa-clock"></i>
               </span>
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
+              <span>2 分钟</span>
             </span>
 
         </div>
@@ -275,7 +277,27 @@
         <blockquote>
 <p>怎么保证消息不会丢失？</p>
 </blockquote>
+<p>目前主流的消息队列产品都提供了完善的消息可靠性保证机制，完全可以做到在消息传递过程中，即使发生网络中断或者硬件故障，也能确保消息的可靠传递，不丢消息。</p>
+<p>不同的消息队列提供的API不同、配置不同，但是<strong>保证消息可靠传递的实现原理是相同的</strong></p>
+<h2 id="检测消息丢失的方法"><a href="#检测消息丢失的方法" class="headerlink" title="检测消息丢失的方法"></a>检测消息丢失的方法</h2><p><strong>利用消息队列的有序性来验证是否有消息丢失</strong>，在 Producer 给每个发出的消息附加一个连续递增的序号，在 Consumer 端检查这个序号的连续性；和TCP的sqlNum比较相似，如果不连续那就是丢消息了；甚至可以用缺失的序号确定丢失的是哪条消息</p>
 <span id="more"></span>
+
+<h2 id="确保消息可靠传递"><a href="#确保消息可靠传递" class="headerlink" title="确保消息可靠传递"></a>确保消息可靠传递</h2><p>MQ01中，我们知道消息队列分为三个存成部分：Producer——Broker——Consumer</p>
+<p>同样的，一条消息从生产到消费完成这个过程，可以划分三个阶段：</p>
+<p><img src="https://raw.githubusercontent.com/yhyyyy1/MyTypora/master/img/2024-6-9-MQP1V2.png" alt="2024-6-9-MQP1V2"></p>
+<ul>
+<li>生产阶段：消息从Producer中创建出来，经网络传输发送到Broker端</li>
+<li>存储阶段：消息在Broker中存储</li>
+<li>消费阶段：Consumer从Broker上拉取消息，经网络传输发送给Consumer</li>
+</ul>
+<h3 id="生产阶段"><a href="#生产阶段" class="headerlink" title="生产阶段"></a>生产阶段</h3><p>如图所示，在生产阶段，<strong>MQ通过</strong>最常用的<strong>请求确认机制</strong>（ACK，又是类似TCP），来<strong>保证消息的可靠传输</strong></p>
+<p>当发送消息的方法被调用时，消息队列会把消息发送到Broker，Broker收到消息后会给客户端（此处是Producer）返回一个确认响应（ACK），表明消息已经收到了，客户端收到响应后，就是完成了一次正常的消息发送</p>
+<p>Producer长时间没收到确认响应时，会自动重试；如果重试再失败会告知用户</p>
+<h3 id="存储阶段"><a href="#存储阶段" class="headerlink" title="存储阶段"></a>存储阶段</h3><p>正常情况下，只要Broker正常运行就不会有丢失消息的问题，但是如果Broker出现了故障，如服务器宕机，可能会丢失消息的</p>
+<p><strong>可以通过配置 Broker 参数来避免因为宕机丢消息。</strong></p>
+<p>如配置Broker参数，在收到消息后，<strong>将消息写入磁盘后，再给Producer返回确认响应</strong></p>
+<h3 id="消费阶段"><a href="#消费阶段" class="headerlink" title="消费阶段"></a>消费阶段</h3><p>如图所示，同样为<strong>请求确认机制</strong>保证消息的可靠传输，过程同生产阶段</p>
+<p>但是，<strong>不要在收到消息后就立即发送消费确认，而是应该在执行完所有消费业务逻辑之后，再发送消费确认。</strong></p>
 
     </div>
 
@@ -356,6 +378,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A3%80%E6%B5%8B%E6%B6%88%E6%81%AF%E4%B8%A2%E5%A4%B1%E7%9A%84%E6%96%B9%E6%B3%95"><span class="nav-number">1.</span> <span class="nav-text">检测消息丢失的方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%A1%AE%E4%BF%9D%E6%B6%88%E6%81%AF%E5%8F%AF%E9%9D%A0%E4%BC%A0%E9%80%92"><span class="nav-number">2.</span> <span class="nav-text">确保消息可靠传递</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%94%9F%E4%BA%A7%E9%98%B6%E6%AE%B5"><span class="nav-number">2.1.</span> <span class="nav-text">生产阶段</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AD%98%E5%82%A8%E9%98%B6%E6%AE%B5"><span class="nav-number">2.2.</span> <span class="nav-text">存储阶段</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B6%88%E8%B4%B9%E9%98%B6%E6%AE%B5"><span class="nav-number">2.3.</span> <span class="nav-text">消费阶段</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -421,12 +444,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="站点总字数">14k</span>
+    <span title="站点总字数">15k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">50 分钟</span>
+    <span title="站点阅读时长">56 分钟</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> 强力驱动
   </div>

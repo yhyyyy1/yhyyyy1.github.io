@@ -20,17 +20,21 @@
     var CONFIG = {"hostname":"yhy1031.cn","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="个人博客">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Yinhy Blog">
-<meta property="og:url" content="http://yhy1031.cn/blog/archives/index.html">
+  <meta name="description" content="本文用于记录博主在学习Java并发时的知识点总结  之前学习HashMap时，知道HashMap是线程不安全的（Hashtable是线程安全的，但是用的是Synchronized加锁，效率低下），于是引出了JUC中的ConcurrentHashMap 锁分段技术——ConcurrentHashMap的并发思想将数据分成一段一段的存储，然后给每一段的数据配一把锁，当一个线程占用锁访问其中一个段数据">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Java并发笔记05：ConcurrentHashMap">
+<meta property="og:url" content="http://yhy1031.cn/blog/2024/06/11/Java%E5%B9%B6%E5%8F%91%E7%AC%94%E8%AE%B005/index.html">
 <meta property="og:site_name" content="Yinhy Blog">
-<meta property="og:description" content="个人博客">
+<meta property="og:description" content="本文用于记录博主在学习Java并发时的知识点总结  之前学习HashMap时，知道HashMap是线程不安全的（Hashtable是线程安全的，但是用的是Synchronized加锁，效率低下），于是引出了JUC中的ConcurrentHashMap 锁分段技术——ConcurrentHashMap的并发思想将数据分成一段一段的存储，然后给每一段的数据配一把锁，当一个线程占用锁访问其中一个段数据">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://raw.githubusercontent.com/yhyyyy1/MyTypora/master/img/2024-6-11-CCHM1.png">
+<meta property="article:published_time" content="2024-06-11T01:35:58.000Z">
+<meta property="article:modified_time" content="2024-06-11T06:04:22.882Z">
 <meta property="article:author" content="Yinhongyang">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/yhyyyy1/MyTypora/master/img/2024-6-11-CCHM1.png">
 
-<link rel="canonical" href="http://yhy1031.cn/blog/archives/">
+<link rel="canonical" href="http://yhy1031.cn/blog/2024/06/11/Java%E5%B9%B6%E5%8F%91%E7%AC%94%E8%AE%B005/">
 
 
 <script id="page-configurations">
@@ -38,12 +42,12 @@
   CONFIG.page = {
     sidebar: "",
     isHome : false,
-    isPost : false,
+    isPost : true,
     lang   : 'zh-CN'
   };
 </script>
 
-  <title>首页 | Yinhy Blog</title>
+  <title>Java并发笔记05：ConcurrentHashMap | Yinhy Blog</title>
   
 
 
@@ -195,234 +199,165 @@
         <div class="content-wrap">
           
 
-          <div class="content archive">
+          <div class="content post posts-expand">
             
 
+    
   
   
-  
-  <div class="post-block">
-    <div class="posts-collapse">
-      <div class="collection-title">
-        <span class="collection-header">嗯..! 目前共计 22 篇日志。 继续努力。</span>
-      </div>
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yhy1031.cn/blog/2024/06/11/Java%E5%B9%B6%E5%8F%91%E7%AC%94%E8%AE%B005/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Yinhongyang">
+      <meta itemprop="description" content="个人博客">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Yinhy Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Java并发笔记05：ConcurrentHashMap
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2024-06-11 09:35:58 / 修改时间：14:04:22" itemprop="dateCreated datePublished" datetime="2024-06-11T09:35:58+08:00">2024-06-11</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Java/" itemprop="url" rel="index"><span itemprop="name">Java</span></a>
+                </span>
+            </span>
+              <span>&emsp;</span><span class="post-meta-item-icon"><i class="fa fa-eye"></i></span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span><br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>2.1k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>2 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
 
       
-    <div class="collection-year">
-      <span class="collection-header">2024</span>
-    </div>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2024-06-11T09:36:11+08:00"
-              content="2024-06-11">
-          06-11
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/2024/06/11/MQ04/" itemprop="url">
-            <span itemprop="name">消息队列04：消息有序性</span>
-          </a>
-      </div>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2024-06-11T09:35:58+08:00"
-              content="2024-06-11">
-          06-11
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/2024/06/11/Java%E5%B9%B6%E5%8F%91%E7%AC%94%E8%AE%B005/" itemprop="url">
-            <span itemprop="name">Java并发笔记05：ConcurrentHashMap</span>
-          </a>
-      </div>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2024-06-06T15:50:06+08:00"
-              content="2024-06-06">
-          06-06
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/2024/06/06/Java%E5%B9%B6%E5%8F%91%E7%AC%94%E8%AE%B004/" itemprop="url">
-            <span itemprop="name">Java并发笔记04：AQS</span>
-          </a>
-      </div>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2024-06-06T15:35:01+08:00"
-              content="2024-06-06">
-          06-06
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/2024/06/06/Java%E5%B9%B6%E5%8F%91%E7%AC%94%E8%AE%B003/" itemprop="url">
-            <span itemprop="name">Java并发笔记03：Lock</span>
-          </a>
-      </div>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2024-06-05T15:32:36+08:00"
-              content="2024-06-05">
-          06-05
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/2024/06/05/Java%E5%B9%B6%E5%8F%91%E7%AC%94%E8%AE%B002/" itemprop="url">
-            <span itemprop="name">Java并发笔记02：Synchronized & Volatile</span>
-          </a>
-      </div>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2024-06-05T11:14:24+08:00"
-              content="2024-06-05">
-          06-05
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/2024/06/05/Java%E5%B9%B6%E5%8F%91%E7%AC%94%E8%AE%B001/" itemprop="url">
-            <span itemprop="name">Java并发笔记01：基础</span>
-          </a>
-      </div>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2024-06-01T18:48:14+08:00"
-              content="2024-06-01">
-          06-01
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/2024/06/01/MQ03/" itemprop="url">
-            <span itemprop="name">消息队列03：消息可靠性</span>
-          </a>
-      </div>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2024-06-01T12:37:01+08:00"
-              content="2024-06-01">
-          06-01
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/2024/06/01/KMP%E7%AE%97%E6%B3%95/" itemprop="url">
-            <span itemprop="name">KMP算法</span>
-          </a>
-      </div>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2024-06-01T11:30:55+08:00"
-              content="2024-06-01">
-          06-01
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/2024/06/01/MQ02/" itemprop="url">
-            <span itemprop="name">消息队列02：消息队列选型</span>
-          </a>
-      </div>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2024-06-01T11:30:36+08:00"
-              content="2024-06-01">
-          06-01
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/2024/06/01/2024-6-1-%E5%88%B7%E9%A2%98%E6%97%A5%E8%AE%B0/" itemprop="url">
-            <span itemprop="name">2024-6-1-刷题日记</span>
-          </a>
-      </div>
-
-    </header>
-  </article>
-
+        <blockquote>
+<p>本文用于记录博主在学习Java并发时的知识点总结</p>
+</blockquote>
+<p>之前学习HashMap时，知道HashMap是线程不安全的（Hashtable是线程安全的，但是用的是Synchronized加锁，效率低下），于是引出了JUC中的<strong>ConcurrentHashMap</strong></p>
+<h3 id="锁分段技术——ConcurrentHashMap的并发思想"><a href="#锁分段技术——ConcurrentHashMap的并发思想" class="headerlink" title="锁分段技术——ConcurrentHashMap的并发思想"></a>锁分段技术——ConcurrentHashMap的并发思想</h3><p>将数据分成一段一段的存储，然后给每一段的数据配一把锁，<strong>当一个线程占用锁访问其中一个段数据的时候，其他段的数据也能被其他线程访问</strong></p>
+<p>解决了HashMap在并发环境中，因为单锁竞争导致效率低下的问题</p>
+<h2 id="ConcurrentHashMap——JDK1-7"><a href="#ConcurrentHashMap——JDK1-7" class="headerlink" title="ConcurrentHashMap——JDK1.7"></a>ConcurrentHashMap——JDK1.7</h2><p><strong>Java使用了上面的分段锁机制实现了ConcurrentHashMap</strong></p>
+<p>ConcurrentHashMap在对象中保存了一个<strong>Segment数组——将整个Hash表划分为为多个分段</strong>；每个Segment元素——划分出来的分段，类似一个Hashtable。</p>
+<p>执行操作时，首先根据hash算法定位到元素属于哪个Segment，<strong>对具体的Segment加锁</strong>即可；同时其他的Segment可以被其他线程访问，整个HashMap是不受影响的。</p>
+<p>下图为ConcurrentHashMap的结构，ConcurrentHashMap是由Segment数据结构和HashEntry数据结构组成；<strong>Segment是一种可重入锁</strong>，HashEntry就是存储K-V</p>
+<p><img src="https://raw.githubusercontent.com/yhyyyy1/MyTypora/master/img/2024-6-11-CCHM1.png" alt="2024-6-11-CCHM1"></p>
+<h3 id="初始化（JDK1-7）new-ConcurrentHashMap"><a href="#初始化（JDK1-7）new-ConcurrentHashMap" class="headerlink" title="初始化（JDK1.7）new ConcurrentHashMap( )"></a>初始化（JDK1.7）new ConcurrentHashMap( )</h3><p><strong>初始化参数：</strong></p>
+<ul>
+<li><strong>concurrencyLevel</strong>：并发数，CHM中<strong>Segment的数量</strong>（Segment[]的大小），初始化确定后就不能再变化了，默认为16</li>
+<li><strong>initialCapacity</strong>：初始容量，CHM的初始<strong>HashEntry的总数量</strong>，之后要平均分给每个Segment</li>
+<li><strong>loadFactor</strong>：负载因子，用于<strong>每个Segment内部的HashEntry[]扩容</strong>（Segment[]不能扩容）</li>
+</ul>
+<p><strong>new ConcurrentHashMap( )无参构造函数执行初始化后：</strong></p>
+<ul>
+<li>Segment[]长度为16，默认</li>
+<li>每一个分段 Segment[i]的默认大小为2，且负载因子默认为0.75（这里很有说法，2*0.75&#x3D;1.5取整后为1，也就是初始阈值为1；插入第一个元素不会触发扩容；插入第二个元素会触发第一次扩容）</li>
+<li>初始化了segment[0]，但其他位置还是null</li>
+<li>定义了 segmentShift 移位数 和 segmentMask 掩码，用于之后定位Segment</li>
+</ul>
+<h3 id="定位Segment-——插入or获取元素的前提"><a href="#定位Segment-——插入or获取元素的前提" class="headerlink" title="定位Segment  ——插入or获取元素的前提"></a>定位Segment  ——插入or获取元素的前提</h3><p>segmentFor(hash)</p>
+<p>ConcurrentHashMap会对元素的hashCode进行再散列，得到新的hash值，并使用这个hash值 结合之前的segmentShift 和 segmentMask 进行后续的定位（包括定位segment和entry），其实就是得到确定的Segment下标</p>
+<h3 id="ConcurrentHashMap的操作"><a href="#ConcurrentHashMap的操作" class="headerlink" title="ConcurrentHashMap的操作"></a>ConcurrentHashMap的操作</h3><ol>
+<li><p><strong>get操作</strong></p>
+<p>先算hashcode再经过一次散列得到hash，最后用hash定位Segment，根据key得到value</p>
+<p>这个过程是很<strong>高效</strong>的，因为<strong>不需要加锁！</strong>——将要使用的共享变量都定义为了volatile（弱一致性，不会像读写互斥锁一样保证强一致性，当前共享内存中是什么值，就读取什么值）</p>
+</li>
+<li><p><strong>put操作</strong></p>
+<p>put要写入内容，肯定是<strong>要加锁</strong>的。</p>
+<p>put方法首先要定位到segment（segmentFor方法），然后再Segment中插入（分为：判断是否要扩容、定位插入位置插入）</p>
+<p><strong>扩容时机</strong>：插入前判断是否需要扩容（和hashmap不一样，hashmap是插入后判断是否要扩容）</p>
+</li>
+<li><p><strong>size操作</strong></p>
+<p>要统计整个ConcurrentHashMap的大小，就要统计所有Segment中元素大小求和。</p>
+<p>思路如下：</p>
+<ol>
+<li>Segment中是有全局变量count的，直接<strong>把所有count直接相加</strong>，但是这种方法过程中<strong>count可能会变化</strong></li>
+<li>在上述过程中，<strong>将所有Segment的put、remove、clean方法全部锁住</strong>；保证count不会变化，但是<strong>效率很低</strong></li>
+</ol>
+<p><strong>最终流程：</strong>Segment中是有全局变量count的，直接把所有count直接相加，累计做3次；如果这个过程中，容器的count变化了，那就通过加锁的方式来统计count</p>
+<p><strong>累计做3次的解释：</strong></p>
+<ul>
+<li>如果本次尝试末端Count没有发生变化，就直接返回，不用再尝试了</li>
+<li>如果有变化就进行下一次的尝试，直到尝试3次之后，如果还不行，就加锁</li>
+</ul>
+</li>
+</ol>
+<h2 id="ConcurrentHashMap——JDK1-8"><a href="#ConcurrentHashMap——JDK1-8" class="headerlink" title="ConcurrentHashMap——JDK1.8"></a>ConcurrentHashMap——JDK1.8</h2><p>和JDK1.7的ConcurrentHashMap相比，<strong>移除了Segment</strong>！！</p>
+<p><strong>实现方式</strong>和1.8的HashMap类似——<strong>数组+链表+红黑树</strong></p>
+<p><strong>加锁方式</strong>——<strong>CAS和Synchronized</strong></p>
+<h3 id="特点"><a href="#特点" class="headerlink" title="特点"></a>特点</h3><p>每个 Node 里面是 key-value 的形式，并且把 value 用 volatile 修饰，以便保证可见性</p>
+<p><strong>执行put操作时：</strong></p>
+<ul>
+<li>如果hash值对应数组位置为<strong>null</strong>，则<strong>用CAS</strong>放入新值（CAS保证单个变量修改的原子性）</li>
+<li>只有对应槽点<strong>有值</strong>的时候，需要<strong>Synchronized加锁</strong>（针对写操作；不会锁住）</li>
+</ul>
+<p>	</p>
 
     </div>
-  </div>
-  
-  
-  
 
+    
+    
+    
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2024/06/06/Java%E5%B9%B6%E5%8F%91%E7%AC%94%E8%AE%B004/" rel="prev" title="Java并发笔记04：AQS">
+      <i class="fa fa-chevron-left"></i> Java并发笔记04：AQS
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2024/06/11/MQ04/" rel="next" title="消息队列04：消息有序性">
+      消息队列04：消息有序性 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
   
-  <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/archives/page/2/">2</a><a class="page-number" href="/archives/page/3/">3</a><a class="extend next" rel="next" href="/archives/page/2/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
-  </nav>
+  
+  
 
 
 
@@ -474,6 +409,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%94%81%E5%88%86%E6%AE%B5%E6%8A%80%E6%9C%AF%E2%80%94%E2%80%94ConcurrentHashMap%E7%9A%84%E5%B9%B6%E5%8F%91%E6%80%9D%E6%83%B3"><span class="nav-number">1.</span> <span class="nav-text">锁分段技术——ConcurrentHashMap的并发思想</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ConcurrentHashMap%E2%80%94%E2%80%94JDK1-7"><span class="nav-number"></span> <span class="nav-text">ConcurrentHashMap——JDK1.7</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%9D%E5%A7%8B%E5%8C%96%EF%BC%88JDK1-7%EF%BC%89new-ConcurrentHashMap"><span class="nav-number">1.</span> <span class="nav-text">初始化（JDK1.7）new ConcurrentHashMap( )</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%9A%E4%BD%8DSegment-%E2%80%94%E2%80%94%E6%8F%92%E5%85%A5or%E8%8E%B7%E5%8F%96%E5%85%83%E7%B4%A0%E7%9A%84%E5%89%8D%E6%8F%90"><span class="nav-number">2.</span> <span class="nav-text">定位Segment  ——插入or获取元素的前提</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ConcurrentHashMap%E7%9A%84%E6%93%8D%E4%BD%9C"><span class="nav-number">3.</span> <span class="nav-text">ConcurrentHashMap的操作</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ConcurrentHashMap%E2%80%94%E2%80%94JDK1-8"><span class="nav-number"></span> <span class="nav-text">ConcurrentHashMap——JDK1.8</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%89%B9%E7%82%B9"><span class="nav-number">1.</span> <span class="nav-text">特点</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 

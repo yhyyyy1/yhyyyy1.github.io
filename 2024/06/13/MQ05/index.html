@@ -20,17 +20,19 @@
     var CONFIG = {"hostname":"yhy1031.cn","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="个人博客">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Yinhy Blog">
-<meta property="og:url" content="http://yhy1031.cn/blog/archives/2024/index.html">
+  <meta name="description" content="怎么避免消息重复消费？（当时面试时的问题）  消息重复消费场景——伴随着消息传递失败重新发送而发生 比如说，一个消费订单消息，统计下单金额的微服务，如果没有正确处理重复消息，那就会出现重复统计，导致统计结果错误。 消息队列的现状我们现在常用的大多数消息队列提供的服务质量都是At least once（至少一次。消息在传递时，至少会被送达一次；也就是说不会丢消息，保证了可见性但无法保证消息不会重复">
+<meta property="og:type" content="article">
+<meta property="og:title" content="消息队列05：消息幂等性">
+<meta property="og:url" content="http://yhy1031.cn/blog/2024/06/13/MQ05/index.html">
 <meta property="og:site_name" content="Yinhy Blog">
-<meta property="og:description" content="个人博客">
+<meta property="og:description" content="怎么避免消息重复消费？（当时面试时的问题）  消息重复消费场景——伴随着消息传递失败重新发送而发生 比如说，一个消费订单消息，统计下单金额的微服务，如果没有正确处理重复消息，那就会出现重复统计，导致统计结果错误。 消息队列的现状我们现在常用的大多数消息队列提供的服务质量都是At least once（至少一次。消息在传递时，至少会被送达一次；也就是说不会丢消息，保证了可见性但无法保证消息不会重复">
 <meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2024-06-13T05:20:07.000Z">
+<meta property="article:modified_time" content="2024-06-13T13:24:39.369Z">
 <meta property="article:author" content="Yinhongyang">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="http://yhy1031.cn/blog/archives/2024/">
+<link rel="canonical" href="http://yhy1031.cn/blog/2024/06/13/MQ05/">
 
 
 <script id="page-configurations">
@@ -38,12 +40,12 @@
   CONFIG.page = {
     sidebar: "",
     isHome : false,
-    isPost : false,
+    isPost : true,
     lang   : 'zh-CN'
   };
 </script>
 
-  <title>首页 | Yinhy Blog</title>
+  <title>消息队列05：消息幂等性 | Yinhy Blog</title>
   
 
 
@@ -195,234 +197,129 @@
         <div class="content-wrap">
           
 
-          <div class="content archive">
+          <div class="content post posts-expand">
             
 
+    
   
   
-  
-  <div class="post-block">
-    <div class="posts-collapse">
-      <div class="collection-title">
-        <span class="collection-header">嗯..! 目前共计 24 篇日志。 继续努力。</span>
-      </div>
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yhy1031.cn/blog/2024/06/13/MQ05/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Yinhongyang">
+      <meta itemprop="description" content="个人博客">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Yinhy Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          消息队列05：消息幂等性
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2024-06-13 13:20:07 / 修改时间：21:24:39" itemprop="dateCreated datePublished" datetime="2024-06-13T13:20:07+08:00">2024-06-13</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97/" itemprop="url" rel="index"><span itemprop="name">消息队列</span></a>
+                </span>
+            </span>
+              <span>&emsp;</span><span class="post-meta-item-icon"><i class="fa fa-eye"></i></span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span><br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>941</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>3 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
 
       
-    <div class="collection-year">
-      <span class="collection-header">2024</span>
-    </div>
+        <blockquote>
+<p>怎么避免消息重复消费？（当时面试时的问题）</p>
+</blockquote>
+<p>消息重复消费场景——伴随着消息传递失败重新发送而发生</p>
+<p>比如说，一个消费订单消息，统计下单金额的微服务，如果没有正确处理重复消息，那就会出现重复统计，导致统计结果错误。</p>
+<h3 id="消息队列的现状"><a href="#消息队列的现状" class="headerlink" title="消息队列的现状"></a>消息队列的现状</h3><p>我们现在常用的大多数消息队列提供的服务质量都是<strong>At least once</strong>（至少一次。消息在传递时，至少会被送达一次；也就是说不会丢消息，<strong>保证了可见性但无法保证消息不会重复</strong>）</p>
+<p>我们期待的是 Exactly once（恰好一次，不允许丢失和重复），但是目前没有厂商能做到这一点</p>
+<h3 id="用幂等性解决重复消息问题"><a href="#用幂等性解决重复消息问题" class="headerlink" title="用幂等性解决重复消息问题"></a>用幂等性解决重复消息问题</h3><blockquote>
+<p> 一般解决重复消息的办法是，在消费端，让我们消费消息的操作具备<strong>幂等性</strong>。<br><strong>At least once + 幂等操作  &#x3D; Exactly once</strong></p>
+</blockquote>
+<p>幂等性，想起了学HTTP的时候，Post和Get关于幂等性和安全性和讨论</p>
+<p><strong>幂等</strong>：用于描述一个操作、方法or服务；幂等操作，<strong>其任意多次执行所产生的影响均与一次执行的影响相同</strong>——所以对于幂等操作，不用担心重复执行会对系统造成任何改变</p>
+<span id="more"></span>
 
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2024-06-13T13:20:16+08:00"
-              content="2024-06-13">
-          06-13
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/2024/06/13/Java%E5%B9%B6%E5%8F%91%E7%AC%94%E8%AE%B006/" itemprop="url">
-            <span itemprop="name">Java并发笔记06：其余并发安全容器</span>
-          </a>
-      </div>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2024-06-13T13:20:07+08:00"
-              content="2024-06-13">
-          06-13
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/2024/06/13/MQ05/" itemprop="url">
-            <span itemprop="name">消息队列05：消息幂等性</span>
-          </a>
-      </div>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2024-06-11T09:36:11+08:00"
-              content="2024-06-11">
-          06-11
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/2024/06/11/MQ04/" itemprop="url">
-            <span itemprop="name">消息队列04：消息有序性</span>
-          </a>
-      </div>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2024-06-11T09:35:58+08:00"
-              content="2024-06-11">
-          06-11
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/2024/06/11/Java%E5%B9%B6%E5%8F%91%E7%AC%94%E8%AE%B005/" itemprop="url">
-            <span itemprop="name">Java并发笔记05：ConcurrentHashMap</span>
-          </a>
-      </div>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2024-06-06T15:50:06+08:00"
-              content="2024-06-06">
-          06-06
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/2024/06/06/Java%E5%B9%B6%E5%8F%91%E7%AC%94%E8%AE%B004/" itemprop="url">
-            <span itemprop="name">Java并发笔记04：AQS</span>
-          </a>
-      </div>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2024-06-06T15:35:01+08:00"
-              content="2024-06-06">
-          06-06
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/2024/06/06/Java%E5%B9%B6%E5%8F%91%E7%AC%94%E8%AE%B003/" itemprop="url">
-            <span itemprop="name">Java并发笔记03：Lock</span>
-          </a>
-      </div>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2024-06-05T15:32:36+08:00"
-              content="2024-06-05">
-          06-05
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/2024/06/05/Java%E5%B9%B6%E5%8F%91%E7%AC%94%E8%AE%B002/" itemprop="url">
-            <span itemprop="name">Java并发笔记02：Synchronized & Volatile</span>
-          </a>
-      </div>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2024-06-05T11:14:24+08:00"
-              content="2024-06-05">
-          06-05
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/2024/06/05/Java%E5%B9%B6%E5%8F%91%E7%AC%94%E8%AE%B001/" itemprop="url">
-            <span itemprop="name">Java并发笔记01：基础</span>
-          </a>
-      </div>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2024-06-01T18:48:14+08:00"
-              content="2024-06-01">
-          06-01
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/2024/06/01/MQ03/" itemprop="url">
-            <span itemprop="name">消息队列03：消息可靠性</span>
-          </a>
-      </div>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2024-06-01T12:37:01+08:00"
-              content="2024-06-01">
-          06-01
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/2024/06/01/KMP%E7%AE%97%E6%B3%95/" itemprop="url">
-            <span itemprop="name">KMP算法</span>
-          </a>
-      </div>
-
-    </header>
-  </article>
-
+<h2 id="常用设计幂等操作的方法"><a href="#常用设计幂等操作的方法" class="headerlink" title="常用设计幂等操作的方法"></a>常用设计幂等操作的方法</h2><h3 id="利用数据库的唯一约束实现幂等"><a href="#利用数据库的唯一约束实现幂等" class="headerlink" title="利用数据库的唯一约束实现幂等"></a>利用数据库的唯一约束实现幂等</h3><p>数据库的唯一约束可限定对应字段的记录在数据库中不可能存在第二条！</p>
+<p>根据这条特性，我们可以<strong>设计一个和待消费消息匹配的表</strong>，<strong>将特异性字段设置唯一约束</strong>，保证只存在一条这样的记录，从而保证了消息的幂等性</p>
+<p>如针对转账消息（包括转账单ID、账户ID、变更金额），我们可以创建一张流水转账表（包括这些字段），将转账单ID 和 账户ID 两个字段联合创建唯一约束，保证了表中对于相同转账单ID 和 账户ID 的记录最多只能存在一条</p>
+<p>同样的，Redis中SETNX也可以实现</p>
+<h3 id="为更新的数据设置前置条件"><a href="#为更新的数据设置前置条件" class="headerlink" title="为更新的数据设置前置条件"></a>为更新的数据设置前置条件</h3><p><strong>给数据变更设置一个前置条件，如果满足条件就更新数据，否则拒绝更新数据</strong>。（但是这种操作对消息设计的要求比较高）</p>
+<p>这样设置保证了第一次消费时满足条件可以执行，之后的消费会因为无法满足条件而不能执行（第一次执行后导致了判断条件不再满足）</p>
+<p>另外，如果要更新的数据不是数值，我们可以<strong>将前置条件改为数据的版本号，和当前版本号一致则可更新</strong></p>
+<h3 id="记录并检查操作——Token机制-or-GUID-全局唯一ID-机制"><a href="#记录并检查操作——Token机制-or-GUID-全局唯一ID-机制" class="headerlink" title="记录并检查操作——Token机制 or GUID(全局唯一ID)机制"></a>记录并检查操作——Token机制 or GUID(全局唯一ID)机制</h3><p>思路：<strong>在执行数据更新操作之前，先检查是否执行过这个更新操作</strong>（我当时面试的时候就是往这个方向回答的）</p>
+<p>具体的实现方式：在发送消息时，<strong>给每条消息指定一个全局唯一的ID</strong>；消费时，<strong>先根据这个ID检查这条消息是否被消费过</strong>；如果没有消费过，才更新数据，然后<strong>将消费状态置为已消费</strong></p>
+<p>但是这个方案很难实现，GUID就很难实现了；“检查消费状态”、“更新数据”、“设置消费状态”这三个操作很显然要保证原子性，用事务？锁？都可以，但是都不好解决</p>
+<p>所以这种方法属于是迫不得已的方法了</p>
 
     </div>
-  </div>
-  
-  
-  
 
+    
+    
+    
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2024/06/11/MQ04/" rel="prev" title="消息队列04：消息有序性">
+      <i class="fa fa-chevron-left"></i> 消息队列04：消息有序性
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2024/06/13/Java%E5%B9%B6%E5%8F%91%E7%AC%94%E8%AE%B006/" rel="next" title="Java并发笔记06：其余并发安全容器">
+      Java并发笔记06：其余并发安全容器 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
   
-  <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/archives/2024/page/2/">2</a><a class="page-number" href="/archives/2024/page/3/">3</a><a class="extend next" rel="next" href="/archives/2024/page/2/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
-  </nav>
+  
+  
 
 
 
@@ -474,6 +371,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97%E7%9A%84%E7%8E%B0%E7%8A%B6"><span class="nav-number">1.</span> <span class="nav-text">消息队列的现状</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%94%A8%E5%B9%82%E7%AD%89%E6%80%A7%E8%A7%A3%E5%86%B3%E9%87%8D%E5%A4%8D%E6%B6%88%E6%81%AF%E9%97%AE%E9%A2%98"><span class="nav-number">2.</span> <span class="nav-text">用幂等性解决重复消息问题</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B8%B8%E7%94%A8%E8%AE%BE%E8%AE%A1%E5%B9%82%E7%AD%89%E6%93%8D%E4%BD%9C%E7%9A%84%E6%96%B9%E6%B3%95"><span class="nav-number"></span> <span class="nav-text">常用设计幂等操作的方法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%A9%E7%94%A8%E6%95%B0%E6%8D%AE%E5%BA%93%E7%9A%84%E5%94%AF%E4%B8%80%E7%BA%A6%E6%9D%9F%E5%AE%9E%E7%8E%B0%E5%B9%82%E7%AD%89"><span class="nav-number">1.</span> <span class="nav-text">利用数据库的唯一约束实现幂等</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%BA%E6%9B%B4%E6%96%B0%E7%9A%84%E6%95%B0%E6%8D%AE%E8%AE%BE%E7%BD%AE%E5%89%8D%E7%BD%AE%E6%9D%A1%E4%BB%B6"><span class="nav-number">2.</span> <span class="nav-text">为更新的数据设置前置条件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AE%B0%E5%BD%95%E5%B9%B6%E6%A3%80%E6%9F%A5%E6%93%8D%E4%BD%9C%E2%80%94%E2%80%94Token%E6%9C%BA%E5%88%B6-or-GUID-%E5%85%A8%E5%B1%80%E5%94%AF%E4%B8%80ID-%E6%9C%BA%E5%88%B6"><span class="nav-number">3.</span> <span class="nav-text">记录并检查操作——Token机制 or GUID(全局唯一ID)机制</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 

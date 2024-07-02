@@ -20,17 +20,19 @@
     var CONFIG = {"hostname":"yhy1031.cn","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="个人博客">
+  <meta name="description" content="本文用于记录博主在学习Java并发时的知识点总结  JUC中除了ConcurrentHashMap之外还有其他的并发安全容器： CopyOnWriteArrayListJUC中主要的线程安全List CopyOnWrite——当容器需要被修改时，不直接修改当前容器，而是先将当前容器进行Copy，复制出一个新的容器，然后修改新的容器，修改完成后，再将原容器的引用指向新的容器（相当于MySQL中的写">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Java并发笔记06：其余并发安全容器">
 <meta property="og:url" content="http://yhy1031.cn/blog/2024/06/13/Java%E5%B9%B6%E5%8F%91%E7%AC%94%E8%AE%B006/index.html">
 <meta property="og:site_name" content="Yinhy Blog">
-<meta property="og:description" content="个人博客">
+<meta property="og:description" content="本文用于记录博主在学习Java并发时的知识点总结  JUC中除了ConcurrentHashMap之外还有其他的并发安全容器： CopyOnWriteArrayListJUC中主要的线程安全List CopyOnWrite——当容器需要被修改时，不直接修改当前容器，而是先将当前容器进行Copy，复制出一个新的容器，然后修改新的容器，修改完成后，再将原容器的引用指向新的容器（相当于MySQL中的写">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://raw.githubusercontent.com/yhyyyy1/MyTypora/master/img/2024-7-2-BQ01.png">
 <meta property="article:published_time" content="2024-06-13T05:20:16.000Z">
-<meta property="article:modified_time" content="2024-06-13T05:20:56.984Z">
+<meta property="article:modified_time" content="2024-07-02T05:43:52.132Z">
 <meta property="article:author" content="Yinhongyang">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/yhyyyy1/MyTypora/master/img/2024-7-2-BQ01.png">
 
 <link rel="canonical" href="http://yhy1031.cn/blog/2024/06/13/Java%E5%B9%B6%E5%8F%91%E7%AC%94%E8%AE%B006/">
 
@@ -226,10 +228,16 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              
 
-              <time title="创建时间：2024-06-13 13:20:16 / 修改时间：13:20:56" itemprop="dateCreated datePublished" datetime="2024-06-13T13:20:16+08:00">2024-06-13</time>
+              <time title="创建时间：2024-06-13 13:20:16" itemprop="dateCreated datePublished" datetime="2024-06-13T13:20:16+08:00">2024-06-13</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2024-07-02 13:43:52" itemprop="dateModified" datetime="2024-07-02T13:43:52+08:00">2024-07-02</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
@@ -247,14 +255,14 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>0</span>
+              <span>792</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
                 <i class="far fa-clock"></i>
               </span>
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
+              <span>3 分钟</span>
             </span>
 
         </div>
@@ -266,7 +274,45 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        
+        <blockquote>
+<p>本文用于记录博主在学习Java并发时的知识点总结</p>
+</blockquote>
+<p>JUC中除了ConcurrentHashMap之外还有其他的并发安全容器：</p>
+<h3 id="CopyOnWriteArrayList"><a href="#CopyOnWriteArrayList" class="headerlink" title="CopyOnWriteArrayList"></a>CopyOnWriteArrayList</h3><p>JUC中主要的<strong>线程安全List</strong></p>
+<p><strong>CopyOnWrite</strong>——当容器需要被修改时，不直接修改当前容器，而是先将当前容器进行Copy，复制出一个新的容器，然后修改新的容器，<strong>修改完成后，再将原容器的引用指向新的容器</strong>（相当于MySQL中的写时复制技术）</p>
+<p>CopyOnWrite的适用场景——<strong>读多写少</strong>；<strong>要求读操作快</strong>，而写操作慢一点也没关系</p>
+<p>ArrayList的经典问题——迭代期间是否允许修改结合内容？</p>
+<ul>
+<li><strong>ArrayList</strong>在迭代期间如果修改结合内容，会<strong>抛出异常</strong>（ConcurrentModificationException）</li>
+<li><strong>CopyOnWriteArrayList</strong>在迭代期间如果修改结合内容，<strong>不会抛出异常</strong>，因为就数据依旧存在，迭代器使用的还是旧数组，不过旧数据可能已经过时了。</li>
+</ul>
+<p>CopyOnWriteArrayList的缺点：</p>
+<ul>
+<li><strong>内存占用</strong>：正如MySQL中的写时复制技术一样，因为要复制，所以内容中会同时有两个对象的内容，会占用内存。</li>
+<li><strong>数据一致性的问题</strong>：因为是CopyOnWrite的逻辑是先修改副本，导致修改的内容对于其他的线程来说不能实时看到，只能修改完成后才能可见。</li>
+</ul>
+<h3 id="ConcurrentLinkedQueue"><a href="#ConcurrentLinkedQueue" class="headerlink" title="ConcurrentLinkedQueue"></a>ConcurrentLinkedQueue</h3><p>线程安全队列，且ConcurrentLinkedQueue是<strong>非阻塞队列</strong>，使用<strong>循环CAS实现</strong></p>
+<p><strong>入队过程：（一个死循环）</strong></p>
+<ul>
+<li>定位尾节点</li>
+<li>使用CAS算法将入队节点设置为尾节点的next节点，如果不成功则重试</li>
+</ul>
+<p><strong>适合用在不需要阻塞功能，且并发不是特别剧烈的场景</strong></p>
+<h3 id="BlockingQueue"><a href="#BlockingQueue" class="headerlink" title="BlockingQueue"></a>BlockingQueue</h3><p><strong>阻塞队列</strong>是支持阻塞的插入和移除方法的队列</p>
+<p><strong>阻塞的插入</strong>：当队列满时，队列会阻塞插入元素的线程，等待队不满（队列中有出队的情况）</p>
+<p><strong>阻塞的移除</strong>：队列为空时，队列会阻塞获取元素的线程，等待队列变为非空</p>
+<p><img src="https://raw.githubusercontent.com/yhyyyy1/MyTypora/master/img/2024-7-2-BQ01.png" alt="2024-7-2-BQ01"></p>
+<p>和常规queue的操作比较类似（add remove<strong>抛异常</strong>、offer poll会<strong>返回值</strong>true or null）</p>
+<h4 id="Java中的阻塞队列"><a href="#Java中的阻塞队列" class="headerlink" title="Java中的阻塞队列"></a>Java中的阻塞队列</h4><ul>
+<li><strong>ArrayBlockingQueue</strong>：由数据结构组成的有界阻塞队列</li>
+<li><strong>LinkedBlockingQueue</strong>：由链表结构组成的有界阻塞队列。队列的默认和最大长度为Integer.MAX_VALUE</li>
+<li><strong>PriorityBlockingQueue</strong>：支持优先级排序的无界阻塞队列，默认为自然顺序升序排列，但是可以通过重写compareTo()方法实现指定顺序排序</li>
+<li><strong>DelayQueue</strong>：使用优先级队列实现的无界阻塞队列。队列使用PriorityQueue来实现。且<strong>实现Delayed接口</strong>，可以在创建元素时指定多久才能从队列中获取当前元素（缓存有效期、定时任务调度）</li>
+<li><strong>SynchronousQueue</strong>：不存元素的阻塞队列。每一个put操作必须等待一个take操作，否则不能继续添加元素。队列本身不存放任何元素（随放随拿）</li>
+<li><strong>LinkedTransferQueue</strong>：链表结构组成的单向无界阻塞队列</li>
+<li><strong>LinkedBlockingDeque</strong>：由链表组成的双向阻塞链表（如Deque）</li>
+</ul>
+
     </div>
 
     
@@ -284,7 +330,10 @@
     <a href="/2024/06/13/MQ05/" rel="prev" title="消息队列05：消息幂等性">
       <i class="fa fa-chevron-left"></i> 消息队列05：消息幂等性
     </a></div>
-      <div class="post-nav-item"></div>
+      <div class="post-nav-item">
+    <a href="/2024/06/28/MQ06/" rel="next" title="消息队列06：消息积压处理">
+      消息队列06：消息积压处理 <i class="fa fa-chevron-right"></i>
+    </a></div>
     </div>
       </footer>
     
@@ -343,6 +392,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#CopyOnWriteArrayList"><span class="nav-number">1.</span> <span class="nav-text">CopyOnWriteArrayList</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ConcurrentLinkedQueue"><span class="nav-number">2.</span> <span class="nav-text">ConcurrentLinkedQueue</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#BlockingQueue"><span class="nav-number">3.</span> <span class="nav-text">BlockingQueue</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Java%E4%B8%AD%E7%9A%84%E9%98%BB%E5%A1%9E%E9%98%9F%E5%88%97"><span class="nav-number">3.1.</span> <span class="nav-text">Java中的阻塞队列</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -358,7 +408,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">24</span>
+          <span class="site-state-item-count">26</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -408,12 +458,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="站点总字数">19k</span>
+    <span title="站点总字数">20k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">1:09</span>
+    <span title="站点阅读时长">1:14</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> 强力驱动
   </div>

@@ -224,10 +224,16 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              
 
-              <time title="创建时间：2024-06-29 15:20:54 / 修改时间：16:25:09" itemprop="dateCreated datePublished" datetime="2024-06-29T15:20:54+08:00">2024-06-29</time>
+              <time title="创建时间：2024-06-29 15:20:54" itemprop="dateCreated datePublished" datetime="2024-06-29T15:20:54+08:00">2024-06-29</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2024-07-04 16:24:04" itemprop="dateModified" datetime="2024-07-04T16:24:04+08:00">2024-07-04</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
@@ -242,14 +248,14 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>78</span>
+              <span>1.7k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
                 <i class="far fa-clock"></i>
               </span>
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
+              <span>6 分钟</span>
             </span>
 
         </div>
@@ -264,7 +270,21 @@
           <blockquote>
 <p> 起因——近期遇到的一个笔试题需要使用ACM模式构建树来解题， 后面找到“<a target="_blank" rel="noopener" href="https://kamacoder.com/">卡码网</a>”练习21-23题+51题（24 25不知道是不是做一下再说）</p>
 </blockquote>
-<h3 id="21-构造二叉树"><a href="#21-构造二叉树" class="headerlink" title="21. 构造二叉树"></a><a target="_blank" rel="noopener" href="https://kamacoder.com/problempage.php?pid=1020">21. 构造二叉树</a></h3><h3 id="22-二叉树的遍历"><a href="#22-二叉树的遍历" class="headerlink" title="22. 二叉树的遍历"></a><a target="_blank" rel="noopener" href="https://kamacoder.com/problempage.php?pid=1021">22. 二叉树的遍历</a></h3><h3 id="23-二叉树的高度"><a href="#23-二叉树的高度" class="headerlink" title="23. 二叉树的高度"></a><a target="_blank" rel="noopener" href="https://kamacoder.com/problempage.php?pid=1022">23. 二叉树的高度</a></h3><h3 id="51-平移二叉树"><a href="#51-平移二叉树" class="headerlink" title="51. 平移二叉树"></a><a target="_blank" rel="noopener" href="https://kamacoder.com/problempage.php?pid=1051">51. 平移二叉树</a></h3>
+<p>逐渐理解了ACM模式和核心代码模式的区别与共通部分——<strong>Solution部分相同</strong></p>
+<ul>
+<li>ACM模式在Main类中的main方法中处理输入参数，之后再完成代码执行逻辑</li>
+<li>核心代码模式不需要处理入参，只用完成代码的执行逻辑就OK了（相当于ACM的第二部分）</li>
+</ul>
+<p>二叉树的定义代码：（ACM模式中这些都是自己定义的，所以具体实现的方法比较多样化）</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">TreeNode</span>&#123;</span><br><span class="line">     <span class="type">int</span> val;<span class="comment">//当前位置</span></span><br><span class="line">     <span class="type">int</span> letter;<span class="comment">//字母标识</span></span><br><span class="line">     TreeNode left;<span class="comment">//左右节点</span></span><br><span class="line">     TreeNode right;</span><br><span class="line">    </span><br><span class="line">     TreeNode() &#123;&#125;</span><br><span class="line">     TreeNode(<span class="type">int</span> val) &#123; <span class="built_in">this</span>.val = val; &#125;</span><br><span class="line">     TreeNode(<span class="type">int</span> val,<span class="type">int</span> letter) &#123;</span><br><span class="line">         <span class="built_in">this</span>.val = val; </span><br><span class="line">         <span class="built_in">this</span>.letter = letter; </span><br><span class="line">     &#125;</span><br><span class="line">     TreeNode(<span class="type">int</span> val, TreeNode left, TreeNode right) &#123;</span><br><span class="line">         <span class="built_in">this</span>.val = val;</span><br><span class="line">         <span class="built_in">this</span>.left = left;</span><br><span class="line">         <span class="built_in">this</span>.right = right;</span><br><span class="line">     &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2024/06/29/ACM%E6%A8%A1%E5%BC%8F%E2%80%94%E2%80%94%E6%A0%91%E7%9A%84%E6%9E%84%E5%BB%BA/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
@@ -314,7 +334,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2024-07-02 10:39:09" itemprop="dateModified" datetime="2024-07-02T10:39:09+08:00">2024-07-02</time>
+                <time title="修改时间：2024-07-02 13:45:27" itemprop="dateModified" datetime="2024-07-02T13:45:27+08:00">2024-07-02</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -330,7 +350,7 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>682</span>
+              <span>683</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
@@ -357,16 +377,14 @@
 <h2 id="优化性能来避免消息积压"><a href="#优化性能来避免消息积压" class="headerlink" title="优化性能来避免消息积压"></a>优化性能来避免消息积压</h2><p>消息队列系统中的性能主要体现在，<strong>生产者发消息和消费者收消息</strong>的业务逻辑中。</p>
 <p>对于大多数业务来说，<strong>消息队列本身的处理能力要远大于业务系统的处理能力</strong>。（消息队列执行的业务主要是收发、而业务系统执行的业务逻辑远比消息队列的复杂，所以处理能力较差）</p>
 <p>于是对于“如何优化性能来避免消息积压？”这个问题，我们要关注的是：<strong>在消息收发的两端，业务代码要怎么和消息队列配合，达到一个最佳的性能。</strong></p>
-<h3 id="发送端性能优化"><a href="#发送端性能优化" class="headerlink" title="发送端性能优化"></a>发送端性能优化</h3><p>发送端业务代码的处理性能，实际上和消息队列的关系不大，毕竟是发送端先执行自己的业务逻辑产生消息，然后再发送消息。</p>
-<p>因此对于发送端（发送消息）的业务逻辑，只需要注意<strong>设置合适的并发和批量大小</strong>就行。若要提高性能可以提高并发和批量大小（但是两者有时要进行选择：如在线系统比较注重时延，提高批量大小必然会增大时延，所以选择提高并发量来提高性能；离线系统不关心时延，更注重吞吐量，所以增大批量大小就可以了）</p>
-<h3 id="消费端性能优化"><a href="#消费端性能优化" class="headerlink" title="消费端性能优化"></a>消费端性能优化</h3><p><strong>消息队列的性能问题大部分都出现在消费端！</strong>（消费端的消费速度根本不上发送端发送消息速度，就会造成消息积压）——所以系统的<strong>消费端的消费性能要高于生产端的发送性能</strong></p>
-<p>消费端的消费性能提高的方法：</p>
-<ol>
-<li>优化消费业务逻辑</li>
-<li><strong>增加消费端的并发数</strong>（增加Consumer的实例数量），且要同步增加主题中分区的数量，保证Consumer的实例数的分区数量是相等的。（每个分区上只支持单线程消费）</li>
-</ol>
-<h2 id="处理消息积压"><a href="#处理消息积压" class="headerlink" title="处理消息积压"></a>处理消息积压</h2><p>对于系统发生消息积压的情况，需要先解决积压，再分析原因，毕竟保证系统的可用性是首先要解决的问题。快速解决积压的方法就是通过水平扩容增加 Consumer 的实例数量。</p>
-
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2024/06/28/MQ06/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
@@ -416,7 +434,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2024-07-02 13:43:52" itemprop="dateModified" datetime="2024-07-02T13:43:52+08:00">2024-07-02</time>
+                <time title="修改时间：2024-07-02 13:45:31" itemprop="dateModified" datetime="2024-07-02T13:45:31+08:00">2024-07-02</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -432,7 +450,7 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>792</span>
+              <span>793</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
@@ -468,28 +486,14 @@
 <li><strong>内存占用</strong>：正如MySQL中的写时复制技术一样，因为要复制，所以内容中会同时有两个对象的内容，会占用内存。</li>
 <li><strong>数据一致性的问题</strong>：因为是CopyOnWrite的逻辑是先修改副本，导致修改的内容对于其他的线程来说不能实时看到，只能修改完成后才能可见。</li>
 </ul>
-<h3 id="ConcurrentLinkedQueue"><a href="#ConcurrentLinkedQueue" class="headerlink" title="ConcurrentLinkedQueue"></a>ConcurrentLinkedQueue</h3><p>线程安全队列，且ConcurrentLinkedQueue是<strong>非阻塞队列</strong>，使用<strong>循环CAS实现</strong></p>
-<p><strong>入队过程：（一个死循环）</strong></p>
-<ul>
-<li>定位尾节点</li>
-<li>使用CAS算法将入队节点设置为尾节点的next节点，如果不成功则重试</li>
-</ul>
-<p><strong>适合用在不需要阻塞功能，且并发不是特别剧烈的场景</strong></p>
-<h3 id="BlockingQueue"><a href="#BlockingQueue" class="headerlink" title="BlockingQueue"></a>BlockingQueue</h3><p><strong>阻塞队列</strong>是支持阻塞的插入和移除方法的队列</p>
-<p><strong>阻塞的插入</strong>：当队列满时，队列会阻塞插入元素的线程，等待队不满（队列中有出队的情况）</p>
-<p><strong>阻塞的移除</strong>：队列为空时，队列会阻塞获取元素的线程，等待队列变为非空</p>
-<p><img src="https://raw.githubusercontent.com/yhyyyy1/MyTypora/master/img/2024-7-2-BQ01.png" alt="2024-7-2-BQ01"></p>
-<p>和常规queue的操作比较类似（add remove<strong>抛异常</strong>、offer poll会<strong>返回值</strong>true or null）</p>
-<h4 id="Java中的阻塞队列"><a href="#Java中的阻塞队列" class="headerlink" title="Java中的阻塞队列"></a>Java中的阻塞队列</h4><ul>
-<li><strong>ArrayBlockingQueue</strong>：由数据结构组成的有界阻塞队列</li>
-<li><strong>LinkedBlockingQueue</strong>：由链表结构组成的有界阻塞队列。队列的默认和最大长度为Integer.MAX_VALUE</li>
-<li><strong>PriorityBlockingQueue</strong>：支持优先级排序的无界阻塞队列，默认为自然顺序升序排列，但是可以通过重写compareTo()方法实现指定顺序排序</li>
-<li><strong>DelayQueue</strong>：使用优先级队列实现的无界阻塞队列。队列使用PriorityQueue来实现。且<strong>实现Delayed接口</strong>，可以在创建元素时指定多久才能从队列中获取当前元素（缓存有效期、定时任务调度）</li>
-<li><strong>SynchronousQueue</strong>：不存元素的阻塞队列。每一个put操作必须等待一个take操作，否则不能继续添加元素。队列本身不存放任何元素（随放随拿）</li>
-<li><strong>LinkedTransferQueue</strong>：链表结构组成的单向无界阻塞队列</li>
-<li><strong>LinkedBlockingDeque</strong>：由链表组成的双向阻塞链表（如Deque）</li>
-</ul>
-
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2024/06/13/Java%E5%B9%B6%E5%8F%91%E7%AC%94%E8%AE%B006/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
@@ -1325,12 +1329,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="站点总字数">20k</span>
+    <span title="站点总字数">22k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">1:14</span>
+    <span title="站点阅读时长">1:20</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> 强力驱动
   </div>

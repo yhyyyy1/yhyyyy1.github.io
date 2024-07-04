@@ -201,6 +201,208 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yhy1031.cn/blog/2024/06/05/Java%E5%B9%B6%E5%8F%91%E7%AC%94%E8%AE%B002/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Yinhongyang">
+      <meta itemprop="description" content="个人博客">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Yinhy Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2024/06/05/Java%E5%B9%B6%E5%8F%91%E7%AC%94%E8%AE%B002/" class="post-title-link" itemprop="url">Java并发笔记02：Synchronized & Volatile</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2024-06-05 15:32:36" itemprop="dateCreated datePublished" datetime="2024-06-05T15:32:36+08:00">2024-06-05</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2024-06-09 19:43:01" itemprop="dateModified" datetime="2024-06-09T19:43:01+08:00">2024-06-09</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Java/" itemprop="url" rel="index"><span itemprop="name">Java</span></a>
+                </span>
+            </span><br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>1.2k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>4 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <blockquote>
+<p>本文用于记录博主在学习Java并发时的知识点总结</p>
+</blockquote>
+<h2 id="Synchronized"><a href="#Synchronized" class="headerlink" title="Synchronized"></a>Synchronized</h2><p>Java中对悲观锁的实现，是synchronized同步块</p>
+<h3 id="Synchronized-之-锁的竞争与升级"><a href="#Synchronized-之-锁的竞争与升级" class="headerlink" title="Synchronized 之 锁的竞争与升级"></a>Synchronized 之 锁的竞争与升级</h3><p>一般来说，锁是不能降级的</p>
+<p>Synchronized的锁有4种状态——无锁、偏向锁、轻量级锁、重量级锁</p>
+<h4 id="底层如何区分呢？"><a href="#底层如何区分呢？" class="headerlink" title="底层如何区分呢？"></a>底层如何区分呢？</h4><p>Synchronized用的锁存储在Java对象头的<strong>Mark word</strong>中</p>
+<p>其中包括指向当前获取锁的对象的指针（轻、重是指针，偏向锁是线程ID）</p>
+<ol>
+<li>锁标志位（2 bit）：轻量级锁为 00，重量级锁为 10，无锁和偏向锁都是 01，11 为GC的标记</li>
+<li>偏向锁标志（1 bit）：未启用偏向锁为0，启用为1——锁标志位无法区分无锁和偏向锁，所以使用偏向锁标志（在锁标志位前 1 bit）</li>
+</ol>
+<p>另外，是否启用偏向锁是提前定义好的，并且有偏向锁启动延迟（延迟之内自动认为没有偏向锁）</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2024/06/05/Java%E5%B9%B6%E5%8F%91%E7%AC%94%E8%AE%B002/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yhy1031.cn/blog/2024/06/05/Java%E5%B9%B6%E5%8F%91%E7%AC%94%E8%AE%B001/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Yinhongyang">
+      <meta itemprop="description" content="个人博客">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Yinhy Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2024/06/05/Java%E5%B9%B6%E5%8F%91%E7%AC%94%E8%AE%B001/" class="post-title-link" itemprop="url">Java并发笔记01：基础</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2024-06-05 11:14:24" itemprop="dateCreated datePublished" datetime="2024-06-05T11:14:24+08:00">2024-06-05</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2024-06-09 16:08:45" itemprop="dateModified" datetime="2024-06-09T16:08:45+08:00">2024-06-09</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Java/" itemprop="url" rel="index"><span itemprop="name">Java</span></a>
+                </span>
+            </span><br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>1.1k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>4 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <blockquote>
+<p>本文用于记录博主在学习Java并发时的知识点总结</p>
+</blockquote>
+<p>老生常谈的一个概念——<strong>进程是操作系统资源分配的基本单位</strong>、<strong>线程是操作系统调度资源的基本单位</strong></p>
+<p>同一个类的线程共享代码和数据空间</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2024/06/05/Java%E5%B9%B6%E5%8F%91%E7%AC%94%E8%AE%B001/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://yhy1031.cn/blog/2024/06/01/MQ03/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -427,7 +629,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2024-06-11 16:13:44" itemprop="dateModified" datetime="2024-06-11T16:13:44+08:00">2024-06-11</time>
+                <time title="修改时间：2024-07-04 18:37:21" itemprop="dateModified" datetime="2024-07-04T18:37:21+08:00">2024-07-04</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -443,7 +645,7 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>830</span>
+              <span>840</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
@@ -1002,188 +1204,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yhy1031.cn/blog/2024/05/28/leetCode-142-%E7%8E%AF%E5%BD%A2%E9%93%BE%E8%A1%A8II/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="Yinhongyang">
-      <meta itemprop="description" content="个人博客">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Yinhy Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2024/05/28/leetCode-142-%E7%8E%AF%E5%BD%A2%E9%93%BE%E8%A1%A8II/" class="post-title-link" itemprop="url">leetCode_142_环形链表II</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2024-05-28 13:58:24 / 修改时间：16:06:40" itemprop="dateCreated datePublished" datetime="2024-05-28T13:58:24+08:00">2024-05-28</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E5%88%B7%E9%A2%98%E6%97%A5%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">刷题日记</span></a>
-                </span>
-            </span><br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>528</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>2 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>给定一个链表的头节点  <code>head</code> ，返回链表开始入环的第一个节点。 <em>如果链表无环，则返回 <code>null</code>。</em></p>
-<p>如果链表中有某个节点，可以通过连续跟踪 <code>next</code> 指针再次到达，则链表中存在环。 为了表示给定链表中的环，评测系统内部使用整数 <code>pos</code> 来表示链表尾连接到链表中的位置（<strong>索引从 0 开始</strong>）。如果 <code>pos</code> 是 <code>-1</code>，则在该链表中没有环。<strong>注意：<code>pos</code> 不作为参数进行传递</strong>，仅仅是为了标识链表的实际情况。</p>
-<p><strong>不允许修改</strong> 链表。</br><br>如下为修改示例：</p>
-<p><img src="https://raw.githubusercontent.com/yhyyyy1/MyTypora/master/img/LeetCode142P1.png" alt="LeetCode142P1"></p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2024/05/28/leetCode-142-%E7%8E%AF%E5%BD%A2%E9%93%BE%E8%A1%A8II/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yhy1031.cn/blog/2024/05/28/2024-5-28-%E5%88%B7%E9%A2%98%E6%97%A5%E8%AE%B0/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="Yinhongyang">
-      <meta itemprop="description" content="个人博客">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Yinhy Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2024/05/28/2024-5-28-%E5%88%B7%E9%A2%98%E6%97%A5%E8%AE%B0/" class="post-title-link" itemprop="url">2024-5-28-刷题日记</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2024-05-28 09:16:00 / 修改时间：15:59:53" itemprop="dateCreated datePublished" datetime="2024-05-28T09:16:00+08:00">2024-05-28</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E5%88%B7%E9%A2%98%E6%97%A5%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">刷题日记</span></a>
-                </span>
-            </span><br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>809</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>3 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>（捅了链表的老巢了。。。。）</p>
-<h4 id="Question-1-反转链表"><a href="#Question-1-反转链表" class="headerlink" title="Question.1 反转链表"></a><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/reverse-linked-list/">Question.1 反转链表</a></h4><p>常规思路迭代还是挺简单的，选节点+头插法阿巴阿巴~~但是借助了外部空间</p>
-<p>下面是一种<strong>原地反转</strong>的方法：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> ListNode <span class="title function_">reverseList</span><span class="params">(ListNode head)</span> &#123;</span><br><span class="line">    <span class="comment">// 定义pre、cur、tmp节点</span></span><br><span class="line">    <span class="type">ListNode</span> <span class="variable">pre</span> <span class="operator">=</span> <span class="literal">null</span>; <span class="comment">// 当前遍历节点的前节点</span></span><br><span class="line">    <span class="type">ListNode</span> <span class="variable">cur</span> <span class="operator">=</span> head; </span><br><span class="line">    <span class="type">ListNode</span> <span class="variable">tmp</span> <span class="operator">=</span> <span class="literal">null</span>; <span class="comment">// 临时存储后序的节点</span></span><br><span class="line">    <span class="keyword">while</span> (cur != <span class="literal">null</span>) &#123;</span><br><span class="line">        tmp = cur.next;</span><br><span class="line">        cur.next = pre; <span class="comment">// 改变了链表的箭头方向</span></span><br><span class="line">        pre = cur;</span><br><span class="line">        cur = tmp;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> pre;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>但是题目说可以尝试<strong>递归</strong>，感谢大佬的题解：<a target="_blank" rel="noopener" href="https://leetcode.cn/problems/reverse-linked-list/solutions/36710/dong-hua-yan-shi-206-fan-zhuan-lian-biao-by-user74/">https://leetcode.cn/problems/reverse-linked-list/solutions/36710/dong-hua-yan-shi-206-fan-zhuan-lian-biao-by-user74/</a></p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2024/05/28/2024-5-28-%E5%88%B7%E9%A2%98%E6%97%A5%E8%AE%B0/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1255,7 +1275,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">26</span>
+          <span class="site-state-item-count">28</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -1305,12 +1325,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="站点总字数">22k</span>
+    <span title="站点总字数">23k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">1:20</span>
+    <span title="站点阅读时长">1:25</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> 强力驱动
   </div>

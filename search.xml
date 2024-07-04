@@ -4,6 +4,44 @@
   
     
     <entry>
+      <title>Java并发笔记07：CAS &amp; 乐观锁与悲观锁</title>
+      <link href="/2024/07/04/Java%E5%B9%B6%E5%8F%91%E7%AC%94%E8%AE%B007/"/>
+      <url>/2024/07/04/Java%E5%B9%B6%E5%8F%91%E7%AC%94%E8%AE%B007/</url>
+      
+        <content type="html"><![CDATA[<blockquote><p>本文用于记录博主在学习Java并发时的知识点总结</p></blockquote><h3 id="CAS——Compare-And-Swap"><a href="#CAS——Compare-And-Swap" class="headerlink" title="CAS——Compare-And-Swap"></a>CAS——Compare-And-Swap</h3><p>对比交换，这是一条CPU的原子指令。</p><p><strong>CAS操作需要输入两个数值，一个旧值(期望操作前的值)和一个新值，在操作期间先比较下在旧值有没有发生变化，如果没有发生变化，才交换成新值，发生了变化则不交换。</strong></p><p><strong>CAS是乐观锁</strong>（在操作数据时非常乐观，认为别人不会同时修改数据。因此在执行更新的时候只会判断一下在此期间别人是否修改了数据，如果别人修改了数据则放弃操作，否则执行操作）<strong>，CAS是无锁的</strong>，所以如果线程之间<strong>存在竞争</strong>的时候，就只能通过<strong>自旋的方式来等待</strong></p><p><strong>CAS自旋</strong>：接上，CAS自旋相当于循环+CAS，如果本次CAS(100→50)不成功，则会认为有其他线程的CAS快我一步，我会进行CAS(50→0)，如果还不成功则进行CAS(0→-50)……</p><h4 id="CAS的三个主要问题"><a href="#CAS的三个主要问题" class="headerlink" title="CAS的三个主要问题"></a>CAS的三个主要问题</h4><ol><li><p><strong>ABA问题</strong>：如果一个值原来是A，变成了B，又变成了A（A→B→A），那么使用CAS进行检查时会发现它的值没有发生变化。</p><blockquote><p>如：</p><p>某人充值游戏需要花费50￥，此时银行卡中余额有100￥，则要执行CAS(100→50)，因为游戏界面比较卡，多点了几次充值按钮，触发了后台threadA和threadB工作要执行CAS(100→50)，此时threadA的CAS(100→50)执行成功，threadB的会被阻塞。</p><p>如果此时正好，wx零钱提现到账50￥，threadC执行CAS(50→100)且执行成功，银行卡余额又变成了100￥，threadB则会成功执行，使得银行卡余额变成50￥。</p></blockquote><p>解决方法：版本号！在变量前加上版本号，同时判断值与版本号是否相等。</p></li><li><p><strong>循环时间长，开销大</strong></p><p>自旋CAS如果长时间不成功，会给CPU带来很大的执行开销</p></li><li><p><strong>只能保证一个共享变量的原子操作</strong></p><p>多变量只能加锁</p></li></ol><h3 id="原子操作类"><a href="#原子操作类" class="headerlink" title="原子操作类"></a>原子操作类</h3><p><strong>原子更新基本类型类</strong>：使用原子的方式<strong>更新基本类型</strong>，包括一下三类：</p><ol><li>AtomicBoolean：原子更新布尔类型</li><li>AtomicInteger：原子更新整型</li><li>AtomicLong：原子更新长整型</li></ol><p>对应的操作：</p><ul><li>public final int **get()**：获取当前的值</li><li>public final int **getAndSet(int newValue)**：获取当前的值，并设置新的值</li><li>public final int **getAndIncrement()**：获取当前的值，并自增1</li><li>public final int **getAndDecrement()**：获取当前的值，并自减1</li><li>public final int **getAndAdd(int delta)**：获取当前的值，并加上预期值delta</li></ul><p><strong>原子更新数组</strong>：通过原子的方式<strong>更新数组里的某个元素</strong>，包括一下三类：</p><ol><li>AtomicIntegerArray：原子更新整型数组</li><li>AtomicLongArray：原子更新长整型数组</li><li>AtomicReferenceArray：原子更新引用类型数组</li></ol><p>对应的操作：</p><ul><li>**get(int index)**：获取索引为index的元素值</li><li>**compareAndSet(int index, E expect, E update)**：如果索引index处的值等于expect，则更新为update</li></ul><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">AtomicIntegerArray</span> <span class="variable">array</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">AtomicIntegerArray</span>(<span class="keyword">new</span> <span class="title class_">int</span>[]&#123;<span class="number">0</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>&#125;);</span><br></pre></td></tr></table></figure><blockquote><p>先到这里，日后再更新</p></blockquote>]]></content>
+      
+      
+      <categories>
+          
+          <category> Java </category>
+          
+      </categories>
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>消息队列07：消息延迟队列</title>
+      <link href="/2024/07/04/MQ07/"/>
+      <url>/2024/07/04/MQ07/</url>
+      
+        <content type="html"><![CDATA[<blockquote><p>怎么实现订单超时自动取消？</p></blockquote><p>kafka不支持延迟消息！但是延迟消息却是经常使用的：</p><p>如在电商、支付等系统中，一般都是先创建订单A or 支付单A，再给用户一定时间进行支付，如果没有按时支付的话，就需要把之前的订单A or 支付单A取消掉。</p><h3 id="延迟队列和延迟消息"><a href="#延迟队列和延迟消息" class="headerlink" title="延迟队列和延迟消息"></a>延迟队列和延迟消息</h3><p>延迟队列是一种特殊的队列，队列中的<strong>每个元素都有一个过期时间</strong>；当元素还<strong>没到过期时间</strong>的时候，如果试图从队列中<strong>获取这个元素</strong>，就会<strong>被阻塞</strong>。而当有<strong>元素过期</strong>时，就会<strong>得到这个元素</strong>——得到的永远是最先过期的元素。</p><p>JDK就自带延迟队列（阻塞队列中的<strong>DelayQueue</strong>）</p><p><strong>延迟消息</strong>，是一种特殊的延迟队列，是<strong>基于消息队列的延迟队列</strong>。——延迟消息指<strong>消息不会立刻被消费，而是经过一段时间后才会被消费。在经过这段时间之前，这个消息一直被存储在消息队列的服务器上</strong>（Question：这个服务器是谁？Producer？Broker？Consumer？）。</p><h3 id="如何自己实现延迟消息？"><a href="#如何自己实现延迟消息？" class="headerlink" title="如何自己实现延迟消息？"></a>如何自己实现延迟消息？</h3><p>RabbitMQ中有TTL（Time To Live）即过期时间，可以给消息或者队列设置（若给队列设置则队列中的所有消息都有相同的过期时间），如果队列的生存时间超过设置的TTL则会变成“死信”（Dead Message），放入死信队列中（DLX，Dead-Letter-Exchange）。</p><p>所以，有如下操作：</p><ul><li>准备一个队列Queue，并为这个队列设置过期时间TTL（且这个队列没有消费者）</li><li>将真实的业务biz_Queue绑定到这个Queue，作为它的死信队列</li><li>生产者发送消息到Queue中，因为没有消费者，等TTL时间之后，消息过期，会将消息转发到死信队列biz_Queue中，此时消费者就可以拿到消息了</li></ul>]]></content>
+      
+      
+      <categories>
+          
+          <category> 消息队列 </category>
+          
+      </categories>
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>ACM模式——树的构建</title>
       <link href="/2024/06/29/ACM%E6%A8%A1%E5%BC%8F%E2%80%94%E2%80%94%E6%A0%91%E7%9A%84%E6%9E%84%E5%BB%BA/"/>
       <url>/2024/06/29/ACM%E6%A8%A1%E5%BC%8F%E2%80%94%E2%80%94%E6%A0%91%E7%9A%84%E6%9E%84%E5%BB%BA/</url>
@@ -236,7 +274,7 @@
       <link href="/2024/06/01/MQ02/"/>
       <url>/2024/06/01/MQ02/</url>
       
-        <content type="html"><![CDATA[<blockquote><p>你的项目为什么选择用 rocketmq &#x2F; kafka &#x2F; rabbitmq作为消息队列组件？而不是其他的呢？</p></blockquote><p>选择消息队列的前提：开源、不冷门、消息的可靠传递、Cluster、性能好</p><h2 id="Kafka"><a href="#Kafka" class="headerlink" title="Kafka"></a>Kafka</h2><ul><li><strong>主题（Topic）</strong> ：消息的种类称为主题，可以说一个主题代表了一类消息，相当于是对消息进行分类，主题就像是数据库中的表。</li><li><strong>分区（partition）</strong> ：主题可以被分为若干个分区，同一个主题中的分区可以不在一个机器上，有可能会部署在多个机器上，由此来实现 kafka 的伸缩性。</li><li><strong>批次</strong>：为了提高效率， 消息会分批次写入 Kafka，批次就代指的是一组消息</li></ul><h3 id="优缺点"><a href="#优缺点" class="headerlink" title="优缺点"></a>优缺点</h3><p><strong>Kafka 与周边生态系统的兼容性是最好的没有之</strong>一，尤其在大数据和流计算领域，几乎所有的相关开源软件系统都会优先支持 Kafka。</p><p>Kafka的<strong>性能很高</strong>（不过和RocketMQ没有量级上的差距），几十万条&#x2F;s</p><p>但是是异步批量的设计，导致同步收发消息的响应时延较高（kafka会把消息攒一批发送）——<strong>不适合在线业务场景</strong></p><p>如果你需要处理海量的消息，像收集日志、监控信息或是前端的埋点这类数据，或是你的应用场景大量使用了大数据、流计算相关的开源产品，那 Kafka 是最适合你的消息队列。</p><span id="more"></span><h2 id="RocketMQ"><a href="#RocketMQ" class="headerlink" title="RocketMQ"></a>RocketMQ</h2><ul><li><strong>Name 服务器（NameServer）</strong> ：充当注册中心，类似 Kafka 中的 Zookeeper。</li><li><strong>Broker</strong>: 一个独立的 RocketMQ 服务器就被称为 broker，broker 接收来自生产者的消息，为消息设置偏移量。</li><li><strong>主题（Topic）</strong> ：消息的第一级类型，一条消息必须有一个 Topic。</li><li><strong>子主题（Tag）</strong> ：消息的第二级类型，同一业务模块不同目的的消息就可以用相同 Topic 和不同的 Tag 来标识。</li><li><strong>分组（Group）</strong> ：一个组可以订阅多个 Topic，包括生产者组（Producer Group）和消费者组（Consumer Group）。</li><li><strong>队列（Queue）</strong> ：可以类比 Kafka 的分区 Partition。</li></ul><h3 id="优缺点-1"><a href="#优缺点-1" class="headerlink" title="优缺点"></a>优缺点</h3><p>阿里巴巴使用Java开发的；<strong>没什么突出的优点，也没什么明显的缺点</strong></p><p>优点：<strong>响应时延要求很高的场景，应该选择使用 RocketMQ。</strong></p><p>缺点：与周边生态系统的集成和兼容程度要略逊一筹。</p><p>如果你的系统使用消息队列主要场景是处理在线业务，比如在交易系统中用消息队列传递订单，那 RocketMQ 的低延迟和金融级的稳定性是你需要的。</p><h2 id="RabbitMQ"><a href="#RabbitMQ" class="headerlink" title="RabbitMQ"></a>RabbitMQ</h2><p><strong>优点：</strong></p><ol><li>相当轻量级、容易部署和使用（是大多个人项目选择RabbitMQ的主要原因了吧）</li><li>路由配置很灵活</li><li>支持的编程语言很多</li></ol><p><strong>缺点：</strong></p><ol><li>RabbitMQ对消息堆积的支持不好、消息堆积会导致其性能下降</li><li>RabbitMQ的性能是这几个中最差的（但是也够用了）</li><li>RabbitMQ用Erlang写的，小众；不方便扩展</li></ol><p>消息队列并不是你将要构建系统的主角之一，你对消息队列功能和性能都没有很高的要求，只需要一个开箱即用易于维护的产品，建议使用 RabbitMQ</p>]]></content>
+        <content type="html"><![CDATA[<blockquote><p>你的项目为什么选择用 rocketmq &#x2F; kafka &#x2F; rabbitmq作为消息队列组件？而不是其他的呢？</p></blockquote><p>选择消息队列的前提：开源、不冷门、消息的可靠传递、Cluster、性能好</p><h2 id="Kafka"><a href="#Kafka" class="headerlink" title="Kafka"></a>Kafka</h2><ul><li><strong>主题（Topic）</strong> ：消息的种类称为主题，可以说一个主题代表了一类消息，相当于是对消息进行分类，主题就像是数据库中的表。</li><li><strong>分区（partition）</strong> ：主题可以被分为若干个分区，同一个主题中的分区可以不在一个机器上，有可能会部署在多个机器上，由此来实现 kafka 的伸缩性。</li><li><strong>批次</strong>：为了提高效率， 消息会分批次写入 Kafka，批次就代指的是一组消息</li></ul><h3 id="优缺点"><a href="#优缺点" class="headerlink" title="优缺点"></a>优缺点</h3><p><strong>Kafka 与周边生态系统的兼容性是最好的没有之</strong>一，尤其在大数据和流计算领域，几乎所有的相关开源软件系统都会优先支持 Kafka。</p><p>Kafka的<strong>性能很高</strong>（不过和RocketMQ没有量级上的差距），几十万条&#x2F;s</p><p>但是是异步批量的设计，导致同步收发消息的响应时延较高（kafka会把消息攒一批发送）——<strong>不适合在线业务场景</strong></p><p>如果你需要处理海量的消息，像收集日志、监控信息或是前端的埋点这类数据，或是你的应用场景大量使用了大数据、流计算相关的开源产品，那 Kafka 是最适合你的消息队列。</p><span id="more"></span><h2 id="RocketMQ"><a href="#RocketMQ" class="headerlink" title="RocketMQ"></a>RocketMQ</h2><ul><li><strong>Name 服务器（NameServer）</strong> ：充当注册中心，类似 Kafka 中的 Zookeeper。</li><li><strong>Broker</strong>: 一个独立的 RocketMQ 服务器就被称为 broker，broker 接收来自生产者的消息，为消息设置偏移量。</li><li><strong>主题（Topic）</strong> ：消息的第一级类型，一条消息必须有一个 Topic。</li><li><strong>子主题（Tag）</strong> ：消息的第二级类型，同一业务模块不同目的的消息就可以用相同 Topic 和不同的 Tag 来标识。</li><li><strong>分组（Group）</strong> ：一个组可以订阅多个 Topic，包括生产者组（Producer Group）和消费者组（Consumer Group）。</li><li><strong>队列（Queue）</strong> ：可以类比 Kafka 的分区 Partition。</li></ul><h3 id="优缺点-1"><a href="#优缺点-1" class="headerlink" title="优缺点"></a>优缺点</h3><p>阿里巴巴使用Java开发的；<strong>没什么突出的优点，也没什么明显的缺点</strong></p><p>优点：<strong>响应时延要求很高的场景，应该选择使用 RocketMQ。</strong></p><p>缺点：与周边生态系统的集成和兼容程度要略逊一筹。</p><p>如果你的系统使用消息队列主要场景是处理在线业务，比如在交易系统中用消息队列传递订单，那 RocketMQ 的低延迟和金融级的稳定性是你需要的。</p><h2 id="RabbitMQ"><a href="#RabbitMQ" class="headerlink" title="RabbitMQ"></a>RabbitMQ</h2><p><strong>优点：</strong></p><ol><li>相当轻量级、容易部署和使用（是大多个人项目选择RabbitMQ的主要原因了吧）</li><li>路由配置很灵活</li><li>支持的编程语言很多</li><li>有插件支持延迟消息</li></ol><p><strong>缺点：</strong></p><ol><li>RabbitMQ对消息堆积的支持不好、消息堆积会导致其性能下降</li><li>RabbitMQ的性能是这几个中最差的（但是也够用了）</li><li>RabbitMQ用Erlang写的，小众；不方便扩展</li></ol><p>消息队列并不是你将要构建系统的主角之一，你对消息队列功能和性能都没有很高的要求，只需要一个开箱即用易于维护的产品，建议使用 RabbitMQ</p>]]></content>
       
       
       <categories>
@@ -464,7 +502,7 @@
       <link href="/2024/05/26/introduce/"/>
       <url>/2024/05/26/introduce/</url>
       
-        <content type="html"><![CDATA[<p>博主的算法题刷题日记</p><p>题目来自leetcode，由代码随想录整理</p><ul><li><p>题目目录：<a href="https://programmercarl.com/">https://programmercarl.com/</a></p></li><li><p>题目讲解视频：<a href="https://space.bilibili.com/525438321/channel/collectiondetail?sid=180037">https://space.bilibili.com/525438321/channel/collectiondetail?sid=180037</a></p></li></ul><p>本栏目的内容为博主二刷过程中对题目的思考、解题思路、总结的方法</p><p>包括如下内容：</p><ol><li>每天刷题的思考与问题（每道题都记录，但是不详细）</li><li>刷题时一时半会做不出来的题目 or  一道题目的多种解法</li><li>各种笔试题的题解</li></ol><p>联系博主：<a href="mailto:&#x79;&#x69;&#110;&#x68;&#111;&#x6e;&#x67;&#121;&#x61;&#110;&#x67;&#x35;&#x34;&#54;&#x40;&#x67;&#109;&#x61;&#105;&#x6c;&#46;&#x63;&#111;&#x6d;">&#x79;&#x69;&#110;&#x68;&#111;&#x6e;&#x67;&#121;&#x61;&#110;&#x67;&#x35;&#x34;&#54;&#x40;&#x67;&#109;&#x61;&#105;&#x6c;&#46;&#x63;&#111;&#x6d;</a></p>]]></content>
+        <content type="html"><![CDATA[<p>博主的算法题刷题日记</p><p>题目来自leetcode，由代码随想录整理</p><ul><li><p>题目目录：<a href="https://programmercarl.com/">https://programmercarl.com/</a></p></li><li><p>题目讲解视频：<a href="https://space.bilibili.com/525438321/channel/collectiondetail?sid=180037">https://space.bilibili.com/525438321/channel/collectiondetail?sid=180037</a></p></li></ul><p>本栏目的内容为博主二刷过程中对题目的思考、解题思路、总结的方法</p><p>包括如下内容：</p><ol><li>每天刷题的思考与问题（每道题都记录，但是不详细）</li><li>刷题时一时半会做不出来的题目 or  一道题目的多种解法</li><li>各种笔试题的题解</li></ol><p>联系博主：<a href="mailto:&#121;&#x69;&#x6e;&#x68;&#x6f;&#110;&#103;&#121;&#97;&#110;&#103;&#53;&#52;&#54;&#64;&#103;&#109;&#x61;&#x69;&#x6c;&#46;&#99;&#x6f;&#x6d;">&#121;&#x69;&#x6e;&#x68;&#x6f;&#110;&#103;&#121;&#97;&#110;&#103;&#53;&#52;&#54;&#64;&#103;&#109;&#x61;&#x69;&#x6c;&#46;&#99;&#x6f;&#x6d;</a></p>]]></content>
       
       
       <categories>
@@ -483,7 +521,7 @@
       <link href="/2024/04/09/introduceMyself/"/>
       <url>/2024/04/09/introduceMyself/</url>
       
-        <content type="html"><![CDATA[<p>昵称：4nge1<br>主要方向：Java后端（找工作ing）<br>邮箱：<a href="mailto:&#121;&#105;&#110;&#104;&#111;&#x6e;&#103;&#x79;&#x61;&#110;&#103;&#53;&#x34;&#54;&#64;&#x67;&#109;&#97;&#x69;&#x6c;&#46;&#99;&#x6f;&#109;">&#121;&#105;&#110;&#104;&#111;&#x6e;&#103;&#x79;&#x61;&#110;&#103;&#53;&#x34;&#54;&#64;&#x67;&#109;&#97;&#x69;&#x6c;&#46;&#99;&#x6f;&#109;</a></p>]]></content>
+        <content type="html"><![CDATA[<p>昵称：4nge1<br>主要方向：Java后端（找工作ing）<br>邮箱：<a href="mailto:&#121;&#105;&#110;&#x68;&#111;&#x6e;&#103;&#121;&#97;&#110;&#103;&#53;&#x34;&#x36;&#64;&#103;&#109;&#97;&#x69;&#x6c;&#x2e;&#x63;&#x6f;&#x6d;">&#121;&#105;&#110;&#x68;&#111;&#x6e;&#103;&#121;&#97;&#110;&#103;&#53;&#x34;&#x36;&#64;&#103;&#109;&#97;&#x69;&#x6c;&#x2e;&#x63;&#x6f;&#x6d;</a></p>]]></content>
       
       
       

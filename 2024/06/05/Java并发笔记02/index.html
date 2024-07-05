@@ -28,7 +28,7 @@
 <meta property="og:description" content="本文用于记录博主在学习Java并发时的知识点总结  SynchronizedJava中对悲观锁的实现，是synchronized同步块 Synchronized 之 锁的竞争与升级一般来说，锁是不能降级的 Synchronized的锁有4种状态——无锁、偏向锁、轻量级锁、重量级锁 底层如何区分呢？Synchronized用的锁存储在Java对象头的Mark word中 其中包括指向当前获取锁的对">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2024-06-05T07:32:36.000Z">
-<meta property="article:modified_time" content="2024-06-09T11:43:01.192Z">
+<meta property="article:modified_time" content="2024-07-05T09:04:32.425Z">
 <meta property="article:author" content="Yinhongyang">
 <meta name="twitter:card" content="summary">
 
@@ -234,7 +234,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2024-06-09 19:43:01" itemprop="dateModified" datetime="2024-06-09T19:43:01+08:00">2024-06-09</time>
+                <time title="修改时间：2024-07-05 17:04:32" itemprop="dateModified" datetime="2024-07-05T17:04:32+08:00">2024-07-05</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -290,7 +290,7 @@
 <h4 id="偏向锁的竞争与升级"><a href="#偏向锁的竞争与升级" class="headerlink" title="偏向锁的竞争与升级"></a>偏向锁的竞争与升级</h4><p>对象头Mark word中记录的有线程ID，当前线程要访问同步块就需要<strong>竞争偏向锁</strong>：</p>
 <ol>
 <li>当前线程的ID和Mark word中的相同，则放行</li>
-<li>如果不同，则执行CAS操作，尝试替换Mark word中的线程ID<ol>
+<li>如果不同，则执行CAS操作（<a href="http://yhy1031.cn/2024/07/04/Java%E5%B9%B6%E5%8F%91%E7%AC%94%E8%AE%B007/">CAS介绍</a>），尝试替换Mark word中的线程ID<ol>
 <li>替换成功，则当前线程获得了偏向锁，放行（前一个线程执行完毕 or 当前线程是第一个线程）</li>
 <li>CAS不成功，则要升级为轻量级锁</li>
 </ol>
@@ -525,12 +525,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="站点总字数">24k</span>
+    <span title="站点总字数">25k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">1:27</span>
+    <span title="站点阅读时长">1:31</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> 强力驱动
   </div>

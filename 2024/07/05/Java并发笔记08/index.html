@@ -20,17 +20,22 @@
     var CONFIG = {"hostname":"yhy1031.cn","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="本文用于记录博主在学习Java并发时的知识点总结">
+  <meta name="description" content="本文用于记录博主在学习Java并发时的知识点总结  线程池—— 是一种开发框架，是一种基于池化思想管理线程的工具（池化：如数据库的连接池）  降低资源消耗：重复利用已创建的线程，降低线程创建和销毁造成的消耗 提高响应速度：任务到达时，可以立即执行，不需要等待线程创建 提高线程可管理性  归根结底，线程池的作用：复用线程 线程池的实现原理   线程池分为核心线程池和非核心线程池（核心线程池只有核心">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Java并发笔记08：线程池">
 <meta property="og:url" content="http://yhy1031.cn/blog/2024/07/05/Java%E5%B9%B6%E5%8F%91%E7%AC%94%E8%AE%B008/index.html">
 <meta property="og:site_name" content="Yinhy Blog">
-<meta property="og:description" content="本文用于记录博主在学习Java并发时的知识点总结">
+<meta property="og:description" content="本文用于记录博主在学习Java并发时的知识点总结  线程池—— 是一种开发框架，是一种基于池化思想管理线程的工具（池化：如数据库的连接池）  降低资源消耗：重复利用已创建的线程，降低线程创建和销毁造成的消耗 提高响应速度：任务到达时，可以立即执行，不需要等待线程创建 提高线程可管理性  归根结底，线程池的作用：复用线程 线程池的实现原理   线程池分为核心线程池和非核心线程池（核心线程池只有核心">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://raw.githubusercontent.com/yhyyyy1/MyTypora/master/img/2024-7-5-XCCP1.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/yhyyyy1/MyTypora/master/img/2024-7-5-XCCP2.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/yhyyyy1/MyTypora/master/img/2024-7-5-XCCP3.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/yhyyyy1/MyTypora/master/img/2024-7-5-XCCP4.png">
 <meta property="article:published_time" content="2024-07-05T03:51:05.000Z">
-<meta property="article:modified_time" content="2024-07-05T03:51:30.218Z">
+<meta property="article:modified_time" content="2024-07-05T09:10:16.660Z">
 <meta property="article:author" content="Yinhongyang">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/yhyyyy1/MyTypora/master/img/2024-7-5-XCCP1.png">
 
 <link rel="canonical" href="http://yhy1031.cn/blog/2024/07/05/Java%E5%B9%B6%E5%8F%91%E7%AC%94%E8%AE%B008/">
 
@@ -228,7 +233,7 @@
               <span class="post-meta-item-text">发表于</span>
               
 
-              <time title="创建时间：2024-07-05 11:51:05 / 修改时间：11:51:30" itemprop="dateCreated datePublished" datetime="2024-07-05T11:51:05+08:00">2024-07-05</time>
+              <time title="创建时间：2024-07-05 11:51:05 / 修改时间：17:10:16" itemprop="dateCreated datePublished" datetime="2024-07-05T11:51:05+08:00">2024-07-05</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -247,14 +252,14 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>21</span>
+              <span>1.3k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
                 <i class="far fa-clock"></i>
               </span>
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
+              <span>5 分钟</span>
             </span>
 
         </div>
@@ -269,6 +274,105 @@
         <blockquote>
 <p>本文用于记录博主在学习Java并发时的知识点总结</p>
 </blockquote>
+<p><strong>线程池</strong>—— 是一种开发框架，是一种基于池化思想管理线程的工具（池化：如数据库的连接池）</p>
+<ul>
+<li>降低资源消耗：重复利用已创建的线程，降低线程创建和销毁造成的消耗</li>
+<li>提高响应速度：任务到达时，可以立即执行，不需要等待线程创建</li>
+<li>提高线程可管理性</li>
+</ul>
+<p>归根结底，线程池的作用：<strong>复用线程</strong></p>
+<h3 id="线程池的实现原理"><a href="#线程池的实现原理" class="headerlink" title="线程池的实现原理"></a>线程池的实现原理</h3> <img src="https://raw.githubusercontent.com/yhyyyy1/MyTypora/master/img/2024-7-5-XCCP1.png" alt="2024-7-5-XCCP1" style="zoom:80%;" />
+
+<p>线程池分为<strong>核心线程池</strong>和<strong>非核心线程池</strong>（核心线程池只有核心线程池满了才会复用，否则会创建新线程）</p>
+<span id="more"></span>
+
+<h4 id="线程池工作流程"><a href="#线程池工作流程" class="headerlink" title="线程池工作流程"></a>线程池工作流程</h4><ol>
+<li><strong>首先会判断核心线程池是否已满</strong>：如果没有满，则直接创建新线程来执行任务。如果已经满了，则进行下一步判断，<strong>尝试将任务放入队列</strong>。</li>
+<li><strong>判断队列是否已经满了</strong>：如果没有满，则任务放入队列，结束。如果队列已经满了，则进行下一步判断。</li>
+<li><strong>判断线程池（核心+非核心）是否已经满</strong>：如果没满，则创建新线程来执行任务。如果已经满了，则按照饱和策略来处理任务。</li>
+</ol>
+<h3 id="ThreadPoolExecutor"><a href="#ThreadPoolExecutor" class="headerlink" title="ThreadPoolExecutor"></a>ThreadPoolExecutor</h3><p>Java中线程池的核心实现类是ThreadPoolExecutor类</p>
+<h4 id="线程池参数（7个参数）"><a href="#线程池参数（7个参数）" class="headerlink" title="线程池参数（7个参数）"></a>线程池参数（7个参数）</h4><p> <img src="https://raw.githubusercontent.com/yhyyyy1/MyTypora/master/img/2024-7-5-XCCP2.png" alt="2024-7-5-XCCP2"></p>
+<ul>
+<li><p><strong>corePoolSize</strong>：核心线程池大小</p>
+</li>
+<li><p><strong>maximumPoolSize</strong>：最大线程数——核心+非核心</p>
+</li>
+<li><p><strong>keepAliveTime</strong>：空闲线程存活时间（<strong>只作用于非核心线程</strong>，核心线程不会回收）</p>
+</li>
+<li><p><strong>unit</strong>：时间单位——keepAliveTime的时间单位</p>
+</li>
+<li><p><strong>workQueue</strong>：阻塞队列，用于保存任务</p>
+<p>具体队列类型可以看之前的阻塞队列</p>
+<ul>
+<li><p>ArrayBlockingQueue</p>
+</li>
+<li><p>LinkedBlockingQueue</p>
+</li>
+<li><p>SynchronousQueue</p>
+</li>
+<li><p>PriorityBlockingQueue</p>
+</li>
+</ul>
+</li>
+<li><p><strong>threadFactory</strong>：创建线程的工厂类</p>
+</li>
+<li><p><strong>handler</strong>：饱和策略（拒绝策略）</p>
+<p>线程和阻塞队列都满了，使用handler处理新来的任务</p>
+<ul>
+<li><p><strong>AbortPolicy</strong>：直接抛出异常（默认）</p>
+</li>
+<li><p>CallerRunPolicy：使用任务提交者的线程运行</p>
+</li>
+<li><p>DiscardOldestPolicy：抛弃最老（最早入队的）的线程，并重试提交当前任务</p>
+</li>
+<li><p>DiscardPolicy：不处理丢弃</p>
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="线程池的执行流程"><a href="#线程池的执行流程" class="headerlink" title="线程池的执行流程"></a>线程池的执行流程</h4><p>如下图所示：</p>
+ <img src="https://raw.githubusercontent.com/yhyyyy1/MyTypora/master/img/2024-7-5-XCCP3.png" alt="2024-7-5-XCCP3" style="zoom:67%;" />
+
+<p>调用线程池主要是使用ThreadPoolExecutor中的execute方法，下面是几种情况：</p>
+<ol>
+<li><strong>如果当前运行的线程少于corePoolSize-核心线程池大小</strong>，也就是核心线程池未满，则创建新线程来执行任务（此时相当于线程池的预热阶段）</li>
+<li><strong>如果运行的线程等于or多于corePoolSize</strong>，则将任务加入BlockingQueue-等待队列中（等待核心线程池中的有空闲线程）</li>
+<li><strong>如果无法将任务加入到BlockingQueue中（队列满了）</strong>，则创建新线程来处理任务</li>
+<li><strong>如果创建新线程将使得运行的线程超出maximumPoolSize-最大线程数</strong>，则任务将根据handler-饱和策略被拒绝，</li>
+</ol>
+<h4 id="常用的三种ThreadPoolExecutor"><a href="#常用的三种ThreadPoolExecutor" class="headerlink" title="常用的三种ThreadPoolExecutor"></a>常用的三种ThreadPoolExecutor</h4><ol>
+<li><p><strong>FixedThreadPool</strong>——控制最大并发（定义的最大线程数）的线程池</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// JUC中newFixedThreadPool的源码</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> ExecutorService <span class="title function_">newFixedThreadPool</span><span class="params">(<span class="type">int</span> nThreads, ThreadFactory threadFactory)</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">ThreadPoolExecutor</span>(nThreads, nThreads,</span><br><span class="line">                                  <span class="number">0L</span>, TimeUnit.MILLISECONDS,</span><br><span class="line">                                  <span class="keyword">new</span> <span class="title class_">LinkedBlockingQueue</span>&lt;Runnable&gt;(),</span><br><span class="line">                                  threadFactory);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>corePoolSize和maximumPoolSize在线程池<strong>创建时就被指定</strong>（此处是nThreads），而且<strong>相等——核心线程就是总线程</strong>，也就是最大的并发数</p>
+<p>阻塞队列为<strong>LinkedBlockingQueue</strong>（队列容量为Integer.MAX_VALUE，是无界阻塞队列），所以maximumPoolSize是一个无效参数，被设置成corePoolSize，表示非核心线程池大小为0</p>
+<p><strong>keepAliveTime为0L</strong>，因为没有非核心线程。（更加保证了不会有非核心线程，一旦创建就kill）</p>
+</li>
+<li><p><strong>SingleThreadExecutor</strong>——单线程处理的线程池</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// JUC中newSingleThreadExecutor的源码</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> ExecutorService <span class="title function_">newSingleThreadExecutor</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">FinalizableDelegatedExecutorService</span></span><br><span class="line">        (<span class="keyword">new</span> <span class="title class_">ThreadPoolExecutor</span>(<span class="number">1</span>, <span class="number">1</span>,</span><br><span class="line">                                <span class="number">0L</span>, TimeUnit.MILLISECONDS,</span><br><span class="line">                                <span class="keyword">new</span> <span class="title class_">LinkedBlockingQueue</span>&lt;Runnable&gt;()));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>SingleThreadExecutor的<strong>corePoolSize和maximumPoolSize被设置为1</strong>。</p>
+<p>其他参数与FixedThreadPool相同（如无界队列LinkedBlockingQueue，keepAliveTime为0L等）</p>
+</li>
+<li><p><strong>CachedThreadPool</strong>——可回收缓存的线程池</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// JUC中newCachedThreadPool的源码</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> ExecutorService <span class="title function_">newCachedThreadPool</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">ThreadPoolExecutor</span>(<span class="number">0</span>, Integer.MAX_VALUE,</span><br><span class="line">                                  <span class="number">60L</span>, TimeUnit.SECONDS,</span><br><span class="line">                                  <span class="keyword">new</span> <span class="title class_">SynchronousQueue</span>&lt;Runnable&gt;());</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>CachedThreadPool的<strong>corePoolSize被设置为0</strong>，即corePool为空；<strong>maximumPoolSize被设置为Integer.MAX_VALUE</strong>，即maximumPool是无界的——并发数无限大，但是每个线程都可以回收</p>
+<p><strong>keepAliveTime设置为60L</strong>，意味着CachedThreadPool中的空闲线程等待新任务的最长时间为60秒，空闲线程超过60秒后将会被终止。</p>
+<p>阻塞队列为SynchronousQueue-不存元素的阻塞队列，相当于没有阻塞队列，因为maximumPool是无界的，所以每个任务都会直接创建or复用线程。（所以可能和消耗大量CPU &amp; 内存资源）</p>
+</li>
+</ol>
+<h4 id="线程池的状态"><a href="#线程池的状态" class="headerlink" title="线程池的状态"></a>线程池的状态</h4><p><img src="https://raw.githubusercontent.com/yhyyyy1/MyTypora/master/img/2024-7-5-XCCP4.png" alt="2024-7-5-XCCP4"></p>
+<ul>
+<li>NEW </li>
+<li>RUNNING</li>
+<li>SHUTDOWN：不收但是还在执行</li>
+<li>STOP：不受不执行，执行中的会中断</li>
+<li>TIDYING：所有任务都销毁了，workerCount &#x3D; 0，会执行terminated方法</li>
+<li>TERMINATED：</li>
+</ul>
+<p>可以对比一下<a href="http://yhy1031.cn/2024/06/05/Java%E5%B9%B6%E5%8F%91%E7%AC%94%E8%AE%B001/">线程的状态</a></p>
 
     </div>
 
@@ -346,6 +450,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BA%BF%E7%A8%8B%E6%B1%A0%E7%9A%84%E5%AE%9E%E7%8E%B0%E5%8E%9F%E7%90%86"><span class="nav-number">1.</span> <span class="nav-text">线程池的实现原理</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%BA%BF%E7%A8%8B%E6%B1%A0%E5%B7%A5%E4%BD%9C%E6%B5%81%E7%A8%8B"><span class="nav-number">1.1.</span> <span class="nav-text">线程池工作流程</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ThreadPoolExecutor"><span class="nav-number">2.</span> <span class="nav-text">ThreadPoolExecutor</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%BA%BF%E7%A8%8B%E6%B1%A0%E5%8F%82%E6%95%B0%EF%BC%887%E4%B8%AA%E5%8F%82%E6%95%B0%EF%BC%89"><span class="nav-number">2.1.</span> <span class="nav-text">线程池参数（7个参数）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%BA%BF%E7%A8%8B%E6%B1%A0%E7%9A%84%E6%89%A7%E8%A1%8C%E6%B5%81%E7%A8%8B"><span class="nav-number">2.2.</span> <span class="nav-text">线程池的执行流程</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%B8%B8%E7%94%A8%E7%9A%84%E4%B8%89%E7%A7%8DThreadPoolExecutor"><span class="nav-number">2.3.</span> <span class="nav-text">常用的三种ThreadPoolExecutor</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%BA%BF%E7%A8%8B%E6%B1%A0%E7%9A%84%E7%8A%B6%E6%80%81"><span class="nav-number">2.4.</span> <span class="nav-text">线程池的状态</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -411,12 +516,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="站点总字数">24k</span>
+    <span title="站点总字数">25k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">1:27</span>
+    <span title="站点阅读时长">1:31</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> 强力驱动
   </div>

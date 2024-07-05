@@ -28,7 +28,7 @@
 <meta property="og:description" content="怎么实现订单超时自动取消？  kafka不支持延迟消息！但是延迟消息却是经常使用的： 如在电商、支付等系统中，一般都是先创建订单A or 支付单A，再给用户一定时间进行支付，如果没有按时支付的话，就需要把之前的订单A or 支付单A取消掉。 延迟队列和延迟消息延迟队列是一种特殊的队列，队列中的每个元素都有一个过期时间；当元素还没到过期时间的时候，如果试图从队列中获取这个元素，就会被阻塞。而当有元">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2024-07-04T08:25:45.000Z">
-<meta property="article:modified_time" content="2024-07-04T10:50:03.386Z">
+<meta property="article:modified_time" content="2024-07-04T12:05:45.544Z">
 <meta property="article:author" content="Yinhongyang">
 <meta name="twitter:card" content="summary">
 
@@ -228,7 +228,7 @@
               <span class="post-meta-item-text">发表于</span>
               
 
-              <time title="创建时间：2024-07-04 16:25:45 / 修改时间：18:50:03" itemprop="dateCreated datePublished" datetime="2024-07-04T16:25:45+08:00">2024-07-04</time>
+              <time title="创建时间：2024-07-04 16:25:45 / 修改时间：20:05:45" itemprop="dateCreated datePublished" datetime="2024-07-04T16:25:45+08:00">2024-07-04</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -247,7 +247,7 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>506</span>
+              <span>507</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
@@ -274,6 +274,8 @@
 <h3 id="延迟队列和延迟消息"><a href="#延迟队列和延迟消息" class="headerlink" title="延迟队列和延迟消息"></a>延迟队列和延迟消息</h3><p>延迟队列是一种特殊的队列，队列中的<strong>每个元素都有一个过期时间</strong>；当元素还<strong>没到过期时间</strong>的时候，如果试图从队列中<strong>获取这个元素</strong>，就会<strong>被阻塞</strong>。而当有<strong>元素过期</strong>时，就会<strong>得到这个元素</strong>——得到的永远是最先过期的元素。</p>
 <p>JDK就自带延迟队列（阻塞队列中的<strong>DelayQueue</strong>）</p>
 <p><strong>延迟消息</strong>，是一种特殊的延迟队列，是<strong>基于消息队列的延迟队列</strong>。——延迟消息指<strong>消息不会立刻被消费，而是经过一段时间后才会被消费。在经过这段时间之前，这个消息一直被存储在消息队列的服务器上</strong>（Question：这个服务器是谁？Producer？Broker？Consumer？）。</p>
+<span id="more"></span>
+
 <h3 id="如何自己实现延迟消息？"><a href="#如何自己实现延迟消息？" class="headerlink" title="如何自己实现延迟消息？"></a>如何自己实现延迟消息？</h3><p>RabbitMQ中有TTL（Time To Live）即过期时间，可以给消息或者队列设置（若给队列设置则队列中的所有消息都有相同的过期时间），如果队列的生存时间超过设置的TTL则会变成“死信”（Dead Message），放入死信队列中（DLX，Dead-Letter-Exchange）。</p>
 <p>所以，有如下操作：</p>
 <ul>
@@ -300,8 +302,8 @@
       <i class="fa fa-chevron-left"></i> ACM模式——树的构建
     </a></div>
       <div class="post-nav-item">
-    <a href="/2024/07/04/Java%E5%B9%B6%E5%8F%91%E7%AC%94%E8%AE%B007/" rel="next" title="Java并发笔记07：CAS & 乐观锁与悲观锁">
-      Java并发笔记07：CAS & 乐观锁与悲观锁 <i class="fa fa-chevron-right"></i>
+    <a href="/2024/07/04/Java%E5%B9%B6%E5%8F%91%E7%AC%94%E8%AE%B007/" rel="next" title="Java并发笔记07：CAS & 乐观锁与悲观锁 & 原子cao'zuo类">
+      Java并发笔记07：CAS & 乐观锁与悲观锁 & 原子cao'zuo类 <i class="fa fa-chevron-right"></i>
     </a></div>
     </div>
       </footer>
@@ -377,7 +379,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">28</span>
+          <span class="site-state-item-count">30</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -427,12 +429,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="站点总字数">23k</span>
+    <span title="站点总字数">24k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">1:25</span>
+    <span title="站点阅读时长">1:27</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> 强力驱动
   </div>

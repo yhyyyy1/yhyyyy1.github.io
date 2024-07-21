@@ -20,19 +20,19 @@
     var CONFIG = {"hostname":"yhy1031.cn","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="Question.1 二分查找一道比较简单的题目，但是看到一个比较有趣的评论：  有一天小明到图书馆借了 N 本书，出图书馆的时候，警报响了，于是保安把小明拦下，要检查一下哪本书没有登记出借。小明正准备把每一本书在报警器下过一下，以找出引发警报的书，但是保安露出不屑的眼神：你连二分查找都不会吗？于是保安把书分成两堆，让第一堆过一下报警器，报警器响；于是再把这堆书分成两堆…… 最终，检测了 logN">
+  <meta name="description" content="JVM管理的内存——运行时数据区 java程序的内存——运行时数据区（JVM内存）+本地内存 本地内存——元空间 + 直接内存 运行时数据区运行时数据区包括：程序计数器、虚拟机栈、本地方法栈、Java堆、方法区 程序计数器可以看作：当前线程所执行的字节码（class文件）的行号指示器，通过标示下一条需要执行的字节码指令（对应的地址）完成指令切换，以此来推动线程的运行 特点：  内存占用小，且是运行">
 <meta property="og:type" content="article">
-<meta property="og:title" content="2024.5.27 刷题日记">
-<meta property="og:url" content="http://yhy1031.cn/blog/2024/05/27/2024-5-27-%E5%88%B7%E9%A2%98%E6%97%A5%E8%AE%B0/index.html">
+<meta property="og:title" content="JVM01：Java内存区域">
+<meta property="og:url" content="http://yhy1031.cn/blog/2024/07/19/JVM01/index.html">
 <meta property="og:site_name" content="Yinhy Blog">
-<meta property="og:description" content="Question.1 二分查找一道比较简单的题目，但是看到一个比较有趣的评论：  有一天小明到图书馆借了 N 本书，出图书馆的时候，警报响了，于是保安把小明拦下，要检查一下哪本书没有登记出借。小明正准备把每一本书在报警器下过一下，以找出引发警报的书，但是保安露出不屑的眼神：你连二分查找都不会吗？于是保安把书分成两堆，让第一堆过一下报警器，报警器响；于是再把这堆书分成两堆…… 最终，检测了 logN">
+<meta property="og:description" content="JVM管理的内存——运行时数据区 java程序的内存——运行时数据区（JVM内存）+本地内存 本地内存——元空间 + 直接内存 运行时数据区运行时数据区包括：程序计数器、虚拟机栈、本地方法栈、Java堆、方法区 程序计数器可以看作：当前线程所执行的字节码（class文件）的行号指示器，通过标示下一条需要执行的字节码指令（对应的地址）完成指令切换，以此来推动线程的运行 特点：  内存占用小，且是运行">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2024-05-27T06:56:42.000Z">
-<meta property="article:modified_time" content="2024-05-27T13:17:11.888Z">
+<meta property="article:published_time" content="2024-07-19T06:56:36.000Z">
+<meta property="article:modified_time" content="2024-07-19T08:51:12.714Z">
 <meta property="article:author" content="Yinhongyang">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="http://yhy1031.cn/blog/2024/05/27/2024-5-27-%E5%88%B7%E9%A2%98%E6%97%A5%E8%AE%B0/">
+<link rel="canonical" href="http://yhy1031.cn/blog/2024/07/19/JVM01/">
 
 
 <script id="page-configurations">
@@ -45,7 +45,7 @@
   };
 </script>
 
-  <title>2024.5.27 刷题日记 | Yinhy Blog</title>
+  <title>JVM01：Java内存区域 | Yinhy Blog</title>
   
 
 
@@ -204,7 +204,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yhy1031.cn/blog/2024/05/27/2024-5-27-%E5%88%B7%E9%A2%98%E6%97%A5%E8%AE%B0/">
+    <link itemprop="mainEntityOfPage" href="http://yhy1031.cn/blog/2024/07/19/JVM01/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.jpg">
@@ -217,7 +217,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          2024.5.27 刷题日记
+          JVM01：Java内存区域
         </h1>
 
         <div class="post-meta">
@@ -228,7 +228,7 @@
               <span class="post-meta-item-text">发表于</span>
               
 
-              <time title="创建时间：2024-05-27 14:56:42 / 修改时间：21:17:11" itemprop="dateCreated datePublished" datetime="2024-05-27T14:56:42+08:00">2024-05-27</time>
+              <time title="创建时间：2024-07-19 14:56:36 / 修改时间：16:51:12" itemprop="dateCreated datePublished" datetime="2024-07-19T14:56:36+08:00">2024-07-19</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -236,7 +236,7 @@
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E5%88%B7%E9%A2%98%E6%97%A5%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">刷题日记</span></a>
+                  <a href="/categories/Java/" itemprop="url" rel="index"><span itemprop="name">Java</span></a>
                 </span>
             </span>
               <span>&emsp;</span><span class="post-meta-item-icon"><i class="fa fa-eye"></i></span>
@@ -247,14 +247,14 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>517</span>
+              <span>1.2k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
                 <i class="far fa-clock"></i>
               </span>
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>2 分钟</span>
+              <span>4 分钟</span>
             </span>
 
         </div>
@@ -266,26 +266,50 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h4 id="Question-1-二分查找"><a href="#Question-1-二分查找" class="headerlink" title="Question.1 二分查找"></a><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/binary-search/description/">Question.1 二分查找</a></h4><p>一道比较简单的题目，但是看到一个比较有趣的评论：</p>
-<blockquote>
-<p>有一天小明到图书馆借了 N 本书，出图书馆的时候，警报响了，于是保安把小明拦下，要检查一下哪本书没有登记出借。小明正准备把每一本书在报警器下过一下，以找出引发警报的书，但是保安露出不屑的眼神：你连二分查找都不会吗？于是保安把书分成两堆，让第一堆过一下报警器，报警器响；于是再把这堆书分成两堆…… 最终，检测了 logN 次之后，保安成功的找到了那本引起警报的书，露出了得意和嘲讽的笑容。于是小明背着剩下的书走了。 从此，图书馆丢了 N - 1本书。</p>
-</blockquote>
-<p>二分的本质是由mid分出的两部分分别整体满足不同的性质，对于有序数组就是与目标值的大小关系，对于图书测试就是是否会引起警报</p>
-<p>同时也提了一个醒——二分法的应用场景：有序且唯一</p>
-<span id="more"></span>
-<h4 id="Question-2-移除元素"><a href="#Question-2-移除元素" class="headerlink" title="Question.2 移除元素"></a><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/remove-element/">Question.2 移除元素</a></h4><p><strong>经典双指针问题</strong>，分为两种：</p>
-<ol>
-<li>快慢指针：一个指针快速向前遍历，另一个指针指向要替换的位置</li>
-<li>左右指针：右侧指针来替换左侧指针可以替换的位置</li>
-</ol>
-<h4 id="Question-3-有序数组的平方-Question-4-长度最小的子数组"><a href="#Question-3-有序数组的平方-Question-4-长度最小的子数组" class="headerlink" title="Question.3 有序数组的平方 &amp;&amp; Question.4 长度最小的子数组"></a><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/squares-of-a-sorted-array/description/">Question.3 有序数组的平方</a> &amp;&amp; <a target="_blank" rel="noopener" href="https://leetcode.cn/problems/minimum-size-subarray-sum/">Question.4 长度最小的子数组</a></h4><p>均为双指针问题</p>
-<h4 id="Question-5-螺旋矩阵II"><a href="#Question-5-螺旋矩阵II" class="headerlink" title="Question.5 螺旋矩阵II"></a><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/spiral-matrix-ii/description/">Question.5 螺旋矩阵II</a></h4><p>定义出对应的边界，一层一层的遍历就行了，不用想的那么复杂（找规律什么的）</p>
-<h4 id="Question-6-移除链表元素"><a href="#Question-6-移除链表元素" class="headerlink" title="Question.6 移除链表元素"></a><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/remove-linked-list-elements/description/">Question.6 移除链表元素</a></h4><p>链表题目经验：<strong>能不对head操作就不对head操作</strong></p>
+        <p><strong>JVM管理的内存——运行时数据区</strong></p>
+<p><strong>java程序的内存——运行时数据区（JVM内存）+本地内存</strong></p>
+<p><strong>本地内存——元空间 + 直接内存</strong></p>
+<h2 id="运行时数据区"><a href="#运行时数据区" class="headerlink" title="运行时数据区"></a>运行时数据区</h2><p>运行时数据区包括：程序计数器、虚拟机栈、本地方法栈、Java堆、方法区</p>
+<h3 id="程序计数器"><a href="#程序计数器" class="headerlink" title="程序计数器"></a>程序计数器</h3><p>可以看作：当前线程所执行的字节码（class文件）的<strong>行号指示器</strong>，通过标示下一条需要执行的字节码指令（对应的地址）完成指令切换，以此来推动线程的运行</p>
+<p><strong>特点：</strong></p>
 <ul>
-<li>应对方法 1：定义一个dummyHead作为头节点，如<code>ListNode dummyHead = new ListNode(0, head);</code></li>
-<li>应对方案 2：直接新建一个临时头，如<code>ListNode temp = head;</code></li>
+<li><strong>内存占用小</strong>，且是<strong>运行速度最快</strong>的存储区域</li>
+<li><strong>每个线程都有自己的程序计数器</strong>，是<strong>线程私有</strong>的，生命周期和线程一致</li>
+<li>是程序控制流的指示器，</li>
+<li>字节码解释器工作时就是通过改变这个计数器的值来选取下一条要执行的字节码。</li>
+<li>任何时间一个线程都只会有一个方法在执行，也就是<strong>当前方法</strong>。如果当前方法是<strong>Java方法</strong>，则程序计数器记录的是<strong>对应方法的JVM字节码指令地址</strong>；如果是<strong>native方法</strong>，则是<strong>未指定值（undefined）</strong></li>
+<li>JVM中唯一没有规定任何<code>OutOfMemoryError</code>情况的区域</li>
 </ul>
-<h4 id="Question-7-设计链表"><a href="#Question-7-设计链表" class="headerlink" title="Question.7 设计链表"></a><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/design-linked-list/description/">Question.7 设计链表</a></h4><p>可以直接用ListNode类。。。。 平平无奇的一道题</p>
+<h3 id="虚拟机栈"><a href="#虚拟机栈" class="headerlink" title="虚拟机栈"></a>虚拟机栈</h3><p>每个线程在创建时都会创建一个虚拟机栈，用于记录线程所执行的方法，<strong>每一个Java方法对应的是一个栈帧</strong>，每当<strong>调用一个新方法</strong>时，就会<strong>构建一个栈帧并压栈</strong>；而一个<strong>方法执行结束</strong>时，就会有一个<strong>栈帧出栈</strong>（所以是LIFO，非常合理）。所以当前执行的方法，就对应着栈顶的栈帧，且只有这一个活动的栈帧。</p>
+<p><strong>特点：</strong></p>
+<ul>
+<li>线程私有，生命周期和线程一致</li>
+<li>当前正在执行的方法为<strong>当前栈帧</strong></li>
+<li>异常情况：<ul>
+<li>线程请求的栈深度大于虚拟机所允许的深度，则抛出<code>StackOverflowError</code></li>
+<li>如果Java虚拟机栈容量可动态扩展，当栈扩展时无法申请到足够的内存，会抛出<code>OutOfMemoryError</code></li>
+</ul>
+</li>
+</ul>
+<h3 id="本地方法栈"><a href="#本地方法栈" class="headerlink" title="本地方法栈"></a>本地方法栈</h3><p>为执行 Native Method方法服务（虚拟机栈为 Java方法&#x2F;字节码 服务），和虚拟机栈非常类似</p>
+<h3 id="Java堆"><a href="#Java堆" class="headerlink" title="Java堆"></a>Java堆</h3><p>Java堆是<strong>被所有线程共享的一块内存区域</strong>，<strong>“几乎”所有的对象实例都在这里分配内存</strong>（如基本数据类型、final static修饰的静态对象在方法区中）。</p>
+<p>Java堆也是垃圾收集器GC管理的内存区域。</p>
+<p>Java堆的大小和扩展范围主要通过 <code>-Xmx</code> 和 <code>-Xms</code>控制，而如果如果堆中没有内存完成实例分配，并且堆无法再扩展时，就会抛出 <code>OutOfMemoryError</code> 异常（同上）。且 Java 堆<strong>可以是处于物理上不连续的内存空间</strong>中，只要逻辑上是连续的即可</p>
+<h3 id="方法区-元数据区"><a href="#方法区-元数据区" class="headerlink" title="方法区\元数据区"></a>方法区\元数据区</h3><p>方法区，和Java堆一样，是各个<strong>线程共享</strong>的内存区域，且，它<strong>用于存储已被虚拟机加载的类信息、常量、静态变量</strong>。JVM 关闭后方法区即被释放。</p>
+<p>如果系统类太多，导致方法区溢出，虚拟机同样会抛出内存溢出<code>OutOfMemoryError</code> 错误。同样和Java堆一样，不需要连续的内存并且可以选择固定大小或者可扩展。</p>
+<p><strong>针对方法区，Java8做了改进</strong></p>
+<ul>
+<li><strong>方法区的落地实现：Java7是永久代，Java8元空间</strong>（只存储类的元信息，如类型、字段、方法信息、运行时常量等；将静态变量、字符串常量池等并入到Java堆中）</li>
+<li><strong>永久代中的class metadata</strong>（上面提到的类的元信息，如类型、字段、方法信息、运行时常量等）<strong>转移到native memory</strong>（本地内存中，也就是元空间在本地内存）</li>
+<li><strong>永久代中的interned Strings 和 class static variables</strong> （字符串常量池，静态变量）<strong>转移到java堆中</strong></li>
+<li><strong>参数设置</strong>由 PermSize &amp; MaxPermSize 改为 MetaspaceSize 和 MaxMetaspaceSize</li>
+</ul>
+<h4 id="运行时常量池——Runtime-Constant-Pool（方法区的一部分）"><a href="#运行时常量池——Runtime-Constant-Pool（方法区的一部分）" class="headerlink" title="运行时常量池——Runtime Constant Pool（方法区的一部分）"></a>运行时常量池——Runtime Constant Pool（方法区的一部分）</h4><p>用于存放class文件中的常量池表（其中有编译器生成的各种<strong>字面量和符号引用</strong>，字面量：编译时，对数据的一种表示）。</p>
+<p>每个已经加载的类型（类or接口）都维护一个运行时常量池，当这些类型加载到虚拟机后创建。</p>
+<p>超出大小范围：报错<code>OutOfMemoryError</code></p>
+<h2 id="本地内存和直接内存"><a href="#本地内存和直接内存" class="headerlink" title="本地内存和直接内存"></a>本地内存和直接内存</h2><h3 id="本地内存"><a href="#本地内存" class="headerlink" title="本地内存"></a>本地内存</h3><p>不在JVM运行时数据区中，也不是JVM规范定义的内存区域，受本机物理内存限制。</p>
+<p><strong>Java8将元数据区（之前的方法区）从JVM的运行时数据区，转移到了本地内存中。</strong></p>
+<h3 id="直接内存"><a href="#直接内存" class="headerlink" title="直接内存"></a>直接内存</h3><p>和Native堆相关的内存，用于提高Java堆和Native堆交互的性能。</p>
 
     </div>
 
@@ -301,12 +325,12 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2024/05/26/hexo-next-deploy/" rel="prev" title="hexo&next部署流程">
-      <i class="fa fa-chevron-left"></i> hexo&next部署流程
+    <a href="/2024/07/19/Spring%E6%A0%B8%E5%BF%83%E7%9F%A5%E8%AF%8602/" rel="prev" title="Spring核心知识02：Spring IoC">
+      <i class="fa fa-chevron-left"></i> Spring核心知识02：Spring IoC
     </a></div>
       <div class="post-nav-item">
-    <a href="/2024/05/27/Java%E5%AE%B9%E5%99%A8%E9%83%A8%E5%88%86%E7%9F%A5%E8%AF%86%E7%82%B9%E6%80%BB%E7%BB%93/" rel="next" title="Java容器部分知识点总结（未完待续）">
-      Java容器部分知识点总结（未完待续） <i class="fa fa-chevron-right"></i>
+    <a href="/2024/07/21/2024-7-21-%E5%88%B7%E9%A2%98%E6%97%A5%E8%AE%B0/" rel="next" title="2024-7-21-刷题日记（单调队列）">
+      2024-7-21-刷题日记（单调队列） <i class="fa fa-chevron-right"></i>
     </a></div>
     </div>
       </footer>
@@ -366,7 +390,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#Question-1-%E4%BA%8C%E5%88%86%E6%9F%A5%E6%89%BE"><span class="nav-number">1.</span> <span class="nav-text">Question.1 二分查找</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Question-2-%E7%A7%BB%E9%99%A4%E5%85%83%E7%B4%A0"><span class="nav-number">2.</span> <span class="nav-text">Question.2 移除元素</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Question-3-%E6%9C%89%E5%BA%8F%E6%95%B0%E7%BB%84%E7%9A%84%E5%B9%B3%E6%96%B9-Question-4-%E9%95%BF%E5%BA%A6%E6%9C%80%E5%B0%8F%E7%9A%84%E5%AD%90%E6%95%B0%E7%BB%84"><span class="nav-number">3.</span> <span class="nav-text">Question.3 有序数组的平方 &amp;&amp; Question.4 长度最小的子数组</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Question-5-%E8%9E%BA%E6%97%8B%E7%9F%A9%E9%98%B5II"><span class="nav-number">4.</span> <span class="nav-text">Question.5 螺旋矩阵II</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Question-6-%E7%A7%BB%E9%99%A4%E9%93%BE%E8%A1%A8%E5%85%83%E7%B4%A0"><span class="nav-number">5.</span> <span class="nav-text">Question.6 移除链表元素</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Question-7-%E8%AE%BE%E8%AE%A1%E9%93%BE%E8%A1%A8"><span class="nav-number">6.</span> <span class="nav-text">Question.7 设计链表</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%BF%90%E8%A1%8C%E6%97%B6%E6%95%B0%E6%8D%AE%E5%8C%BA"><span class="nav-number">1.</span> <span class="nav-text">运行时数据区</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%A8%8B%E5%BA%8F%E8%AE%A1%E6%95%B0%E5%99%A8"><span class="nav-number">1.1.</span> <span class="nav-text">程序计数器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%99%9A%E6%8B%9F%E6%9C%BA%E6%A0%88"><span class="nav-number">1.2.</span> <span class="nav-text">虚拟机栈</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9C%AC%E5%9C%B0%E6%96%B9%E6%B3%95%E6%A0%88"><span class="nav-number">1.3.</span> <span class="nav-text">本地方法栈</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Java%E5%A0%86"><span class="nav-number">1.4.</span> <span class="nav-text">Java堆</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%96%B9%E6%B3%95%E5%8C%BA-%E5%85%83%E6%95%B0%E6%8D%AE%E5%8C%BA"><span class="nav-number">1.5.</span> <span class="nav-text">方法区\元数据区</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%BF%90%E8%A1%8C%E6%97%B6%E5%B8%B8%E9%87%8F%E6%B1%A0%E2%80%94%E2%80%94Runtime-Constant-Pool%EF%BC%88%E6%96%B9%E6%B3%95%E5%8C%BA%E7%9A%84%E4%B8%80%E9%83%A8%E5%88%86%EF%BC%89"><span class="nav-number">1.5.1.</span> <span class="nav-text">运行时常量池——Runtime Constant Pool（方法区的一部分）</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9C%AC%E5%9C%B0%E5%86%85%E5%AD%98%E5%92%8C%E7%9B%B4%E6%8E%A5%E5%86%85%E5%AD%98"><span class="nav-number">2.</span> <span class="nav-text">本地内存和直接内存</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9C%AC%E5%9C%B0%E5%86%85%E5%AD%98"><span class="nav-number">2.1.</span> <span class="nav-text">本地内存</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%9B%B4%E6%8E%A5%E5%86%85%E5%AD%98"><span class="nav-number">2.2.</span> <span class="nav-text">直接内存</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 

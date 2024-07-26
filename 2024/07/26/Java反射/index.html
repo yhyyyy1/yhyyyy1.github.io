@@ -20,17 +20,19 @@
     var CONFIG = {"hostname":"yhy1031.cn","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="个人博客">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Yinhy Blog">
-<meta property="og:url" content="http://yhy1031.cn/blog/archives/2024/index.html">
+  <meta name="description" content="JAVA反射机制是在运行状态中，对于任意一个类，都能够知道这个类的所有属性和方法；对于任意一个对象，都能够调用它的任意一个方法和属性；这种动态获取信息以及动态调用对象方法的功能称为java语言的反射机制。  反射就是把 Java 类中的各种成分映射成一个个的 Java 对象。（例如：一个类有：成员变量、方法、构造方法、包等等信息，利用反射技术可以对一个类进行解剖，把个个组成部分映射成一个个对象。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Java反射">
+<meta property="og:url" content="http://yhy1031.cn/blog/2024/07/26/Java%E5%8F%8D%E5%B0%84/index.html">
 <meta property="og:site_name" content="Yinhy Blog">
-<meta property="og:description" content="个人博客">
+<meta property="og:description" content="JAVA反射机制是在运行状态中，对于任意一个类，都能够知道这个类的所有属性和方法；对于任意一个对象，都能够调用它的任意一个方法和属性；这种动态获取信息以及动态调用对象方法的功能称为java语言的反射机制。  反射就是把 Java 类中的各种成分映射成一个个的 Java 对象。（例如：一个类有：成员变量、方法、构造方法、包等等信息，利用反射技术可以对一个类进行解剖，把个个组成部分映射成一个个对象。">
 <meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2024-07-26T04:26:46.000Z">
+<meta property="article:modified_time" content="2024-07-26T04:44:08.599Z">
 <meta property="article:author" content="Yinhongyang">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="http://yhy1031.cn/blog/archives/2024/">
+<link rel="canonical" href="http://yhy1031.cn/blog/2024/07/26/Java%E5%8F%8D%E5%B0%84/">
 
 
 <script id="page-configurations">
@@ -38,12 +40,12 @@
   CONFIG.page = {
     sidebar: "",
     isHome : false,
-    isPost : false,
+    isPost : true,
     lang   : 'zh-CN'
   };
 </script>
 
-  <title>首页 | Yinhy Blog</title>
+  <title>Java反射 | Yinhy Blog</title>
   
 
 
@@ -195,235 +197,106 @@
         <div class="content-wrap">
           
 
-          <div class="content archive">
+          <div class="content post posts-expand">
             
 
+    
   
   
-  
-  <div class="post-block">
-    <div class="posts-collapse">
-      <div class="collection-title">
-        
-        <span class="collection-header">还行! 目前共计 42 篇日志。 继续努力。</span>
-      </div>
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yhy1031.cn/blog/2024/07/26/Java%E5%8F%8D%E5%B0%84/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Yinhongyang">
+      <meta itemprop="description" content="个人博客">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Yinhy Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Java反射
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2024-07-26 12:26:46 / 修改时间：12:44:08" itemprop="dateCreated datePublished" datetime="2024-07-26T12:26:46+08:00">2024-07-26</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Java/" itemprop="url" rel="index"><span itemprop="name">Java</span></a>
+                </span>
+            </span>
+              <span>&emsp;</span><span class="post-meta-item-icon"><i class="fa fa-eye"></i></span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span><br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>225</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
 
       
-    <div class="collection-year">
-      <span class="collection-header">2024</span>
-    </div>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2024-07-26T12:26:46+08:00"
-              content="2024-07-26">
-          07-26
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/2024/07/26/Java%E5%8F%8D%E5%B0%84/" itemprop="url">
-            <span itemprop="name">Java反射</span>
-          </a>
-      </div>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2024-07-23T16:24:35+08:00"
-              content="2024-07-23">
-          07-23
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/2024/07/23/JVM03/" itemprop="url">
-            <span itemprop="name">JVM03：类加载机制</span>
-          </a>
-      </div>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2024-07-23T13:28:34+08:00"
-              content="2024-07-23">
-          07-23
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/2024/07/23/Java%E5%AE%B9%E5%99%A8%E7%9F%A5%E8%AF%86%E7%82%B9%E8%A1%A5%E5%85%85%E2%80%94%E2%80%94%E4%BC%98%E5%85%88%E7%BA%A7%E9%98%9F%E5%88%97/" itemprop="url">
-            <span itemprop="name">Java容器知识点补充——优先级队列</span>
-          </a>
-      </div>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2024-07-23T12:54:53+08:00"
-              content="2024-07-23">
-          07-23
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/2024/07/23/2024-7-23-%E5%88%B7%E9%A2%98%E6%97%A5%E8%AE%B0/" itemprop="url">
-            <span itemprop="name">2024-7-23-刷题日记（大小顶堆）</span>
-          </a>
-      </div>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2024-07-21T14:16:31+08:00"
-              content="2024-07-21">
-          07-21
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/2024/07/21/JVM02/" itemprop="url">
-            <span itemprop="name">JVM02：GC与内存分配策略</span>
-          </a>
-      </div>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2024-07-21T13:49:14+08:00"
-              content="2024-07-21">
-          07-21
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/2024/07/21/2024-7-21-%E5%88%B7%E9%A2%98%E6%97%A5%E8%AE%B0/" itemprop="url">
-            <span itemprop="name">2024-7-21-刷题日记（单调队列）</span>
-          </a>
-      </div>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2024-07-19T14:56:36+08:00"
-              content="2024-07-19">
-          07-19
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/2024/07/19/JVM01/" itemprop="url">
-            <span itemprop="name">JVM01：Java内存区域</span>
-          </a>
-      </div>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2024-07-19T14:56:23+08:00"
-              content="2024-07-19">
-          07-19
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/2024/07/19/Spring%E6%A0%B8%E5%BF%83%E7%9F%A5%E8%AF%8602/" itemprop="url">
-            <span itemprop="name">Spring核心知识02：Spring IoC</span>
-          </a>
-      </div>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2024-07-06T19:00:17+08:00"
-              content="2024-07-06">
-          07-06
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/2024/07/06/%E5%90%8E%E7%AB%AF%E5%88%9D%E5%A7%8B%E5%8C%96%E6%A8%A1%E6%9D%BF/" itemprop="url">
-            <span itemprop="name">后端初始化模板01——实体类</span>
-          </a>
-      </div>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2024-07-06T10:47:53+08:00"
-              content="2024-07-06">
-          07-06
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/2024/07/06/ACM%E6%A8%A1%E5%BC%8F%E2%80%94%E2%80%94%E7%BB%83%E4%B9%A02/" itemprop="url">
-            <span itemprop="name">ACM模式——练习2（浮点数练习）</span>
-          </a>
-      </div>
-
-    </header>
-  </article>
-
+        <blockquote>
+<p>JAVA反射机制是在运行状态中，<strong>对于任意一个类，都能够知道这个类的所有属性和方法</strong>；<strong>对于任意一个对象，都能够调用它的任意一个方法和属性</strong>；这种<strong>动态获取信息</strong>以及<strong>动态调用对象方法的功能</strong>称为java语言的反射机制。</p>
+</blockquote>
+<p><strong>反射就是把 Java 类中的各种成分映射成一个个的 Java 对象</strong>。（例如：一个类有：成员变量、方法、构造方法、包等等信息，利用反射技术可以对一个类进行解剖，把个个组成部分映射成一个个对象。）</p>
+<h3 id="Class类"><a href="#Class类" class="headerlink" title="Class类"></a>Class类</h3><p>Class类是一个实实在在的类，存在于JDK的java.lang包中。Class类的实例表示 java 应用运行时的类 or 接口，每个 java 类运行时都可以在 <a href="http://yhy1031.cn/2024/07/19/JVM01/">JVM</a> 里表现为一个 class 对象</p>
 
     </div>
-  </div>
-  
-  
-  
 
+    
+    
+    
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2024/07/23/JVM03/" rel="prev" title="JVM03：类加载机制">
+      <i class="fa fa-chevron-left"></i> JVM03：类加载机制
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
   
-  <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/archives/2024/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/archives/2024/page/5/">5</a><a class="extend next" rel="next" href="/archives/2024/page/2/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
-  </nav>
+  
+  
 
 
 
@@ -475,6 +348,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Class%E7%B1%BB"><span class="nav-number">1.</span> <span class="nav-text">Class类</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 

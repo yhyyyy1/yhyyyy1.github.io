@@ -226,7 +226,7 @@
               <span class="post-meta-item-text">发表于</span>
               
 
-              <time title="创建时间：2024-07-26 12:26:46 / 修改时间：12:44:08" itemprop="dateCreated datePublished" datetime="2024-07-26T12:26:46+08:00">2024-07-26</time>
+              <time title="创建时间：2024-07-26 12:26:46 / 修改时间：14:04:58" itemprop="dateCreated datePublished" datetime="2024-07-26T12:26:46+08:00">2024-07-26</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -242,14 +242,14 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>225</span>
+              <span>1.2k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
                 <i class="far fa-clock"></i>
               </span>
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
+              <span>4 分钟</span>
             </span>
 
         </div>
@@ -265,8 +265,26 @@
 <p>JAVA反射机制是在运行状态中，<strong>对于任意一个类，都能够知道这个类的所有属性和方法</strong>；<strong>对于任意一个对象，都能够调用它的任意一个方法和属性</strong>；这种<strong>动态获取信息</strong>以及<strong>动态调用对象方法的功能</strong>称为java语言的反射机制。</p>
 </blockquote>
 <p><strong>反射就是把 Java 类中的各种成分映射成一个个的 Java 对象</strong>。（例如：一个类有：成员变量、方法、构造方法、包等等信息，利用反射技术可以对一个类进行解剖，把个个组成部分映射成一个个对象。）</p>
-<h3 id="Class类"><a href="#Class类" class="headerlink" title="Class类"></a>Class类</h3><p>Class类是一个实实在在的类，存在于JDK的java.lang包中。Class类的实例表示 java 应用运行时的类 or 接口，每个 java 类运行时都可以在 <a href="http://yhy1031.cn/2024/07/19/JVM01/">JVM</a> 里表现为一个 class 对象</p>
-
+<h3 id="Class类"><a href="#Class类" class="headerlink" title="Class类"></a>Class类</h3><p>Class类是一个实实在在的类，存在于JDK的java.lang包中。</p>
+<p><strong>Class类的实例</strong>表示 <strong>java 应用运行时的类 or 接口</strong>，每个 java 类运行时都可以在 <a href="http://yhy1031.cn/2024/07/19/JVM01/">JVM</a> 里表现为一个 class 对象，可以通过<code>类名.class</code>、<code>类型.getClass()</code>、<code>Class.forName(&quot;全限定类名&quot;)</code>等方法获取class对象。</p>
+<p><strong>数组</strong>同样也被应成为 class 对象的一个类，所有具有相同元素类型和维数的数组都共享该Class对象。</p>
+<p><strong>基本数据类型 boolean、short、int、long、double、float、char、byte</strong> 和 <strong>关键字 void</strong> 同样被映射为class对象。</p>
+<p>总结出以下特点：</p>
+<ul>
+<li>Class 类也是一种类，和class关键词不同</li>
+<li><strong>手动编写的类被编译后会生成一个 Class 对象</strong>，其表示的是创建的类的类型信息，而且这个 Class 对象保存在同名的 .class 文件中（字节码文件）</li>
+<li>每个通过关键字 <strong>class 标识的类</strong>，在内存中<strong>有且只有一个与之对应的 Class 对象来描述其类型信息</strong>，无论这个类创建了多少实例对象，其依据的都是同一个Class对象</li>
+<li><strong>Class 类只有私有构造函数</strong>，因此对应 Class 对象只能由 JVM 创建和加载（只有私有构造函数，意味着外部代码无法使用new关键字直接创建 Class 对象）</li>
+<li><strong>Class 类的对象作用是运行时提供 or 获得某个对象的类型信息</strong></li>
+</ul>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2024/07/26/Java%E5%8F%8D%E5%B0%84/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
@@ -308,10 +326,16 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              
 
-              <time title="创建时间：2024-07-23 16:24:35 / 修改时间：18:16:58" itemprop="dateCreated datePublished" datetime="2024-07-23T16:24:35+08:00">2024-07-23</time>
+              <time title="创建时间：2024-07-23 16:24:35" itemprop="dateCreated datePublished" datetime="2024-07-23T16:24:35+08:00">2024-07-23</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2024-07-26 14:04:51" itemprop="dateModified" datetime="2024-07-26T14:04:51+08:00">2024-07-26</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
@@ -353,50 +377,15 @@
 <li>将这个字节流所代表的<strong>静态存储结构</strong>转化为<strong>方法区的运行时数据结构</strong></li>
 <li>在内存中生成一个<strong>代表这个类的java.lang.Class对象</strong>（生成对象在堆中），作为方法区中这个类的各种数据的访问入口</li>
 </ol>
-<h4 id="2-验证"><a href="#2-验证" class="headerlink" title="2. 验证"></a>2. 验证</h4><p><strong>连接阶段的第一步</strong></p>
-<p> <strong>确保Class文件的字节流中包含的信息符合虚拟机规范</strong>，保证在运行后不会危害虚拟机自身的安全。主要包括四种验证：</p>
-<ul>
-<li><strong>文件格式验证</strong>：验证读进来的字节流符合Class标准格式（如：是否以魔数0xCAFEBABE开头，版本号等能否被虚拟机执行等）</li>
-<li><strong>元数据验证</strong>：格式对了（文件格式验证通过）之后，验证数据是否合理（如这个类是否有父类，除了java.lang.Object都要有父类）</li>
-<li><strong>字节码验证</strong>：分析类的方法体，保证在运行时不会危害虚拟机</li>
-<li><strong>符号引用验证</strong>（发生在解析阶段）：检查常量池中引用的外部类是否存在，是否可以正常访问</li>
-</ul>
-<h4 id="3-准备"><a href="#3-准备" class="headerlink" title="3. 准备"></a>3. 准备</h4><p><strong>为类的静态变量分配内存并设置类变量初始化值的阶段</strong></p>
-<p>如果是final修饰的，则在Class文件中该字段的属性表中存在ConstanstValue属性，按照代码中写的给初值</p>
-<p>如果不是final，则先赋0，初始化再赋值</p>
-<h4 id="4-解析"><a href="#4-解析" class="headerlink" title="4. 解析"></a>4. 解析</h4><p><strong>虚拟机将常量池内符号引用替换为直接引用的过程</strong>——换句话说，解析阶段是将其常量池信息（就是字节码中类的信息）放入运行时常量池，并把里面的符号引用（符号地址）变为直接引用（真实地址）</p>
-<p>符号引用：用于描述目标</p>
-<p>直接引用：直接指向目标地址</p>
-<h4 id="5-初始化"><a href="#5-初始化" class="headerlink" title="5. 初始化"></a>5. 初始化</h4><p><strong>初始化是为类的静态变量赋予正确的初始值（非final，之前赋值为0）</strong></p>
-<p>初始化步骤：</p>
-<ol>
-<li>如果这个类还没有被加载和连接，则程序先加载并连接该类</li>
-<li>如果该类的直接父类还没有被初始化，则先初始化它的直接父类</li>
-<li>如果类中有初始化语句（静态代码块），则系统一次执行这些初始化语句</li>
-</ol>
-<p>（<strong>只有当对类的主动使用的时候才会导致类的初始化</strong>，如调用静态方法、访问or赋值静态变量、new、反射，初始化子类也会初始化父类）</p>
-<p><img src="https://raw.githubusercontent.com/yhyyyy1/MyTypora/master/img/2024-7-23-JVMP2.png" alt="2024-7-23-JVMP2"></p>
-<h3 id="类加载器和类加载机制"><a href="#类加载器和类加载机制" class="headerlink" title="类加载器和类加载机制"></a>类加载器和类加载机制</h3><p>在Java程序中，对于任意一个类，都必须由<strong>加载它的类加载器</strong>和<strong>这个类本身</strong>一起共同确立其在Java虚拟机中的<strong>唯一性</strong>——<strong>同一个类被不同的加载器加载，即使来源是同一个Class文件，也会被视为不同的类</strong>（每个类加载器都有自己的命名空间）</p>
-<p>所以<strong>一个限定名的类只会被一个类加载器加载</strong>，以保证其唯一性，且无歧义</p>
-<img src="https://raw.githubusercontent.com/yhyyyy1/MyTypora/master/img/2024-7-23-JVM03.png" alt="	" style="zoom:67%;" />
-
-<h4 id="类加载器"><a href="#类加载器" class="headerlink" title="类加载器"></a>类加载器</h4><p>三层类加载器</p>
-<ul>
-<li><strong>启动类加载器</strong>：Java核心库</li>
-<li><strong>扩展类加载器</strong>：Java拓展库</li>
-<li><strong>应用程序类加载器</strong>：classpath下的内容</li>
-</ul>
-<h4 id="双亲委派模型"><a href="#双亲委派模型" class="headerlink" title="双亲委派模型"></a>双亲委派模型</h4><p><strong>双亲委派模型工作过程</strong>：一个类加载器收到一个类的加载请求时，它<strong>首先不会自己尝试去加载它，而是把这个请求委派给父类加载器去完成</strong>，这样层层委派，因此<strong>所有的加载请求最终都会传送到顶层的启动类加载器</strong>中，<strong>只有当父类加载器反馈自己无法完成这个加载请求时，子加载器才会尝试自己去加载</strong>。</p>
-<p><strong>好处：</strong>避免系统中出现同名的类，保证类之间比较结果以及类的唯一性</p>
-<p><strong>Java类的实例化顺序：</strong></p>
-<ol>
-<li>父类中的static代码块，当前类的static代码块</li>
-<li>父类的普通代码模块</li>
-<li>父类的构造函数</li>
-<li>当前类的普通代码块</li>
-<li>当前类的构造函数</li>
-</ol>
-
+<p><img src="https://raw.githubusercontent.com/yhyyyy1/MyTypora/master/img/2024-7-26-JVM01.png" alt="2024-7-26-JVM01"></p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2024/07/23/JVM03/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
@@ -1329,12 +1318,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="站点总字数">36k</span>
+    <span title="站点总字数">37k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">2:10</span>
+    <span title="站点阅读时长">2:14</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> 强力驱动
   </div>

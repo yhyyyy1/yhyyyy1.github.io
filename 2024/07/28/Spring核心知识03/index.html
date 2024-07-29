@@ -20,19 +20,19 @@
     var CONFIG = {"hostname":"yhy1031.cn","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="昵称：4nge1主要方向：Java后端（找工作ing）邮箱：&#121;&#x69;&#110;&#104;&#111;&#110;&#x67;&#x79;&#97;&#x6e;&#103;&#53;&#x34;&#54;&#x40;&#x67;&#109;&#97;&#x69;&#108;&#x2e;&#x63;&#x6f;&#x6d;">
-<meta property="og:type" content="website">
-<meta property="og:title" content="关于博主">
-<meta property="og:url" content="http://yhy1031.cn/blog/about/index.html">
+  <meta name="description" content="个人博客">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Spring核心知识03：Bean的生命周期">
+<meta property="og:url" content="http://yhy1031.cn/blog/2024/07/28/Spring%E6%A0%B8%E5%BF%83%E7%9F%A5%E8%AF%8603/index.html">
 <meta property="og:site_name" content="Yinhy Blog">
-<meta property="og:description" content="昵称：4nge1主要方向：Java后端（找工作ing）邮箱：&#121;&#x69;&#110;&#104;&#111;&#110;&#x67;&#x79;&#97;&#x6e;&#103;&#53;&#x34;&#54;&#x40;&#x67;&#109;&#97;&#x69;&#108;&#x2e;&#x63;&#x6f;&#x6d;">
+<meta property="og:description" content="个人博客">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2024-05-26T06:34:54.000Z">
-<meta property="article:modified_time" content="2024-05-26T11:43:17.642Z">
+<meta property="article:published_time" content="2024-07-28T05:38:29.000Z">
+<meta property="article:modified_time" content="2024-07-28T05:38:53.088Z">
 <meta property="article:author" content="Yinhongyang">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="http://yhy1031.cn/blog/about/">
+<link rel="canonical" href="http://yhy1031.cn/blog/2024/07/28/Spring%E6%A0%B8%E5%BF%83%E7%9F%A5%E8%AF%8603/">
 
 
 <script id="page-configurations">
@@ -40,13 +40,12 @@
   CONFIG.page = {
     sidebar: "",
     isHome : false,
-    isPost : false,
+    isPost : true,
     lang   : 'zh-CN'
   };
 </script>
 
-  <title>关于博主 | Yinhy Blog
-</title>
+  <title>Spring核心知识03：Bean的生命周期 | Yinhy Blog</title>
   
 
 
@@ -197,44 +196,103 @@
       <div class="main-inner">
         <div class="content-wrap">
           
-  
-  
 
-          <div class="content page posts-expand">
+          <div class="content post posts-expand">
             
 
     
-    
-    
-    <div class="post-block" lang="zh-CN">
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yhy1031.cn/blog/2024/07/28/Spring%E6%A0%B8%E5%BF%83%E7%9F%A5%E8%AF%8603/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Yinhongyang">
+      <meta itemprop="description" content="个人博客">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Yinhy Blog">
+    </span>
       <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Spring核心知识03：Bean的生命周期
+        </h1>
 
-<h1 class="post-title" itemprop="name headline">关于博主
-</h1>
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
 
-<div class="post-meta">
+              <time title="创建时间：2024-07-28 13:38:29 / 修改时间：13:38:53" itemprop="dateCreated datePublished" datetime="2024-07-28T13:38:29+08:00">2024-07-28</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Java/" itemprop="url" rel="index"><span itemprop="name">Java</span></a>
+                </span>
+            </span>
+              <span>&emsp;</span><span class="post-meta-item-icon"><i class="fa fa-eye"></i></span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span><br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>0</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2024/07/26/Java%E5%8F%8D%E5%B0%84/" rel="prev" title="Java反射">
+      <i class="fa fa-chevron-left"></i> Java反射
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
   
 
-</div>
-
-</header>
-
-      
-      
-      
-      <div class="post-body">
-          <p>昵称：4nge1<br>主要方向：Java后端（找工作ing）<br>邮箱：<a href="mailto:&#121;&#x69;&#110;&#104;&#111;&#110;&#x67;&#x79;&#97;&#x6e;&#103;&#53;&#x34;&#54;&#x40;&#x67;&#109;&#97;&#x69;&#108;&#x2e;&#x63;&#x6f;&#x6d;">&#121;&#x69;&#110;&#104;&#111;&#110;&#x67;&#x79;&#97;&#x6e;&#103;&#53;&#x34;&#54;&#x40;&#x67;&#109;&#97;&#x69;&#108;&#x2e;&#x63;&#x6f;&#x6d;</a></p>
-
-      </div>
-      
-      
-      
-    </div>
-    
-
-    
-    
-    
 
 
           </div>

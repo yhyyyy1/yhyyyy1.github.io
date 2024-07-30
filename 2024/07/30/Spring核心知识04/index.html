@@ -20,19 +20,19 @@
     var CONFIG = {"hostname":"yhy1031.cn","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="你的项目为什么选择用 rocketmq &#x2F; kafka &#x2F; rabbitmq作为消息队列组件？而不是其他的呢？  选择消息队列的前提：开源、不冷门、消息的可靠传递、Cluster、性能好 Kafka 主题（Topic） ：消息的种类称为主题，可以说一个主题代表了一类消息，相当于是对消息进行分类，主题就像是数据库中的表。 分区（partition） ：主题可以被分为若干个分区，">
+  <meta name="description" content="个人博客">
 <meta property="og:type" content="article">
-<meta property="og:title" content="消息队列02：消息队列选型">
-<meta property="og:url" content="http://yhy1031.cn/blog/2024/06/01/MQ02/index.html">
+<meta property="og:title" content="Spring核心知识04：循环依赖 &amp; 三级缓存">
+<meta property="og:url" content="http://yhy1031.cn/blog/2024/07/30/Spring%E6%A0%B8%E5%BF%83%E7%9F%A5%E8%AF%8604/index.html">
 <meta property="og:site_name" content="Yinhy Blog">
-<meta property="og:description" content="你的项目为什么选择用 rocketmq &#x2F; kafka &#x2F; rabbitmq作为消息队列组件？而不是其他的呢？  选择消息队列的前提：开源、不冷门、消息的可靠传递、Cluster、性能好 Kafka 主题（Topic） ：消息的种类称为主题，可以说一个主题代表了一类消息，相当于是对消息进行分类，主题就像是数据库中的表。 分区（partition） ：主题可以被分为若干个分区，">
+<meta property="og:description" content="个人博客">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2024-06-01T03:30:55.000Z">
-<meta property="article:modified_time" content="2024-07-04T10:37:21.157Z">
+<meta property="article:published_time" content="2024-07-30T05:39:19.000Z">
+<meta property="article:modified_time" content="2024-07-30T05:39:56.020Z">
 <meta property="article:author" content="Yinhongyang">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="http://yhy1031.cn/blog/2024/06/01/MQ02/">
+<link rel="canonical" href="http://yhy1031.cn/blog/2024/07/30/Spring%E6%A0%B8%E5%BF%83%E7%9F%A5%E8%AF%8604/">
 
 
 <script id="page-configurations">
@@ -45,7 +45,7 @@
   };
 </script>
 
-  <title>消息队列02：消息队列选型 | Yinhy Blog</title>
+  <title>Spring核心知识04：循环依赖 & 三级缓存 | Yinhy Blog</title>
   
 
 
@@ -204,7 +204,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yhy1031.cn/blog/2024/06/01/MQ02/">
+    <link itemprop="mainEntityOfPage" href="http://yhy1031.cn/blog/2024/07/30/Spring%E6%A0%B8%E5%BF%83%E7%9F%A5%E8%AF%8604/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.jpg">
@@ -217,7 +217,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          消息队列02：消息队列选型
+          Spring核心知识04：循环依赖 & 三级缓存
         </h1>
 
         <div class="post-meta">
@@ -226,23 +226,17 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
+              
 
-              <time title="创建时间：2024-06-01 11:30:55" itemprop="dateCreated datePublished" datetime="2024-06-01T11:30:55+08:00">2024-06-01</time>
+              <time title="创建时间：2024-07-30 13:39:19 / 修改时间：13:39:56" itemprop="dateCreated datePublished" datetime="2024-07-30T13:39:19+08:00">2024-07-30</time>
             </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2024-07-04 18:37:21" itemprop="dateModified" datetime="2024-07-04T18:37:21+08:00">2024-07-04</time>
-              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97/" itemprop="url" rel="index"><span itemprop="name">消息队列</span></a>
+                  <a href="/categories/Java/" itemprop="url" rel="index"><span itemprop="name">Java</span></a>
                 </span>
             </span>
               <span>&emsp;</span><span class="post-meta-item-icon"><i class="fa fa-eye"></i></span>
@@ -253,14 +247,14 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>840</span>
+              <span>0</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
                 <i class="far fa-clock"></i>
               </span>
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>3 分钟</span>
+              <span>1 分钟</span>
             </span>
 
         </div>
@@ -272,48 +266,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <blockquote>
-<p>你的项目为什么选择用 rocketmq &#x2F; kafka &#x2F; rabbitmq作为消息队列组件？而不是其他的呢？</p>
-</blockquote>
-<p>选择消息队列的前提：开源、不冷门、消息的可靠传递、Cluster、性能好</p>
-<h2 id="Kafka"><a href="#Kafka" class="headerlink" title="Kafka"></a>Kafka</h2><ul>
-<li><strong>主题（Topic）</strong> ：消息的种类称为主题，可以说一个主题代表了一类消息，相当于是对消息进行分类，主题就像是数据库中的表。</li>
-<li><strong>分区（partition）</strong> ：主题可以被分为若干个分区，同一个主题中的分区可以不在一个机器上，有可能会部署在多个机器上，由此来实现 kafka 的伸缩性。</li>
-<li><strong>批次</strong>：为了提高效率， 消息会分批次写入 Kafka，批次就代指的是一组消息</li>
-</ul>
-<h3 id="优缺点"><a href="#优缺点" class="headerlink" title="优缺点"></a>优缺点</h3><p><strong>Kafka 与周边生态系统的兼容性是最好的没有之</strong>一，尤其在大数据和流计算领域，几乎所有的相关开源软件系统都会优先支持 Kafka。</p>
-<p>Kafka的<strong>性能很高</strong>（不过和RocketMQ没有量级上的差距），几十万条&#x2F;s</p>
-<p>但是是异步批量的设计，导致同步收发消息的响应时延较高（kafka会把消息攒一批发送）——<strong>不适合在线业务场景</strong></p>
-<p>如果你需要处理海量的消息，像收集日志、监控信息或是前端的埋点这类数据，或是你的应用场景大量使用了大数据、流计算相关的开源产品，那 Kafka 是最适合你的消息队列。</p>
-<span id="more"></span>
-
-<h2 id="RocketMQ"><a href="#RocketMQ" class="headerlink" title="RocketMQ"></a>RocketMQ</h2><ul>
-<li><strong>Name 服务器（NameServer）</strong> ：充当注册中心，类似 Kafka 中的 Zookeeper。</li>
-<li><strong>Broker</strong>: 一个独立的 RocketMQ 服务器就被称为 broker，broker 接收来自生产者的消息，为消息设置偏移量。</li>
-<li><strong>主题（Topic）</strong> ：消息的第一级类型，一条消息必须有一个 Topic。</li>
-<li><strong>子主题（Tag）</strong> ：消息的第二级类型，同一业务模块不同目的的消息就可以用相同 Topic 和不同的 Tag 来标识。</li>
-<li><strong>分组（Group）</strong> ：一个组可以订阅多个 Topic，包括生产者组（Producer Group）和消费者组（Consumer Group）。</li>
-<li><strong>队列（Queue）</strong> ：可以类比 Kafka 的分区 Partition。</li>
-</ul>
-<h3 id="优缺点-1"><a href="#优缺点-1" class="headerlink" title="优缺点"></a>优缺点</h3><p>阿里巴巴使用Java开发的；<strong>没什么突出的优点，也没什么明显的缺点</strong></p>
-<p>优点：<strong>响应时延要求很高的场景，应该选择使用 RocketMQ。</strong></p>
-<p>缺点：与周边生态系统的集成和兼容程度要略逊一筹。</p>
-<p>如果你的系统使用消息队列主要场景是处理在线业务，比如在交易系统中用消息队列传递订单，那 RocketMQ 的低延迟和金融级的稳定性是你需要的。</p>
-<h2 id="RabbitMQ"><a href="#RabbitMQ" class="headerlink" title="RabbitMQ"></a>RabbitMQ</h2><p><strong>优点：</strong></p>
-<ol>
-<li>相当轻量级、容易部署和使用（是大多个人项目选择RabbitMQ的主要原因了吧）</li>
-<li>路由配置很灵活</li>
-<li>支持的编程语言很多</li>
-<li>有插件支持延迟消息</li>
-</ol>
-<p><strong>缺点：</strong></p>
-<ol>
-<li>RabbitMQ对消息堆积的支持不好、消息堆积会导致其性能下降</li>
-<li>RabbitMQ的性能是这几个中最差的（但是也够用了）</li>
-<li>RabbitMQ用Erlang写的，小众；不方便扩展</li>
-</ol>
-<p>消息队列并不是你将要构建系统的主角之一，你对消息队列功能和性能都没有很高的要求，只需要一个开箱即用易于维护的产品，建议使用 RabbitMQ</p>
-
+        
     </div>
 
     
@@ -328,13 +281,10 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2024/06/01/2024-6-1-%E5%88%B7%E9%A2%98%E6%97%A5%E8%AE%B0/" rel="prev" title="2024-6-1-刷题日记">
-      <i class="fa fa-chevron-left"></i> 2024-6-1-刷题日记
+    <a href="/2024/07/28/Spring%E6%A0%B8%E5%BF%83%E7%9F%A5%E8%AF%8603/" rel="prev" title="Spring核心知识03：依赖注入">
+      <i class="fa fa-chevron-left"></i> Spring核心知识03：依赖注入
     </a></div>
-      <div class="post-nav-item">
-    <a href="/2024/06/01/KMP%E7%AE%97%E6%B3%95/" rel="next" title="KMP算法">
-      KMP算法 <i class="fa fa-chevron-right"></i>
-    </a></div>
+      <div class="post-nav-item"></div>
     </div>
       </footer>
     
@@ -393,7 +343,6 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Kafka"><span class="nav-number">1.</span> <span class="nav-text">Kafka</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BC%98%E7%BC%BA%E7%82%B9"><span class="nav-number">1.1.</span> <span class="nav-text">优缺点</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#RocketMQ"><span class="nav-number">2.</span> <span class="nav-text">RocketMQ</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BC%98%E7%BC%BA%E7%82%B9-1"><span class="nav-number">2.1.</span> <span class="nav-text">优缺点</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#RabbitMQ"><span class="nav-number">3.</span> <span class="nav-text">RabbitMQ</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 

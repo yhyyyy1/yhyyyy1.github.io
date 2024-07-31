@@ -201,7 +201,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yhy1031.cn/blog/2024/07/30/Spring%E6%A0%B8%E5%BF%83%E7%9F%A5%E8%AF%8604/">
+    <link itemprop="mainEntityOfPage" href="http://yhy1031.cn/blog/2024/07/31/Spring%E6%A0%B8%E5%BF%83%E7%9F%A5%E8%AF%8606/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.jpg">
@@ -215,7 +215,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2024/07/30/Spring%E6%A0%B8%E5%BF%83%E7%9F%A5%E8%AF%8604/" class="post-title-link" itemprop="url">Spring核心知识04：循环依赖 & 三级缓存</a>
+            <a href="/2024/07/31/Spring%E6%A0%B8%E5%BF%83%E7%9F%A5%E8%AF%8606/" class="post-title-link" itemprop="url">Spring核心知识06：Spring设计模式</a>
         </h2>
 
         <div class="post-meta">
@@ -226,7 +226,7 @@
               <span class="post-meta-item-text">发表于</span>
               
 
-              <time title="创建时间：2024-07-30 13:39:19 / 修改时间：13:39:56" itemprop="dateCreated datePublished" datetime="2024-07-30T13:39:19+08:00">2024-07-30</time>
+              <time title="创建时间：2024-07-31 17:03:56 / 修改时间：17:43:03" itemprop="dateCreated datePublished" datetime="2024-07-31T17:03:56+08:00">2024-07-31</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -261,7 +261,217 @@
     <div class="post-body" itemprop="articleBody">
 
       
+          <blockquote>
+</blockquote>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yhy1031.cn/blog/2024/07/31/Spring%E6%A0%B8%E5%BF%83%E7%9F%A5%E8%AF%8605/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Yinhongyang">
+      <meta itemprop="description" content="个人博客">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Yinhy Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
           
+            <a href="/2024/07/31/Spring%E6%A0%B8%E5%BF%83%E7%9F%A5%E8%AF%8605/" class="post-title-link" itemprop="url">Spring核心知识05：AOP</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2024-07-31 11:35:02 / 修改时间：19:41:58" itemprop="dateCreated datePublished" datetime="2024-07-31T11:35:02+08:00">2024-07-31</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Java/" itemprop="url" rel="index"><span itemprop="name">Java</span></a>
+                </span>
+            </span><br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>12k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>11 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <blockquote>
+<p>AOP（Aspect Oriented Peogram）——面向切面编程：<strong>在运行时，动态地将代码切入到类的指定方法、指定位置</strong>上的编程思想</p>
+</blockquote>
+<h3 id="什么是AOP"><a href="#什么是AOP" class="headerlink" title="什么是AOP"></a>什么是AOP</h3><p>一般而言，我们管<strong>切入到指定类指定方法的代码片段</strong>称为<strong>切面</strong>，而<strong>切入到哪些类、哪些方法</strong>则叫<strong>切入点</strong>。有了AOP，我们就可以<strong>把几个类共有的代码（多个类&#x2F;业务逻辑代码的大切割），抽取到一个切片中，等到需要时再切入对象中去</strong>，从而改变其原有的行为。</p>
+<blockquote>
+<p>总结：<strong>AOP称为面向切面编程，用于将那些与业务无关，但却对多个对象产生影响的公共行为和逻辑，抽取并封装为一个可重用的模块，这个模块被命名为“切面”，减少了系统中的重复代码，降低了模块间的耦合度，同时提高了系统的可维护性</strong></p>
+</blockquote>
+<h4 id="常见的AOP场景"><a href="#常见的AOP场景" class="headerlink" title="常见的AOP场景"></a>常见的AOP场景</h4><ul>
+<li>记录操作日志——日志是公共行为，使用AOP提取</li>
+<li>缓存处理——使用AOP切面<strong>拦截</strong>需要缓存的业务方法（可以看出，AOP其实就是拦截一些方法，执行一些公共方法）</li>
+<li>Spring中内置的事务处理（见06）</li>
+</ul>
+<p>可以将AOP视为OOP的补充——<strong>OOP从纵向上区分出一个个的类来，而AOP则从横向上向对象中加入特定的代码</strong></p>
+<p><img src="https://raw.githubusercontent.com/yhyyyy1/MyTypora/master/img/2024-7-31-AOP01.png" alt="2024-7-31-AOP01"></p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2024/07/31/Spring%E6%A0%B8%E5%BF%83%E7%9F%A5%E8%AF%8605/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yhy1031.cn/blog/2024/07/30/Spring%E6%A0%B8%E5%BF%83%E7%9F%A5%E8%AF%8604/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Yinhongyang">
+      <meta itemprop="description" content="个人博客">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Yinhy Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2024/07/30/Spring%E6%A0%B8%E5%BF%83%E7%9F%A5%E8%AF%8604/" class="post-title-link" itemprop="url">Spring核心知识04：循环依赖 & 三级缓存</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2024-07-30 13:39:19" itemprop="dateCreated datePublished" datetime="2024-07-30T13:39:19+08:00">2024-07-30</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2024-07-31 20:05:50" itemprop="dateModified" datetime="2024-07-31T20:05:50+08:00">2024-07-31</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Java/" itemprop="url" rel="index"><span itemprop="name">Java</span></a>
+                </span>
+            </span><br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>8.2k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>7 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <blockquote>
+<p>循环依赖——两者相互依赖（此部分需要结合05-AOP学习）</p>
+</blockquote>
+<h2 id="循环依赖"><a href="#循环依赖" class="headerlink" title="循环依赖"></a>循环依赖</h2><p><strong>在开发中，经常出现我们写的两个类、甚至多个类相互依赖了；但是很难注意到——因为没有报错，因为Spring会帮我们解决这个问题</strong></p>
+<p>循环依赖，如下所示：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="meta">@ComponentScan</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">AppConfig</span> &#123;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Service</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">AuthorService</span> &#123;</span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    BookService bookService;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Service</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">BookService</span> &#123;</span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    AuthorService authorService;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Main</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        <span class="type">ApplicationContext</span> <span class="variable">annotationConfigApplicationContext</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">AnnotationConfigApplicationContext</span>(AppConfig.class);</span><br><span class="line"></span><br><span class="line">        <span class="type">BookService</span> <span class="variable">bookService</span> <span class="operator">=</span> (BookService) annotationConfigApplicationContext.getBean(<span class="string">&quot;bookService&quot;</span>);</span><br><span class="line">        System.out.println(bookService.authorService);</span><br><span class="line"></span><br><span class="line">        <span class="type">AuthorService</span> <span class="variable">authorService</span> <span class="operator">=</span> (AuthorService) annotationConfigApplicationContext.getBean(<span class="string">&quot;authorService&quot;</span>);</span><br><span class="line">        System.out.println(authorService.bookService);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>可以看到BookService中需要AuthorService，而AuthorService中需要BookSrevice，于是形成了循环依赖，按理说应该出现死锁：</p>
+<ol>
+<li>创建bean B，发现依赖bean A</li>
+<li>创建bean A，发现依赖bean B</li>
+<li>创建bean B，发现依赖Bean A</li>
+<li>创建bean A，发现依赖bean B……死循环</li>
+</ol>
+<p>要创建beanA，它需要beanB，而创建beanB，又需要beanA，然后两个bean都创建不出来</p>
+<p><strong>但是在我们的实践中，却什么问题都没有</strong></p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2024/07/30/Spring%E6%A0%B8%E5%BF%83%E7%9F%A5%E8%AF%8604/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
@@ -327,14 +537,14 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>1.6k</span>
+              <span>4.5k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
                 <i class="far fa-clock"></i>
               </span>
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>6 分钟</span>
+              <span>4 分钟</span>
             </span>
 
         </div>
@@ -403,10 +613,16 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              
 
-              <time title="创建时间：2024-07-26 12:26:46 / 修改时间：16:30:21" itemprop="dateCreated datePublished" datetime="2024-07-26T12:26:46+08:00">2024-07-26</time>
+              <time title="创建时间：2024-07-26 12:26:46" itemprop="dateCreated datePublished" datetime="2024-07-26T12:26:46+08:00">2024-07-26</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2024-07-30 14:53:08" itemprop="dateModified" datetime="2024-07-30T14:53:08+08:00">2024-07-30</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
@@ -421,7 +637,7 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>2.7k</span>
+              <span>11k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
@@ -529,14 +745,14 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>1.3k</span>
+              <span>1.6k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
                 <i class="far fa-clock"></i>
               </span>
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>5 分钟</span>
+              <span>1 分钟</span>
             </span>
 
         </div>
@@ -630,7 +846,7 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>725</span>
+              <span>3k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
@@ -724,14 +940,14 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>765</span>
+              <span>1.6k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
                 <i class="far fa-clock"></i>
               </span>
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>3 分钟</span>
+              <span>1 分钟</span>
             </span>
 
         </div>
@@ -817,14 +1033,14 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>2.9k</span>
+              <span>4.3k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
                 <i class="far fa-clock"></i>
               </span>
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>11 分钟</span>
+              <span>4 分钟</span>
             </span>
 
         </div>
@@ -910,14 +1126,14 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>941</span>
+              <span>2.2k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
                 <i class="far fa-clock"></i>
               </span>
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>3 分钟</span>
+              <span>2 分钟</span>
             </span>
 
         </div>
@@ -939,226 +1155,6 @@
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2024/07/21/2024-7-21-%E5%88%B7%E9%A2%98%E6%97%A5%E8%AE%B0/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yhy1031.cn/blog/2024/07/19/JVM01/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="Yinhongyang">
-      <meta itemprop="description" content="个人博客">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Yinhy Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2024/07/19/JVM01/" class="post-title-link" itemprop="url">JVM01：Java内存区域</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2024-07-19 14:56:36" itemprop="dateCreated datePublished" datetime="2024-07-19T14:56:36+08:00">2024-07-19</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2024-07-21 18:28:52" itemprop="dateModified" datetime="2024-07-21T18:28:52+08:00">2024-07-21</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Java/" itemprop="url" rel="index"><span itemprop="name">Java</span></a>
-                </span>
-            </span><br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>1.3k</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>5 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p><strong>JVM管理的内存——运行时数据区</strong></p>
-<p><strong>java程序的内存——运行时数据区（JVM内存）+本地内存</strong></p>
-<p><strong>本地内存——元空间 + 直接内存</strong></p>
-<h2 id="运行时数据区"><a href="#运行时数据区" class="headerlink" title="运行时数据区"></a>运行时数据区</h2><p>运行时数据区包括：程序计数器、虚拟机栈、本地方法栈、Java堆、方法区</p>
-<h3 id="程序计数器"><a href="#程序计数器" class="headerlink" title="程序计数器"></a>程序计数器</h3><p>可以看作：当前线程所执行的字节码（class文件）的<strong>行号指示器</strong>，通过标示下一条需要执行的字节码指令（对应的地址）完成指令切换，以此来推动线程的运行</p>
-<p><strong>特点：</strong></p>
-<ul>
-<li><strong>内存占用小</strong>，且是<strong>运行速度最快</strong>的存储区域</li>
-<li><strong>每个线程都有自己的程序计数器</strong>，是<strong>线程私有</strong>的，生命周期和线程一致</li>
-<li>是程序控制流的指示器，</li>
-<li>字节码解释器工作时就是通过改变这个计数器的值来选取下一条要执行的字节码。</li>
-<li>任何时间一个线程都只会有一个方法在执行，也就是<strong>当前方法</strong>。如果当前方法是<strong>Java方法</strong>，则程序计数器记录的是<strong>对应方法的JVM字节码指令地址</strong>；如果是<strong>native方法</strong>，则是<strong>未指定值（undefined）</strong></li>
-<li>JVM中唯一没有规定任何<code>OutOfMemoryError</code>情况的区域</li>
-</ul>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2024/07/19/JVM01/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yhy1031.cn/blog/2024/07/19/Spring%E6%A0%B8%E5%BF%83%E7%9F%A5%E8%AF%8602/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="Yinhongyang">
-      <meta itemprop="description" content="个人博客">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Yinhy Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2024/07/19/Spring%E6%A0%B8%E5%BF%83%E7%9F%A5%E8%AF%8602/" class="post-title-link" itemprop="url">Spring核心知识02：Spring IoC</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2024-07-19 14:56:23" itemprop="dateCreated datePublished" datetime="2024-07-19T14:56:23+08:00">2024-07-19</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2024-07-30 13:40:56" itemprop="dateModified" datetime="2024-07-30T13:40:56+08:00">2024-07-30</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Java/" itemprop="url" rel="index"><span itemprop="name">Java</span></a>
-                </span>
-            </span><br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>1.6k</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>6 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <blockquote>
-<p><strong>IoC 即控制反转</strong>（Inversion of Control）</p>
-<p>IoC又称为依赖倒置原则：<strong>程序要依赖于抽象接口，不要依赖于具体实现——降低代码之间的耦合度</strong></p>
-<p>IoC是一种思想，主要解决程序设计中的对象依赖关系管理问题。在IoC思想中，对象的创建权反转给第三方容器，由容器进行对象的创建及依赖关系的管理。</p>
-</blockquote>
-<p>IoC 容器，把创建和查找依赖对象的控制权交给了容器，由容器进行注入组合对象，所以对象与对象之间是松散耦合。</p>
-<h3 id="IoC的实现方式"><a href="#IoC的实现方式" class="headerlink" title="IoC的实现方式"></a>IoC的实现方式</h3><ul>
-<li><strong>依赖注入（DI）</strong>：<strong>不通过<code>new()</code>的方式在类的内部创建依赖类的对象</strong>，而是<strong>将依赖的类对象在外部创建好之后，通过构造函数、函数参数等方式传递&#x2F;注入给类内部使用</strong>。</li>
-<li>依赖查找：容器中的受控对象通过容器的API来查找自己所依赖的资源和协作对象。</li>
-</ul>
-<blockquote>
-<p>此处，如果问到 IoC和 DI 的区别——IoC是设计思想，DI是IoC思想的具体实现之一</p>
-</blockquote>
-<h3 id="如何理解IoC中的-I-和-C"><a href="#如何理解IoC中的-I-和-C" class="headerlink" title="如何理解IoC中的 I 和 C"></a>如何理解IoC中的 I 和 C</h3><ul>
-<li><p>C-控制，<strong>谁控制谁？控制什么？</strong></p>
-<p><strong>传统方式</strong>，我们是直接在对象内部通过new进行创建对象，<strong>是程序主动去创建依赖对象的</strong>；而IoC中有一个专门的容器来创建这些对象，即由<strong>IoC容器来控制对象的创建</strong>；</p>
-<p>因此，控制就指的是<strong>IoC容器控制对象</strong>；<strong>控制了外部资源获取</strong></p>
-</li>
-<li><p>I-反转，<strong>为什么反转？哪方面反转了？</strong></p>
-<p>传统应用程序中，是由我们自己在对象中主动控制去直接获取依赖对象，是正转；而<strong>反转则是由IoC容器来帮忙创建及注入依赖对象。（此时被注入的对象只是被动的接收依赖对象）</strong>，这就是反转，<strong>依赖对象的获取被反转了</strong>。</p>
-</li>
-</ul>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2024/07/19/Spring%E6%A0%B8%E5%BF%83%E7%9F%A5%E8%AF%8602/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -1249,7 +1245,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">44</span>
+          <span class="site-state-item-count">46</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -1299,12 +1295,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="站点总字数">41k</span>
+    <span title="站点总字数">110k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">2:30</span>
+    <span title="站点阅读时长">1:40</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> 强力驱动
   </div>

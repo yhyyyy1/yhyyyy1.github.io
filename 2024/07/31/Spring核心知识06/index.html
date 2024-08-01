@@ -20,13 +20,15 @@
     var CONFIG = {"hostname":"yhy1031.cn","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta property="og:type" content="article">
-<meta property="og:title" content="Spring核心知识06：Spring设计模式">
+  <meta name="description" content="在某些业务场景下，如果一个请求中，需要同时写入多张表的数据。为了保证操作的原子性（要么同时成功，要么同时失败），避免数据不一致的情况，我们一般都会用到 spring 事务。  事务嘛，还是ACID，和MySQL中的一样，都是通过保证AID来保证C 说到底，Spring事务还是对MySQL事务的支持，如果MySQL使用的引擎是innodb（支持事务）则OK，如果使用的是myisam（不支持事务）则">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Spring核心知识06：事务传播机制">
 <meta property="og:url" content="http://yhy1031.cn/blog/2024/07/31/Spring%E6%A0%B8%E5%BF%83%E7%9F%A5%E8%AF%8606/index.html">
 <meta property="og:site_name" content="Yinhy Blog">
+<meta property="og:description" content="在某些业务场景下，如果一个请求中，需要同时写入多张表的数据。为了保证操作的原子性（要么同时成功，要么同时失败），避免数据不一致的情况，我们一般都会用到 spring 事务。  事务嘛，还是ACID，和MySQL中的一样，都是通过保证AID来保证C 说到底，Spring事务还是对MySQL事务的支持，如果MySQL使用的引擎是innodb（支持事务）则OK，如果使用的是myisam（不支持事务）则">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2024-07-31T09:03:56.000Z">
-<meta property="article:modified_time" content="2024-07-31T09:43:03.644Z">
+<meta property="article:modified_time" content="2024-08-01T08:06:19.550Z">
 <meta property="article:author" content="Yinhongyang">
 <meta name="twitter:card" content="summary">
 
@@ -43,7 +45,7 @@
   };
 </script>
 
-  <title>Spring核心知识06：Spring设计模式 | Yinhy Blog</title>
+  <title>Spring核心知识06：事务传播机制 | Yinhy Blog</title>
   
 
 
@@ -215,7 +217,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          Spring核心知识06：Spring设计模式
+          Spring核心知识06：事务传播机制
         </h1>
 
         <div class="post-meta">
@@ -224,10 +226,16 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              
 
-              <time title="创建时间：2024-07-31 17:03:56 / 修改时间：17:43:03" itemprop="dateCreated datePublished" datetime="2024-07-31T17:03:56+08:00">2024-07-31</time>
+              <time title="创建时间：2024-07-31 17:03:56" itemprop="dateCreated datePublished" datetime="2024-07-31T17:03:56+08:00">2024-07-31</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2024-08-01 16:06:19" itemprop="dateModified" datetime="2024-08-01T16:06:19+08:00">2024-08-01</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
@@ -245,14 +253,14 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>0</span>
+              <span>1.4k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
                 <i class="far fa-clock"></i>
               </span>
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
+              <span>5 分钟</span>
             </span>
 
         </div>
@@ -265,8 +273,84 @@
 
       
         <blockquote>
+<p>在某些业务场景下，如果<strong>一个请求中，需要同时写入多张表的数据</strong>。为了保证操作的原子性（要么同时成功，要么同时失败），避免数据不一致的情况，我们一般都会用到 spring 事务。</p>
 </blockquote>
+<p>事务嘛，还是ACID，和MySQL中的一样，都是通过保证AID来保证C</p>
+<p>说到底，Spring事务还是对MySQL事务的支持，如果MySQL使用的引擎是innodb（支持事务）则OK，如果使用的是myisam（不支持事务）则不行——MySQL是根</p>
+<h2 id="Spring支持两种方式的事务管理"><a href="#Spring支持两种方式的事务管理" class="headerlink" title="Spring支持两种方式的事务管理"></a>Spring支持两种方式的事务管理</h2><h3 id="编程式事务管理"><a href="#编程式事务管理" class="headerlink" title="编程式事务管理"></a>编程式事务管理</h3><p>通过  <code>TransactionTemplate</code> 或者 <code>TransactionManager</code> 手动管理事务，实际应用中很少使用</p>
+<p>使用 <code>TransactionTemplate</code> 进行编程式事务管理的示例代码如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Autowired</span></span><br><span class="line"><span class="keyword">private</span> TransactionTemplate transactionTemplate;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">testTransaction</span><span class="params">()</span> &#123;</span><br><span class="line">    transactionTemplate.execute(<span class="keyword">new</span> <span class="title class_">TransactionCallbackWithoutResult</span>() &#123;</span><br><span class="line">        <span class="meta">@Override</span></span><br><span class="line">        <span class="keyword">protected</span> <span class="keyword">void</span> <span class="title function_">doInTransactionWithoutResult</span><span class="params">(TransactionStatus status)</span> &#123;</span><br><span class="line">            <span class="keyword">try</span> &#123;</span><br><span class="line">                <span class="comment">// 业务代码</span></span><br><span class="line">            &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">                status.setRollbackOnly();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
+<p>使用 <code>TransactionManager</code> 进行编程式事务管理的示例代码如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Autowired</span></span><br><span class="line"><span class="keyword">private</span> PlatformTransactionManager transactionManager;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">testTransaction</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="type">TransactionStatus</span> <span class="variable">status</span> <span class="operator">=</span> transactionManager.getTransaction(<span class="keyword">new</span> <span class="title class_">DefaultTransactionDefinition</span>());</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        <span class="comment">//业务代码</span></span><br><span class="line">        transactionManager.commit(status);</span><br><span class="line">    &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">        transactionManager.rollback(status);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="声明式事务管理（推荐使用）"><a href="#声明式事务管理（推荐使用）" class="headerlink" title="声明式事务管理（推荐使用）"></a>声明式事务管理（推荐使用）</h3><p>实际是通过AOP实现的（将公共的  <code>TransactionTemplate</code> 或者 <code>TransactionManager</code> 的编程式事务管理实现，抽象为一个切面，做环绕通知就OK了），代码侵入性最小，<strong>基于 <code>@Transactional</code> 的全注解方式使用最多</strong></p>
+<p>使用 <code>@Transactional</code>注解进行事务管理的示例代码如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Transactional(propagation = Propagation.REQUIRED)</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> aMethod &#123;</span><br><span class="line">  <span class="comment">//do something</span></span><br><span class="line">  <span class="type">B</span> <span class="variable">b</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">B</span>();</span><br><span class="line">  <span class="type">C</span> <span class="variable">c</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">C</span>();</span><br><span class="line">  b.bMethod();</span><br><span class="line">  c.cMethod();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="Spring-事务管理接口介绍"><a href="#Spring-事务管理接口介绍" class="headerlink" title="Spring 事务管理接口介绍"></a>Spring 事务管理接口介绍</h2><p>Spring 框架种，事务管理相关的最重要的3个接口：</p>
+<ul>
+<li>**<code>PlatformTransationManager</code>**：事务管理器，Spring事务策略的核心</li>
+<li>**<code>TransactionDefinition</code>**：事务定义信息（事务隔离界别、传播行为、超时、只读、回滚规则）</li>
+<li>**<code>TransactionStatus</code>**：事务运行状态</li>
+</ul>
+<p><strong><code>PlatformTransationManager</code> 接口看作是事务上层的管理者</strong>，**<code>TransactionDefinition</code> 和 <code>TransactionStatus</code> 两个接口看作是事务的描述**</p>
+<p><code>PlatformTransationManager</code> 根据 <code>TransactionDefinition</code> 的定义事务的超时时间、隔离级别等属性，进行事务管理；<code>TransactionStatus</code> 接口则是提供了一些方法来获取事务的状态（新事务、回滚等）</p>
+<h3 id="PlatformTransationManager-事务管理接口"><a href="#PlatformTransationManager-事务管理接口" class="headerlink" title="PlatformTransationManager 事务管理接口"></a><code>PlatformTransationManager</code> 事务管理接口</h3><p><strong>Spring 并不直接管理事务，而是提供了多种事务管理器</strong> 。Spring 事务管理器的接口是：**<code>PlatformTransactionManager</code>** </p>
+<p>不同的平台（数据交互），如JDBC、Hibernate、JPA 等有各自的事务管理器基于这个接口</p>
+<p>其中主要有三个方法：</p>
+<ul>
+<li>getTransaction：获取事务（根据事务属性）</li>
+<li>commit：提交事务（根据事务状态）</li>
+<li>rollback：回滚事务（根据事务状态）</li>
+</ul>
+<h3 id="TransactionDefinition-事务属性"><a href="#TransactionDefinition-事务属性" class="headerlink" title="TransactionDefinition 事务属性"></a><code>TransactionDefinition</code> 事务属性</h3><p>事务属性，理解为<strong>事务的一些基本配置，描述了事务策略如何应用到方法上</strong></p>
+<p>事务属性包含了5个方面：（后面会详细说明）</p>
+<ul>
+<li>隔离级别</li>
+<li>传播行为</li>
+<li>回滚规则</li>
+<li>是否只读</li>
+<li>事务超时</li>
+</ul>
+<h3 id="TransactionDefinition-事务状态"><a href="#TransactionDefinition-事务状态" class="headerlink" title="TransactionDefinition 事务状态"></a><code>TransactionDefinition</code> 事务状态</h3><p><strong>用来记录事务的状态</strong>——该接口<strong>定义了一组方法，用来获取或判断事务的相应状态信息</strong></p>
+<p><code>PlatformTransactionManager.getTransaction(…)</code>方法返回的就是一个 <code>TransactionStatus</code> 对象。</p>
+<p>内容包括：</p>
+<ul>
+<li>isNewTransactionL：是否是新事物</li>
+<li>hasSavepoint：是否有恢复点</li>
+<li>setRollbackOnly：设置为只回滚</li>
+<li>isRollbackOnly：是否为只回滚</li>
+<li>isCompleted：是否已完成</li>
+</ul>
+<h2 id="Spring-事务属性详解"><a href="#Spring-事务属性详解" class="headerlink" title="Spring 事务属性详解"></a>Spring 事务属性详解</h2><p>主要解读 <code>@Transactional</code> 注解中的参数</p>
+<h3 id="事务传播行为"><a href="#事务传播行为" class="headerlink" title="事务传播行为"></a>事务传播行为</h3><p><strong>事务传播行为是为了解决业务层方法之间互相调用的事务问题</strong>：当事务方法被另一个事务方法调用时，必须指定事务应该如何传播。例如：方法可能继续在现有事务中运行，也可能开启一个新事务，并在自己的事务中运行。</p>
+<p>举例：我们在 A 类的<code>aMethod()</code>方法中调用了 B 类的 <code>bMethod()</code> 方法。这个时候就涉及到业务层方法之间互相调用的事务问题。<strong>如果我们的 <code>bMethod()</code>如果发生异常需要回滚，如何配置事务传播行为才能让 <code>aMethod()</code>也跟着回滚呢？</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Service</span></span><br><span class="line">Class A &#123;</span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    B b;</span><br><span class="line">    <span class="meta">@Transactional(propagation = Propagation.xxx)</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> aMethod &#123;</span><br><span class="line">        <span class="comment">//do something</span></span><br><span class="line">        b.bMethod(); <span class="comment">// 在A类中的方法调用B类中的方法</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Service</span></span><br><span class="line">Class B &#123;</span><br><span class="line">    <span class="meta">@Transactional(propagation = Propagation.xxx)</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> bMethod &#123;</span><br><span class="line">       <span class="comment">//do something</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><code>TransactionDefinition</code>中定义了如下的表示传播行为的常量</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">interface</span> <span class="title class_">TransactionDefinition</span> &#123;</span><br><span class="line">    <span class="type">int</span> <span class="variable">PROPAGATION_REQUIRED</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">    <span class="type">int</span> <span class="variable">PROPAGATION_SUPPORTS</span> <span class="operator">=</span> <span class="number">1</span>;</span><br><span class="line">    <span class="type">int</span> <span class="variable">PROPAGATION_MANDATORY</span> <span class="operator">=</span> <span class="number">2</span>;</span><br><span class="line">    <span class="type">int</span> <span class="variable">PROPAGATION_REQUIRES_NEW</span> <span class="operator">=</span> <span class="number">3</span>;</span><br><span class="line">    <span class="type">int</span> <span class="variable">PROPAGATION_NOT_SUPPORTED</span> <span class="operator">=</span> <span class="number">4</span>;</span><br><span class="line">    <span class="type">int</span> <span class="variable">PROPAGATION_NEVER</span> <span class="operator">=</span> <span class="number">5</span>;</span><br><span class="line">    <span class="type">int</span> <span class="variable">PROPAGATION_NESTED</span> <span class="operator">=</span> <span class="number">6</span>;</span><br><span class="line">    ......</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 同时为了方便，有了如下的枚举类</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">package</span> org.springframework.transaction.annotation;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> org.springframework.transaction.TransactionDefinition;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">enum</span> <span class="title class_">Propagation</span> &#123;</span><br><span class="line"></span><br><span class="line">    REQUIRED(TransactionDefinition.PROPAGATION_REQUIRED),</span><br><span class="line"></span><br><span class="line">    SUPPORTS(TransactionDefinition.PROPAGATION_SUPPORTS),</span><br><span class="line"></span><br><span class="line">    MANDATORY(TransactionDefinition.PROPAGATION_MANDATORY),</span><br><span class="line"></span><br><span class="line">    REQUIRES_NEW(TransactionDefinition.PROPAGATION_REQUIRES_NEW),</span><br><span class="line"></span><br><span class="line">    NOT_SUPPORTED(TransactionDefinition.PROPAGATION_NOT_SUPPORTED),</span><br><span class="line"></span><br><span class="line">    NEVER(TransactionDefinition.PROPAGATION_NEVER),</span><br><span class="line"></span><br><span class="line">    NESTED(TransactionDefinition.PROPAGATION_NESTED);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> <span class="type">int</span> value;</span><br><span class="line"></span><br><span class="line">    Propagation(<span class="type">int</span> value) &#123;</span><br><span class="line">        <span class="built_in">this</span>.value = value;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span> <span class="title function_">value</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">this</span>.value;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="正确的事务传播行为"><a href="#正确的事务传播行为" class="headerlink" title="正确的事务传播行为"></a>正确的事务传播行为</h4><ol>
+<li><p><code>TransactionDefinition.PROPAGATION_REQUIRED</code>：<strong>如果当前存在事务，则加入该事务；如果当前没有事务，则创建一个新的事务</strong>（**<code>@Transactional</code>注解默认的事务传播行为**）</p>
+<ul>
+<li><p>如果外部方法没有开启事务，则所修饰的内部方法会新开启自己的事务，且开启的事务相互独立，互不干扰</p>
+</li>
+<li><p>如果外部方法开启事务，且事务传播行为也是 <code>PROPAGATION_REQUIRED</code> 的话，则所有 <code>PROPAGATION_REQUIRED</code> 修饰的内部方法（相对外部方法来说）和外部方法均属于同一事务，只要一个方法回滚，整个事务均回滚</p>
+</li>
+</ul>
+<p>总结：<strong>外部无则新建，外部有则加入</strong></p>
+</li>
+<li><p><code>TransactionDefinition.PROPAGATION_REQUIRES_NEW</code>：<strong>创建一个新的事务，如果当前存在事务，则把当前事务挂起</strong>。也就是说不管外部方法是否开启事务，被修饰的内部方法都会开启事务</p>
+</li>
+<li><p><code>TransactionDefinition.PROPAGATION_REQUIRED</code>：</p>
+</li>
+<li><p><code>TransactionDefinition.PROPAGATION_REQUIRED</code>：</p>
+</li>
+<li><p><code>TransactionDefinition.PROPAGATION_REQUIRED</code>：</p>
+</li>
+</ol>
+<h3 id="事务隔离级别"><a href="#事务隔离级别" class="headerlink" title="事务隔离级别"></a>事务隔离级别</h3><h2 id="Transactional-注解使用详解"><a href="#Transactional-注解使用详解" class="headerlink" title="@Transactional 注解使用详解"></a>@Transactional 注解使用详解</h2>
     </div>
 
     
@@ -285,8 +369,8 @@
       <i class="fa fa-chevron-left"></i> Spring核心知识05：AOP
     </a></div>
       <div class="post-nav-item">
-    <a href="/2024/07/31/Spring%E6%A0%B8%E5%BF%83%E7%9F%A5%E8%AF%8607/" rel="next" title="Spring核心知识07：事务传播机制">
-      Spring核心知识07：事务传播机制 <i class="fa fa-chevron-right"></i>
+    <a href="/2024/07/31/Spring%E6%A0%B8%E5%BF%83%E7%9F%A5%E8%AF%8607/" rel="next" title="Spring核心知识07：常用注解">
+      Spring核心知识07：常用注解 <i class="fa fa-chevron-right"></i>
     </a></div>
     </div>
       </footer>
@@ -346,6 +430,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Spring%E6%94%AF%E6%8C%81%E4%B8%A4%E7%A7%8D%E6%96%B9%E5%BC%8F%E7%9A%84%E4%BA%8B%E5%8A%A1%E7%AE%A1%E7%90%86"><span class="nav-number">1.</span> <span class="nav-text">Spring支持两种方式的事务管理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BC%96%E7%A8%8B%E5%BC%8F%E4%BA%8B%E5%8A%A1%E7%AE%A1%E7%90%86"><span class="nav-number">1.1.</span> <span class="nav-text">编程式事务管理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A3%B0%E6%98%8E%E5%BC%8F%E4%BA%8B%E5%8A%A1%E7%AE%A1%E7%90%86%EF%BC%88%E6%8E%A8%E8%8D%90%E4%BD%BF%E7%94%A8%EF%BC%89"><span class="nav-number">1.2.</span> <span class="nav-text">声明式事务管理（推荐使用）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Spring-%E4%BA%8B%E5%8A%A1%E7%AE%A1%E7%90%86%E6%8E%A5%E5%8F%A3%E4%BB%8B%E7%BB%8D"><span class="nav-number">2.</span> <span class="nav-text">Spring 事务管理接口介绍</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#PlatformTransationManager-%E4%BA%8B%E5%8A%A1%E7%AE%A1%E7%90%86%E6%8E%A5%E5%8F%A3"><span class="nav-number">2.1.</span> <span class="nav-text">PlatformTransationManager 事务管理接口</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#TransactionDefinition-%E4%BA%8B%E5%8A%A1%E5%B1%9E%E6%80%A7"><span class="nav-number">2.2.</span> <span class="nav-text">TransactionDefinition 事务属性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#TransactionDefinition-%E4%BA%8B%E5%8A%A1%E7%8A%B6%E6%80%81"><span class="nav-number">2.3.</span> <span class="nav-text">TransactionDefinition 事务状态</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Spring-%E4%BA%8B%E5%8A%A1%E5%B1%9E%E6%80%A7%E8%AF%A6%E8%A7%A3"><span class="nav-number">3.</span> <span class="nav-text">Spring 事务属性详解</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BA%8B%E5%8A%A1%E4%BC%A0%E6%92%AD%E8%A1%8C%E4%B8%BA"><span class="nav-number">3.1.</span> <span class="nav-text">事务传播行为</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%AD%A3%E7%A1%AE%E7%9A%84%E4%BA%8B%E5%8A%A1%E4%BC%A0%E6%92%AD%E8%A1%8C%E4%B8%BA"><span class="nav-number">3.1.1.</span> <span class="nav-text">正确的事务传播行为</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BA%8B%E5%8A%A1%E9%9A%94%E7%A6%BB%E7%BA%A7%E5%88%AB"><span class="nav-number">3.2.</span> <span class="nav-text">事务隔离级别</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Transactional-%E6%B3%A8%E8%A7%A3%E4%BD%BF%E7%94%A8%E8%AF%A6%E8%A7%A3"><span class="nav-number">4.</span> <span class="nav-text">@Transactional 注解使用详解</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -411,12 +496,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="站点总字数">46k</span>
+    <span title="站点总字数">48k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">2:49</span>
+    <span title="站点阅读时长">2:54</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> 强力驱动
   </div>
@@ -424,15 +509,21 @@
         
 <div class="busuanzi-count">
   <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-  
+
   <span class="site-uv" title="总访客量">
-    我的第<span id="busuanzi_value_site_uv"></span>位朋友, 
+    我的第<span id="busuanzi_value_site_uv"></span>位朋友,
   </span>
 
   <span class="site-pv" title="总访问量">
     经过<span id="busuanzi_value_site_pv"></span>次回眸与你相遇
   </span>
 </div>
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  互联网违法和不良信息举报渠道：17839391214
+</div>
+
 
 
 

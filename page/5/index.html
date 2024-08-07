@@ -206,6 +206,117 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yhy1031.cn/blog/2024/05/30/2024-5-30-%E5%88%B7%E9%A2%98%E6%97%A5%E8%AE%B0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Yinhongyang">
+      <meta itemprop="description" content="个人博客">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Yinhy Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2024/05/30/2024-5-30-%E5%88%B7%E9%A2%98%E6%97%A5%E8%AE%B0/" class="post-title-link" itemprop="url">2024-5-30-刷题日记</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2024-05-30 11:30:42" itemprop="dateCreated datePublished" datetime="2024-05-30T11:30:42+08:00">2024-05-30</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2024-08-04 14:47:28" itemprop="dateModified" datetime="2024-08-04T14:47:28+08:00">2024-08-04</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%88%B7%E9%A2%98%E6%97%A5%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">刷题日记</span></a>
+                </span>
+            </span><br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>5.1k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>5 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h4 id="Question-1-快乐数"><a href="#Question-1-快乐数" class="headerlink" title="Question.1 快乐数"></a><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/happy-number/description/">Question.1 快乐数</a></h4><blockquote>
+<p>编写一个算法来判断一个数 <code>n</code> 是不是快乐数。</p>
+<p><strong>「快乐数」</strong> 定义为：</p>
+<ul>
+<li>对于一个正整数，每一次将该数替换为它每个位置上的数字的平方和。</li>
+<li>然后重复这个过程直到这个数变为 1，也可能是 <strong>无限循环</strong> 但始终变不到 1。</li>
+<li>如果这个过程 <strong>结果为</strong> 1，那么这个数就是快乐数。</li>
+</ul>
+<p>如果 <code>n</code> 是 <em>快乐数</em> 就返回 <code>true</code> ；不是，则返回 <code>false</code> 。</p>
+</blockquote>
+<p>这道题还是挺意思的</p>
+<p><strong>解析如下：</strong></p>
+<p>对于一个数字来说，每个数的平方和显然不会不会一直增大，如9999-&gt;324，表明四位数的平方和最大值为324，所以一个比较大的数是必定会往下掉的</p>
+<p><strong>所以n只有两种情况：</strong>要分析为什么会返回false</p>
+<ol>
+<li>最后变为1</li>
+<li>在一个不大的数字243（999的平方和）以下循环，返回false</li>
+</ol>
+<p>所以，本题就转变成一个链表判断是否有环的题目了</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2024/05/30/2024-5-30-%E5%88%B7%E9%A2%98%E6%97%A5%E8%AE%B0/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://yhy1031.cn/blog/2024/05/28/ACM%E6%A8%A1%E5%BC%8F%E7%AE%97%E6%B3%95%E2%80%94%E2%80%94Scanner%E6%96%B9%E6%B3%95/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -253,14 +364,14 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>726</span>
+              <span>2.2k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
                 <i class="far fa-clock"></i>
               </span>
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>3 分钟</span>
+              <span>2 分钟</span>
             </span>
 
         </div>
@@ -349,7 +460,7 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>179</span>
+              <span>243</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
@@ -442,14 +553,14 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>1.5k</span>
+              <span>1.7k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
                 <i class="far fa-clock"></i>
               </span>
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>5 分钟</span>
+              <span>2 分钟</span>
             </span>
 
         </div>
@@ -553,14 +664,14 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>528</span>
+              <span>1.4k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
                 <i class="far fa-clock"></i>
               </span>
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>2 分钟</span>
+              <span>1 分钟</span>
             </span>
 
         </div>
@@ -649,14 +760,14 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>809</span>
+              <span>2.5k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
                 <i class="far fa-clock"></i>
               </span>
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>3 分钟</span>
+              <span>2 分钟</span>
             </span>
 
         </div>
@@ -747,7 +858,7 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>249</span>
+              <span>269</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
@@ -843,14 +954,14 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>1.4k</span>
+              <span>3.1k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
                 <i class="far fa-clock"></i>
               </span>
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>5 分钟</span>
+              <span>3 分钟</span>
             </span>
 
         </div>
@@ -938,14 +1049,14 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>517</span>
+              <span>701</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
                 <i class="far fa-clock"></i>
               </span>
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>2 分钟</span>
+              <span>1 分钟</span>
             </span>
 
         </div>
@@ -1036,7 +1147,7 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>531</span>
+              <span>1.7k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
@@ -1073,109 +1184,6 @@
             </div>
           <!--/noindex-->
         
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yhy1031.cn/blog/2024/05/26/introduce/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="Yinhongyang">
-      <meta itemprop="description" content="个人博客">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Yinhy Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2024/05/26/introduce/" class="post-title-link" itemprop="url">本栏目介绍</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2024-05-26 14:16:05" itemprop="dateCreated datePublished" datetime="2024-05-26T14:16:05+08:00">2024-05-26</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2024-08-04 13:37:24" itemprop="dateModified" datetime="2024-08-04T13:37:24+08:00">2024-08-04</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E5%88%B7%E9%A2%98%E6%97%A5%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">刷题日记</span></a>
-                </span>
-            </span><br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>155</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>博主的算法题刷题日记</p>
-<p>核心代码模式题目来自leetcode，由代码随想录整理</p>
-<ul>
-<li><p>题目目录：<a target="_blank" rel="noopener" href="https://programmercarl.com/">https://programmercarl.com/</a></p>
-</li>
-<li><p>题目讲解视频：<a target="_blank" rel="noopener" href="https://space.bilibili.com/525438321/channel/collectiondetail?sid=180037">https://space.bilibili.com/525438321/channel/collectiondetail?sid=180037</a></p>
-</li>
-</ul>
-<hr>
-<p>ACM模式题目 来自kamaCoder——<a target="_blank" rel="noopener" href="https://kamacoder.com/">https://kamacoder.com/</a></p>
-<p>本栏目的内容为博主二刷过程中对题目的思考、解题思路、总结的方法</p>
-<p>包括如下内容：</p>
-<ol>
-<li>每天刷题的思考与问题（每道题都记录，但是不详细）</li>
-<li>刷题时一时半会做不出来的题目 or  一道题目的多种解法</li>
-<li>各种笔试题的题解</li>
-</ol>
-<p>联系博主：<a href="mailto:&#x79;&#105;&#x6e;&#104;&#111;&#x6e;&#103;&#121;&#97;&#110;&#x67;&#x35;&#52;&#x36;&#x40;&#103;&#x6d;&#97;&#105;&#x6c;&#x2e;&#99;&#x6f;&#x6d;">&#x79;&#105;&#x6e;&#104;&#111;&#x6e;&#103;&#121;&#97;&#110;&#x67;&#x35;&#52;&#x36;&#x40;&#103;&#x6d;&#97;&#105;&#x6c;&#x2e;&#99;&#x6f;&#x6d;</a></p>
-
       
     </div>
 
@@ -1261,7 +1269,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">51</span>
+          <span class="site-state-item-count">52</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -1273,7 +1281,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">12</span>
+        <span class="site-state-item-count">14</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -1317,12 +1325,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="站点总字数">51k</span>
+    <span title="站点总字数">124k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">3:05</span>
+    <span title="站点阅读时长">1:53</span>
 </div>
 
         

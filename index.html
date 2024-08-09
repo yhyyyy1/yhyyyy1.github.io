@@ -322,10 +322,16 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              
 
-              <time title="创建时间：2024-08-04 13:38:47 / 修改时间：14:48:05" itemprop="dateCreated datePublished" datetime="2024-08-04T13:38:47+08:00">2024-08-04</time>
+              <time title="创建时间：2024-08-04 13:38:47" itemprop="dateCreated datePublished" datetime="2024-08-04T13:38:47+08:00">2024-08-04</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2024-08-09 20:49:48" itemprop="dateModified" datetime="2024-08-09T20:49:48+08:00">2024-08-09</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
@@ -340,14 +346,14 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>17</span>
+              <span>1.1k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
                 <i class="far fa-clock"></i>
               </span>
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
+              <span>4 分钟</span>
             </span>
 
         </div>
@@ -359,7 +365,79 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>笔试<br><a target="_blank" rel="noopener" href="https://www.nowcoder.com/discuss/595750586285395968">https://www.nowcoder.com/discuss/595750586285395968</a> T2<br>野猪跳跃?<br><a target="_blank" rel="noopener" href="https://www.nowcoder.com/feed/main/detail/af382846fb67450cb30c61dfd791e5e5">https://www.nowcoder.com/feed/main/detail/af382846fb67450cb30c61dfd791e5e5</a></p>
+          <blockquote>
+<p>2024-8-3 柠檬微趣笔试，4道题A了1道，针对其余的题目，进行记录</p>
+</blockquote>
+<h3 id="T2-Regular-Expresssion"><a href="#T2-Regular-Expresssion" class="headerlink" title="T2 Regular Expresssion"></a>T2 Regular Expresssion</h3><p>可以参考 <a target="_blank" rel="noopener" href="https://leetcode.cn/problems/regular-expression-matching/description/">leetcode T 10</a></p>
+<p>实现简单的正则表达式匹配，本题中模式字符串所包含的字符的范围为字母、“.”、“*”、“?”、其中：</p>
+<ul>
+<li>“.” 匹配任何单个字符；</li>
+<li>“*” 与模式字符串前一个字符组成一组，匹配零个或多个前面的字符；</li>
+<li>“?” 与模式字符串前一个字符组成一组，匹配一个或多个前面的字符；</li>
+</ul>
+<p>匹配应该覆盖到整个输入的字符串（而不是局部的），测试用例中不会出现超出匹配字符范围之外的字符，也不会出现非法的模式字符串。<strong>使用语言提供的正则表达式库将算作无效答案。</strong></p>
+<h4 id="输入描述"><a href="#输入描述" class="headerlink" title="输入描述"></a>输入描述</h4><p>输入的第一行为需要检测匹配的用例数，接下来的每一行包括两个字符串，前一个字符串为待匹配的字符串，后一个字符串为模式字符串，</p>
+<p>待匹配字符串的长度不超过10。</p>
+<h4 id="输出描述"><a href="#输出描述" class="headerlink" title="输出描述"></a>输出描述</h4><p>对于每一个测试用例，如果匹配则输出一行true，如果不匹配则输出一行false。</p>
+<h4 id="样例："><a href="#样例：" class="headerlink" title="样例："></a>样例：</h4><table>
+<thead>
+<tr>
+<th>输入</th>
+<th>输出</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>3<br />aa     a<br />aa     aa<br />aaa     aa</td>
+<td><br />false<br />true<br />false</td>
+</tr>
+<tr>
+<td>5<br />a     a.<br />a     a.*<br />ab     .*<br />ab     .?<br />b     a?</td>
+<td><br />false<br />true<br />true<br />true<br />false</td>
+</tr>
+</tbody></table>
+<h4 id="题解"><a href="#题解" class="headerlink" title="题解"></a>题解</h4><p>首先<strong>理解各个符号的意思</strong>：</p>
+<ul>
+<li>“.”自己作为一组，匹配任意字符</li>
+<li>“*”和前面的字符成为一组，表示 0—任意多的前面的字符，所以a 和 c*是可以匹配成功的</li>
+<li>“?” 和前面的字符成为一组，表示 1—任意多的前面的字符</li>
+<li>PS：“.”和“*”or“?” 配合可以形成多个.</li>
+</ul>
+<p>总体思路是<strong>从 s[:1] 和 p[:1] 开始判断是否能匹配</strong>，<strong>每轮添加一个字符并判断是否能匹配</strong>，直至添加完整个字符串 s 和 p 。</p>
+<p>展开来看，假设 s[:i] 与 p[:j] 可以匹配，那么下一状态有两种：</p>
+<ol>
+<li>添加一个字符 s i+1后是否能匹配？</li>
+<li>添加字符 p j+1 后是否能匹配？</li>
+</ol>
+<p>显而易见——<strong>动态规划</strong></p>
+<ul>
+<li><p><strong>状态定义</strong>：</p>
+<p>本题状态有m * n 种，所以定义dp[m][n]，<strong>dp[i][j]表示s的前 i 个字符和 p的前 j 个字符能否匹配</strong></p>
+</li>
+<li><p><strong>转移方程</strong>：</p>
+<p>由于<code>dp[0][0]</code>表示空字符串匹配，所以<code>dp[i][j]</code>对应的是<code>s[i-1]</code>和<code>p[j-1]</code></p>
+<ul>
+<li>当<code>p[j-1] == &#39;*&#39;</code>时，<code>dp[i][j]</code> 在当以下任一情况为 true 时等于 true ：<ul>
+<li><code>dp[i][j-2]</code>：也就是不用<code>p[j-2]</code>，能否匹配</li>
+<li><code>dp[i-1][j]</code> 且 <code>s[i-1] == p[j-2]</code>：即让字符 <code>p[j - 2]</code> 多出现 1 次时，能否匹配</li>
+<li><code>dp[i - 1][j]</code> 且 <code>p[j - 2] = &#39;.&#39;</code>：即让字符 <code>&#39;.&#39;</code> 多出现 1 次时，能否匹配</li>
+</ul>
+</li>
+<li>当 <code>p[j - 1] != &#39;*&#39;</code> 时， <code>dp[i][j]</code> 在当以下任一情况为 true 时等于 true ：<ul>
+<li><code>dp[i - 1][j - 1] </code>且 <code>s[i - 1] = p[j - 1]</code> 或者  <code>p[j - 1] = &#39;?&#39;</code>： 即让字符 <code>p[j - 1] </code>多出现一次时，能否匹配</li>
+<li><code>dp[i - 1][j - 1] </code>且 <code>p[j - 1] = &#39;.&#39;</code>： 即将字符 . 看作字符<code> s[i - 1]</code> 时，能否匹配</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><strong>初始化</strong>： 需要先初始化 <code>dp</code> 矩阵首行，以避免状态转移时索引越界</p>
+<ul>
+<li><code>dp[0][0] = true</code></li>
+<li><code>dp[0][j] = dp[0][j - 2]</code> 且 <code>p[j - 1] = &#39;\*&#39;</code>：首行 s 为空字符串，因此当 p 的偶数位为 * 时才能够匹配（即让 p 的奇数位出现 0 次，保持 p 是空字符串）。因此，循环遍历字符串 p ，步长为 2（即只看偶数位）</li>
+</ul>
+</li>
+</ul>
+<h4 id="代码："><a href="#代码：" class="headerlink" title="代码："></a>代码：</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.*;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Main</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        <span class="type">Scanner</span> <span class="variable">in</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Scanner</span>(System.in);</span><br><span class="line">        <span class="type">int</span> <span class="variable">n</span> <span class="operator">=</span> in.nextInt();</span><br><span class="line">        in.nextLine();</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; n; i++) &#123;</span><br><span class="line">            String[] input = in.nextLine().split(<span class="string">&quot; &quot;</span>);</span><br><span class="line">            <span class="keyword">if</span> (isMatch(input[<span class="number">0</span>], input[<span class="number">1</span>])) &#123;</span><br><span class="line">                System.out.println(<span class="string">&quot;true&quot;</span>);</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                System.out.println(<span class="string">&quot;false&quot;</span>);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="type">boolean</span> <span class="title function_">isMatch</span><span class="params">(String s, String p)</span> &#123;</span><br><span class="line">        <span class="type">int</span> <span class="variable">m</span> <span class="operator">=</span> s.length(), n = p.length();</span><br><span class="line">        <span class="type">boolean</span>[][] dp = <span class="keyword">new</span> <span class="title class_">boolean</span>[m + <span class="number">1</span>][n + <span class="number">1</span>];</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 初始化</span></span><br><span class="line">        dp[<span class="number">0</span>][<span class="number">0</span>] = <span class="literal">true</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">j</span> <span class="operator">=</span> <span class="number">2</span>; j &lt;= n; j += <span class="number">2</span>)</span><br><span class="line">            dp[<span class="number">0</span>][j] = dp[<span class="number">0</span>][j - <span class="number">2</span>] &amp;&amp; p.charAt(j - <span class="number">1</span>) == <span class="string">&#x27;*&#x27;</span>;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        <span class="comment">// 填充 dp 数组</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">1</span>; i &lt;= m; i++) &#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">j</span> <span class="operator">=</span> <span class="number">1</span>; j &lt;= n; j++) &#123;</span><br><span class="line"><span class="comment">//                System.out.println(&quot;i: &quot; + i + &quot; j: &quot; + j);</span></span><br><span class="line">                <span class="keyword">if</span> (p.charAt(j - <span class="number">1</span>) == <span class="string">&#x27;*&#x27;</span>) &#123;</span><br><span class="line">                    <span class="keyword">if</span> (dp[i][j - <span class="number">2</span>]) dp[i][j] = <span class="literal">true</span>;                                            <span class="comment">// 1.</span></span><br><span class="line">                    <span class="keyword">else</span> <span class="keyword">if</span> (dp[i - <span class="number">1</span>][j] &amp;&amp; s.charAt(i - <span class="number">1</span>) == p.charAt(j - <span class="number">2</span>)) dp[i][j] = <span class="literal">true</span>; <span class="comment">// 2.</span></span><br><span class="line">                    <span class="keyword">else</span> <span class="keyword">if</span> (dp[i - <span class="number">1</span>][j] &amp;&amp; p.charAt(j - <span class="number">2</span>) == <span class="string">&#x27;.&#x27;</span>) dp[i][j] = <span class="literal">true</span>;             <span class="comment">// 3.</span></span><br><span class="line">                &#125; <span class="keyword">else</span> <span class="keyword">if</span> (p.charAt(j - <span class="number">1</span>) == <span class="string">&#x27;?&#x27;</span> || s.charAt(i - <span class="number">1</span>) == p.charAt(j - <span class="number">1</span>) || p.charAt(j - <span class="number">1</span>) == <span class="string">&#x27;.&#x27;</span>) &#123;</span><br><span class="line">                    dp[i][j] = dp[i - <span class="number">1</span>][j - <span class="number">1</span>];</span><br><span class="line">                &#125;</span><br><span class="line"><span class="comment">//                System.out.println(dp[i][j]);</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> dp[m][n];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 
       
     </div>
@@ -1313,7 +1391,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">14</span>
+        <span class="site-state-item-count">15</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -1357,12 +1435,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="站点总字数">52k</span>
+    <span title="站点总字数">53k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">3:09</span>
+    <span title="站点阅读时长">3:13</span>
 </div>
 
         

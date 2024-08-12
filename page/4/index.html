@@ -637,7 +637,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2024-08-04 14:43:33" itemprop="dateModified" datetime="2024-08-04T14:43:33+08:00">2024-08-04</time>
+                <time title="修改时间：2024-08-10 18:18:13" itemprop="dateModified" datetime="2024-08-10T18:18:13+08:00">2024-08-10</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -676,6 +676,12 @@
 <p>本文用于记录博主在学习Java并发时的知识点总结</p>
 </blockquote>
 <h2 id="Synchronized"><a href="#Synchronized" class="headerlink" title="Synchronized"></a>Synchronized</h2><p>Java中对悲观锁的实现，是synchronized同步块</p>
+<p>众所周知，Synchronized有三种使用场景：</p>
+<ul>
+<li>同步块——只锁synchronized(this)，this对应的对象</li>
+<li>同步方法——会锁住对应的示例对象</li>
+<li>静态同步方法——会锁住整个类的Class对象</li>
+</ul>
 <h3 id="Synchronized-之-锁的竞争与升级"><a href="#Synchronized-之-锁的竞争与升级" class="headerlink" title="Synchronized 之 锁的竞争与升级"></a>Synchronized 之 锁的竞争与升级</h3><p>一般来说，锁是不能降级的</p>
 <p>Synchronized的锁有4种状态——无锁、偏向锁、轻量级锁、重量级锁</p>
 <h4 id="底层如何区分呢？"><a href="#底层如何区分呢？" class="headerlink" title="底层如何区分呢？"></a>底层如何区分呢？</h4><p>Synchronized用的锁存储在Java对象头的<strong>Mark word</strong>中</p>
@@ -742,7 +748,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2024-08-04 14:43:27" itemprop="dateModified" datetime="2024-08-04T14:43:27+08:00">2024-08-04</time>
+                <time title="修改时间：2024-08-10 18:31:53" itemprop="dateModified" datetime="2024-08-10T18:31:53+08:00">2024-08-10</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -758,14 +764,14 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>1.5k</span>
+              <span>1.6k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
                 <i class="far fa-clock"></i>
               </span>
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>5 分钟</span>
+              <span>6 分钟</span>
             </span>
 
         </div>
@@ -1359,7 +1365,7 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">3:13</span>
+    <span title="站点阅读时长">3:14</span>
 </div>
 
         

@@ -206,514 +206,6 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yhy1031.cn/blog/2024/07/05/Java%E5%B9%B6%E5%8F%91%E7%AC%94%E8%AE%B008/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="Yinhongyang">
-      <meta itemprop="description" content="个人博客">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Yinhy Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2024/07/05/Java%E5%B9%B6%E5%8F%91%E7%AC%94%E8%AE%B008/" class="post-title-link" itemprop="url">Java并发笔记08：线程池</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2024-07-05 11:51:05" itemprop="dateCreated datePublished" datetime="2024-07-05T11:51:05+08:00">2024-07-05</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2024-08-04 14:43:49" itemprop="dateModified" datetime="2024-08-04T14:43:49+08:00">2024-08-04</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Java/" itemprop="url" rel="index"><span itemprop="name">Java</span></a>
-                </span>
-            </span><br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>2.8k</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>3 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <blockquote>
-<p>本文用于记录博主在学习Java并发时的知识点总结</p>
-</blockquote>
-<p><strong>线程池</strong>—— 是一种开发框架，是一种基于池化思想管理线程的工具（池化：如数据库的连接池）</p>
-<ul>
-<li>降低资源消耗：重复利用已创建的线程，降低线程创建和销毁造成的消耗</li>
-<li>提高响应速度：任务到达时，可以立即执行，不需要等待线程创建</li>
-<li>提高线程可管理性</li>
-</ul>
-<p>归根结底，线程池的作用：<strong>复用线程</strong></p>
-<h3 id="线程池的实现原理"><a href="#线程池的实现原理" class="headerlink" title="线程池的实现原理"></a>线程池的实现原理</h3> <img src="https://raw.githubusercontent.com/yhyyyy1/MyTypora/master/img/2024-7-5-XCCP1.png" alt="2024-7-5-XCCP1" style="zoom:80%;" />
-
-<p>线程池分为<strong>核心线程池</strong>和<strong>非核心线程池</strong>（核心线程池只有核心线程池满了才会复用，否则会创建新线程）</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2024/07/05/Java%E5%B9%B6%E5%8F%91%E7%AC%94%E8%AE%B008/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yhy1031.cn/blog/2024/07/05/ACM%E6%A8%A1%E5%BC%8F%E2%80%94%E2%80%94%E7%BB%83%E4%B9%A01%EF%BC%88A-B%E9%97%AE%E9%A2%98%EF%BC%89/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="Yinhongyang">
-      <meta itemprop="description" content="个人博客">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Yinhy Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2024/07/05/ACM%E6%A8%A1%E5%BC%8F%E2%80%94%E2%80%94%E7%BB%83%E4%B9%A01%EF%BC%88A-B%E9%97%AE%E9%A2%98%EF%BC%89/" class="post-title-link" itemprop="url">ACM模式——练习1（A+B问题，输入shu'chu）</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2024-07-05 11:49:47" itemprop="dateCreated datePublished" datetime="2024-07-05T11:49:47+08:00">2024-07-05</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2024-08-04 14:42:52" itemprop="dateModified" datetime="2024-08-04T14:42:52+08:00">2024-08-04</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E5%88%B7%E9%A2%98%E6%97%A5%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">刷题日记</span></a>
-                </span>
-            </span><br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>2.1k</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>2 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <blockquote>
-<p>从基础入手，开始练习ACM模式算法题</p>
-</blockquote>
-<h3 id="A-B问题I"><a href="#A-B问题I" class="headerlink" title="A+B问题I"></a><a target="_blank" rel="noopener" href="https://kamacoder.com/problempage.php?pid=1000">A+B问题I</a></h3><p>。。。就是每次笔试的时候给出的样例，有种马上如临大敌的感觉哈哈。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.*;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Main</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        <span class="type">Scanner</span> <span class="variable">in</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Scanner</span>(System.in);</span><br><span class="line">        <span class="keyword">while</span> (in.hasNext()) &#123;</span><br><span class="line">            <span class="type">int</span> <span class="variable">a</span> <span class="operator">=</span> in.nextInt();</span><br><span class="line">            <span class="type">int</span> <span class="variable">b</span> <span class="operator">=</span> in.nextInt();</span><br><span class="line">            System.out.println(a + b);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>小发现：</p>
-<p>​	nextInt()是不会受到“行”的制约的，所以不需要 <code>in.nextLine()</code>来换行</p>
-</blockquote>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2024/07/05/ACM%E6%A8%A1%E5%BC%8F%E2%80%94%E2%80%94%E7%BB%83%E4%B9%A01%EF%BC%88A-B%E9%97%AE%E9%A2%98%EF%BC%89/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yhy1031.cn/blog/2024/07/04/Java%E5%B9%B6%E5%8F%91%E7%AC%94%E8%AE%B007/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="Yinhongyang">
-      <meta itemprop="description" content="个人博客">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Yinhy Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2024/07/04/Java%E5%B9%B6%E5%8F%91%E7%AC%94%E8%AE%B007/" class="post-title-link" itemprop="url">Java并发笔记07：CAS & 乐观锁与悲观锁 & 原子操作类</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2024-07-04 16:25:58" itemprop="dateCreated datePublished" datetime="2024-07-04T16:25:58+08:00">2024-07-04</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2024-08-04 14:43:46" itemprop="dateModified" datetime="2024-08-04T14:43:46+08:00">2024-08-04</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Java/" itemprop="url" rel="index"><span itemprop="name">Java</span></a>
-                </span>
-            </span><br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>1.4k</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <blockquote>
-<p>本文用于记录博主在学习Java并发时的知识点总结</p>
-</blockquote>
-<h3 id="CAS——Compare-And-Swap"><a href="#CAS——Compare-And-Swap" class="headerlink" title="CAS——Compare-And-Swap"></a>CAS——Compare-And-Swap</h3><p>对比交换，这是一条CPU的原子指令。</p>
-<p><strong>CAS操作需要输入两个数值，一个旧值(期望操作前的值)和一个新值，在操作期间先比较下在旧值有没有发生变化，如果没有发生变化，才交换成新值，发生了变化则不交换。</strong></p>
-<p><strong>CAS是乐观锁</strong>（在操作数据时非常乐观，认为别人不会同时修改数据。因此在执行更新的时候只会判断一下在此期间别人是否修改了数据，如果别人修改了数据则放弃操作，否则执行操作）<strong>，CAS是无锁的</strong>，所以如果线程之间<strong>存在竞争</strong>的时候，就只能通过<strong>自旋的方式来等待</strong></p>
-<p><strong>CAS自旋</strong>：接上，CAS自旋相当于循环+CAS，如果本次CAS(100→50)不成功，则会认为有其他线程的CAS快我一步，我会进行CAS(50→0)，如果还不成功则进行CAS(0→-50)……</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2024/07/04/Java%E5%B9%B6%E5%8F%91%E7%AC%94%E8%AE%B007/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yhy1031.cn/blog/2024/07/04/MQ07/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="Yinhongyang">
-      <meta itemprop="description" content="个人博客">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Yinhy Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2024/07/04/MQ07/" class="post-title-link" itemprop="url">消息队列07：消息延迟队列</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2024-07-04 16:25:45" itemprop="dateCreated datePublished" datetime="2024-07-04T16:25:45+08:00">2024-07-04</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2024-08-04 14:45:52" itemprop="dateModified" datetime="2024-08-04T14:45:52+08:00">2024-08-04</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97/" itemprop="url" rel="index"><span itemprop="name">消息队列</span></a>
-                </span>
-            </span><br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>690</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <blockquote>
-<p>怎么实现订单超时自动取消？</p>
-</blockquote>
-<p>kafka不支持延迟消息！但是延迟消息却是经常使用的：</p>
-<p>如在电商、支付等系统中，一般都是先创建订单A or 支付单A，再给用户一定时间进行支付，如果没有按时支付的话，就需要把之前的订单A or 支付单A取消掉。</p>
-<h3 id="延迟队列和延迟消息"><a href="#延迟队列和延迟消息" class="headerlink" title="延迟队列和延迟消息"></a>延迟队列和延迟消息</h3><p>延迟队列是一种特殊的队列，队列中的<strong>每个元素都有一个过期时间</strong>；当元素还<strong>没到过期时间</strong>的时候，如果试图从队列中<strong>获取这个元素</strong>，就会<strong>被阻塞</strong>。而当有<strong>元素过期</strong>时，就会<strong>得到这个元素</strong>——得到的永远是最先过期的元素。</p>
-<p>JDK就自带延迟队列（阻塞队列中的<strong>DelayQueue</strong>）</p>
-<p><strong>延迟消息</strong>，是一种特殊的延迟队列，是<strong>基于消息队列的延迟队列</strong>。——延迟消息指<strong>消息不会立刻被消费，而是经过一段时间后才会被消费。在经过这段时间之前，这个消息一直被存储在消息队列的服务器上</strong>（Question：这个服务器是谁？Producer？Broker？Consumer？）。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2024/07/04/MQ07/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yhy1031.cn/blog/2024/06/29/ACM%E6%A8%A1%E5%BC%8F%E2%80%94%E2%80%94%E6%A0%91%E7%9A%84%E6%9E%84%E5%BB%BA/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="Yinhongyang">
-      <meta itemprop="description" content="个人博客">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Yinhy Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2024/06/29/ACM%E6%A8%A1%E5%BC%8F%E2%80%94%E2%80%94%E6%A0%91%E7%9A%84%E6%9E%84%E5%BB%BA/" class="post-title-link" itemprop="url">ACM模式——树的构建</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2024-06-29 15:20:54" itemprop="dateCreated datePublished" datetime="2024-06-29T15:20:54+08:00">2024-06-29</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2024-08-04 14:43:00" itemprop="dateModified" datetime="2024-08-04T14:43:00+08:00">2024-08-04</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E5%88%B7%E9%A2%98%E6%97%A5%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">刷题日记</span></a>
-                </span>
-            </span><br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>6.2k</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>6 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <blockquote>
-<p> 起因——近期遇到的一个笔试题需要使用ACM模式构建树来解题， 后面找到“<a target="_blank" rel="noopener" href="https://kamacoder.com/">卡码网</a>”练习21-23题+51题（24 25不知道是不是做一下再说）</p>
-</blockquote>
-<p>逐渐理解了ACM模式和核心代码模式的区别与共通部分——<strong>Solution部分相同</strong></p>
-<ul>
-<li>ACM模式在Main类中的main方法中处理输入参数，之后再完成代码执行逻辑</li>
-<li>核心代码模式不需要处理入参，只用完成代码的执行逻辑就OK了（相当于ACM的第二部分）</li>
-</ul>
-<p>二叉树的定义代码：（ACM模式中这些都是自己定义的，所以具体实现的方法比较多样化）</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">TreeNode</span>&#123;</span><br><span class="line">     <span class="type">int</span> val;<span class="comment">//当前位置</span></span><br><span class="line">     <span class="type">int</span> letter;<span class="comment">//字母标识</span></span><br><span class="line">     TreeNode left;<span class="comment">//左右节点</span></span><br><span class="line">     TreeNode right;</span><br><span class="line">    </span><br><span class="line">     TreeNode() &#123;&#125;</span><br><span class="line">     TreeNode(<span class="type">int</span> val) &#123; <span class="built_in">this</span>.val = val; &#125;</span><br><span class="line">     TreeNode(<span class="type">int</span> val,<span class="type">int</span> letter) &#123;</span><br><span class="line">         <span class="built_in">this</span>.val = val; </span><br><span class="line">         <span class="built_in">this</span>.letter = letter; </span><br><span class="line">     &#125;</span><br><span class="line">     TreeNode(<span class="type">int</span> val, TreeNode left, TreeNode right) &#123;</span><br><span class="line">         <span class="built_in">this</span>.val = val;</span><br><span class="line">         <span class="built_in">this</span>.left = left;</span><br><span class="line">         <span class="built_in">this</span>.right = right;</span><br><span class="line">     &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2024/06/29/ACM%E6%A8%A1%E5%BC%8F%E2%80%94%E2%80%94%E6%A0%91%E7%9A%84%E6%9E%84%E5%BB%BA/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://yhy1031.cn/blog/2024/06/28/MQ06/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -761,14 +253,14 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>761</span>
+              <span>683</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
                 <i class="far fa-clock"></i>
               </span>
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
+              <span>2 分钟</span>
             </span>
 
         </div>
@@ -861,14 +353,14 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>1.3k</span>
+              <span>793</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
                 <i class="far fa-clock"></i>
               </span>
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
+              <span>3 分钟</span>
             </span>
 
         </div>
@@ -970,14 +462,14 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>1.1k</span>
+              <span>941</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
                 <i class="far fa-clock"></i>
               </span>
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
+              <span>3 分钟</span>
             </span>
 
         </div>
@@ -1074,14 +566,14 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>1.2k</span>
+              <span>979</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
                 <i class="far fa-clock"></i>
               </span>
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
+              <span>4 分钟</span>
             </span>
 
         </div>
@@ -1172,7 +664,105 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>2.5k</span>
+              <span>1.4k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>5 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <blockquote>
+<p>本文用于记录博主在学习Java并发时的知识点总结</p>
+</blockquote>
+<p>之前学习HashMap时，知道HashMap是线程不安全的（Hashtable是线程安全的，但是用的是Synchronized加锁，效率低下），于是引出了JUC中的<strong>ConcurrentHashMap</strong></p>
+<h3 id="锁分段技术——ConcurrentHashMap的并发思想"><a href="#锁分段技术——ConcurrentHashMap的并发思想" class="headerlink" title="锁分段技术——ConcurrentHashMap的并发思想"></a>锁分段技术——ConcurrentHashMap的并发思想</h3><p>将数据分成一段一段的存储，然后给每一段的数据配一把锁，<strong>当一个线程占用锁访问其中一个段数据的时候，其他段的数据也能被其他线程访问</strong></p>
+<p>解决了HashMap在并发环境中，因为单锁竞争导致效率低下的问题</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2024/06/11/Java%E5%B9%B6%E5%8F%91%E7%AC%94%E8%AE%B005/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yhy1031.cn/blog/2024/06/06/Java%E5%B9%B6%E5%8F%91%E7%AC%94%E8%AE%B004/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Yinhongyang">
+      <meta itemprop="description" content="个人博客">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Yinhy Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2024/06/06/Java%E5%B9%B6%E5%8F%91%E7%AC%94%E8%AE%B004/" class="post-title-link" itemprop="url">Java并发笔记04：AQS</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2024-06-06 15:50:06" itemprop="dateCreated datePublished" datetime="2024-06-06T15:50:06+08:00">2024-06-06</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2024-08-04 14:43:38" itemprop="dateModified" datetime="2024-08-04T14:43:38+08:00">2024-08-04</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Java/" itemprop="url" rel="index"><span itemprop="name">Java</span></a>
+                </span>
+            </span><br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>591</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
@@ -1194,12 +784,442 @@
           <blockquote>
 <p>本文用于记录博主在学习Java并发时的知识点总结</p>
 </blockquote>
-<p>之前学习HashMap时，知道HashMap是线程不安全的（Hashtable是线程安全的，但是用的是Synchronized加锁，效率低下），于是引出了JUC中的<strong>ConcurrentHashMap</strong></p>
-<h3 id="锁分段技术——ConcurrentHashMap的并发思想"><a href="#锁分段技术——ConcurrentHashMap的并发思想" class="headerlink" title="锁分段技术——ConcurrentHashMap的并发思想"></a>锁分段技术——ConcurrentHashMap的并发思想</h3><p>将数据分成一段一段的存储，然后给每一段的数据配一把锁，<strong>当一个线程占用锁访问其中一个段数据的时候，其他段的数据也能被其他线程访问</strong></p>
-<p>解决了HashMap在并发环境中，因为单锁竞争导致效率低下的问题</p>
+<p><strong>AQS 即队列同步器</strong>，是用来构建锁 or 其他同步组件的基础框架，AQS<strong>使用一个volatile int成员变量表示同步状态 state</strong>，通过<strong>内置的FIFO队列完成要获取资源的线程的排队工作</strong></p>
+<p><strong>Lock 和 AQS 的关系：</strong></p>
+<p>Lock是面向锁的使用者的，他定义了使用者与锁的交互接口，隐藏了实现细节。</p>
+<p>AQS是面向锁的实现者的，它简化了锁的实现方式，屏蔽了同步状态的管理，线程的排队，等待与唤醒等底层操作。</p>
+<p>锁和同步器很好的隔离 了使用者和实现者所需关注的领域。</p>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2024/06/11/Java%E5%B9%B6%E5%8F%91%E7%AC%94%E8%AE%B005/#more" rel="contents">
+              <a class="btn" href="/2024/06/06/Java%E5%B9%B6%E5%8F%91%E7%AC%94%E8%AE%B004/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yhy1031.cn/blog/2024/06/06/Java%E5%B9%B6%E5%8F%91%E7%AC%94%E8%AE%B003/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Yinhongyang">
+      <meta itemprop="description" content="个人博客">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Yinhy Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2024/06/06/Java%E5%B9%B6%E5%8F%91%E7%AC%94%E8%AE%B003/" class="post-title-link" itemprop="url">Java并发笔记03：Lock</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2024-06-06 15:35:01" itemprop="dateCreated datePublished" datetime="2024-06-06T15:35:01+08:00">2024-06-06</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2024-08-04 14:43:36" itemprop="dateModified" datetime="2024-08-04T14:43:36+08:00">2024-08-04</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Java/" itemprop="url" rel="index"><span itemprop="name">Java</span></a>
+                </span>
+            </span><br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>1.9k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>7 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <blockquote>
+<p>本文用于记录博主在学习Java并发时的知识点总结</p>
+</blockquote>
+<p><strong>锁Lock是显示的加锁解锁</strong>，而Synchronized是隐式的锁；Lock的实现在 java.util.concurrent包中</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">add</span><span class="params">(<span class="type">int</span> n)</span> &#123;</span><br><span class="line">    <span class="type">Lock</span> <span class="variable">lock</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ReentrantLock</span>(); <span class="comment">//如果要多个线程操作同一个系统资源，需要定义全局锁，将锁对象定义为共享资源</span></span><br><span class="line">    lock.lock(); <span class="comment">// 这才是加锁，上面的只是声明了锁对象</span></span><br><span class="line">    <span class="type">int</span> <span class="variable">count</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        count += n;</span><br><span class="line">    &#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">        lock.unlock();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>需要注意：</p>
+<ul>
+<li><strong>解锁一定要放在finally中</strong>，确保无论如何都可以解锁</li>
+<li><strong>加锁一定要放在try-catch外</strong>，因为加锁过程如果发生异常，也会进入finally块导致锁无故释放（当然，如果程序本身就不会抛出异常，那么没必要try-catch）</li>
+</ul>
+<p>Lock接口基本是由AQS实现的（下篇文章主要介绍）</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2024/06/06/Java%E5%B9%B6%E5%8F%91%E7%AC%94%E8%AE%B003/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yhy1031.cn/blog/2024/06/05/Java%E5%B9%B6%E5%8F%91%E7%AC%94%E8%AE%B002/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Yinhongyang">
+      <meta itemprop="description" content="个人博客">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Yinhy Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2024/06/05/Java%E5%B9%B6%E5%8F%91%E7%AC%94%E8%AE%B002/" class="post-title-link" itemprop="url">Java并发笔记02：Synchronized & Volatile</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2024-06-05 15:32:36" itemprop="dateCreated datePublished" datetime="2024-06-05T15:32:36+08:00">2024-06-05</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2024-08-16 14:54:09" itemprop="dateModified" datetime="2024-08-16T14:54:09+08:00">2024-08-16</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Java/" itemprop="url" rel="index"><span itemprop="name">Java</span></a>
+                </span>
+            </span><br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>1.3k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>5 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <blockquote>
+<p>本文用于记录博主在学习Java并发时的知识点总结</p>
+</blockquote>
+<h2 id="Synchronized"><a href="#Synchronized" class="headerlink" title="Synchronized"></a>Synchronized</h2><p>Java中对悲观锁的实现，是synchronized同步块</p>
+<p>众所周知，Synchronized有三种使用场景：</p>
+<ul>
+<li>同步块——只锁synchronized(this)，this对应的对象</li>
+<li>同步方法——会锁住对应的实例对象</li>
+<li>静态同步方法——会锁住整个类的Class对象</li>
+</ul>
+<p>PS：两个线程分别执行<strong>同一个对象synchronized修饰的实例方法和静态方法</strong>时，<strong>不会发生互斥</strong>，因为锁的资源不同，一个是实例对象，一个是类对象。</p>
+<h3 id="Synchronized-之-锁的竞争与升级"><a href="#Synchronized-之-锁的竞争与升级" class="headerlink" title="Synchronized 之 锁的竞争与升级"></a>Synchronized 之 锁的竞争与升级</h3><p>一般来说，锁是不能降级的</p>
+<p>Synchronized的锁有4种状态——无锁、偏向锁、轻量级锁、重量级锁</p>
+<h4 id="底层如何区分呢？"><a href="#底层如何区分呢？" class="headerlink" title="底层如何区分呢？"></a>底层如何区分呢？</h4><p>Synchronized用的锁存储在Java对象头的<strong>Mark word</strong>中</p>
+<p>其中包括指向当前获取锁的对象的指针（轻、重是指针，偏向锁是线程ID）</p>
+<ol>
+<li>锁标志位（2 bit）：轻量级锁为 00，重量级锁为 10，无锁和偏向锁都是 01，11 为GC的标记</li>
+<li>偏向锁标志（1 bit）：未启用偏向锁为0，启用为1——锁标志位无法区分无锁和偏向锁，所以使用偏向锁标志（在锁标志位前 1 bit）</li>
+</ol>
+<p>另外，是否启用偏向锁是提前定义好的，并且有偏向锁启动延迟（延迟之内自动认为没有偏向锁）</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2024/06/05/Java%E5%B9%B6%E5%8F%91%E7%AC%94%E8%AE%B002/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yhy1031.cn/blog/2024/06/05/Java%E5%B9%B6%E5%8F%91%E7%AC%94%E8%AE%B001/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Yinhongyang">
+      <meta itemprop="description" content="个人博客">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Yinhy Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2024/06/05/Java%E5%B9%B6%E5%8F%91%E7%AC%94%E8%AE%B001/" class="post-title-link" itemprop="url">Java并发笔记01：基础</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2024-06-05 11:14:24" itemprop="dateCreated datePublished" datetime="2024-06-05T11:14:24+08:00">2024-06-05</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2024-08-10 18:31:53" itemprop="dateModified" datetime="2024-08-10T18:31:53+08:00">2024-08-10</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Java/" itemprop="url" rel="index"><span itemprop="name">Java</span></a>
+                </span>
+            </span><br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>1.6k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>6 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <blockquote>
+<p>本文用于记录博主在学习Java并发时的知识点总结</p>
+</blockquote>
+<h3 id="并发编程"><a href="#并发编程" class="headerlink" title="并发编程"></a>并发编程</h3><p><strong>优点</strong>：（Why）</p>
+<ul>
+<li>提高多核CPU的利用率、充分利用多核CPU的计算能力</li>
+<li>方便进行业务拆分、提高业务性能</li>
+</ul>
+<p><strong>缺点</strong>：</p>
+<ul>
+<li>内存泄漏（看下面的线程变量-ThreadLocal）</li>
+<li>线程安全</li>
+<li>死锁</li>
+</ul>
+<p><strong>三个必要因素</strong>：（满足这三个性质，来保证多线程的线程安全）</p>
+<ul>
+<li>可见性（Volatile、Synchronized、Lock）</li>
+<li>原子性（锁、Synchronized）</li>
+<li>有序性（Happens-Before）</li>
+</ul>
+<h3 id="线程的状态"><a href="#线程的状态" class="headerlink" title="线程的状态"></a>线程的状态</h3><p>老生常谈的一个概念——<strong>进程是操作系统资源分配的基本单位</strong>、<strong>线程是操作系统调度资源的基本单位</strong></p>
+<p>同一个类的线程共享代码和数据空间</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2024/06/05/Java%E5%B9%B6%E5%8F%91%E7%AC%94%E8%AE%B001/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yhy1031.cn/blog/2024/06/01/MQ03/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Yinhongyang">
+      <meta itemprop="description" content="个人博客">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Yinhy Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2024/06/01/MQ03/" class="post-title-link" itemprop="url">消息队列03：消息可靠性</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2024-06-01 18:48:14" itemprop="dateCreated datePublished" datetime="2024-06-01T18:48:14+08:00">2024-06-01</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2024-08-04 14:45:43" itemprop="dateModified" datetime="2024-08-04T14:45:43+08:00">2024-08-04</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97/" itemprop="url" rel="index"><span itemprop="name">消息队列</span></a>
+                </span>
+            </span><br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>680</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>2 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <blockquote>
+<p>怎么保证消息不会丢失？</p>
+</blockquote>
+<p>目前主流的消息队列产品都提供了完善的消息可靠性保证机制，完全可以做到在消息传递过程中，即使发生网络中断或者硬件故障，也能确保消息的可靠传递，不丢消息。</p>
+<p>不同的消息队列提供的API不同、配置不同，但是<strong>保证消息可靠传递的实现原理是相同的</strong></p>
+<h2 id="检测消息丢失的方法"><a href="#检测消息丢失的方法" class="headerlink" title="检测消息丢失的方法"></a>检测消息丢失的方法</h2><p><strong>利用消息队列的有序性来验证是否有消息丢失</strong>，在 Producer 给每个发出的消息附加一个连续递增的序号，在 Consumer 端检查这个序号的连续性；和TCP的sqlNum比较相似，如果不连续那就是丢消息了；甚至可以用缺失的序号确定丢失的是哪条消息</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2024/06/01/MQ03/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -1290,7 +1310,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">60</span>
+          <span class="site-state-item-count">55</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -1346,12 +1366,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="站点总字数">133k</span>
+    <span title="站点总字数">57k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">2:01</span>
+    <span title="站点阅读时长">3:26</span>
 </div>
 
         
